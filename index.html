@@ -163,7 +163,7 @@ function editReserve(id){
   render();
 }
 function deleteReserve(id){if(!confirm('Supprimer cette réserve ?'))return; state.reserves=state.reserves.filter(r=>r.id!==id); persist(); render();}
-function filtered(){const q=$('search')?.value?.toLowerCase().trim()||''; const st=$('fStatus')?.value||''; const lot=$('fLot')?.value||''; const loc=$('fLoc')?.value?.toLowerCase().trim()||''; return (state.reserves||[]).filter(r=>(!st||r.status===st)&&(!lot||r.lot===lot)&&(!loc||plainLocation(r).toLowerCase().includes(loc))&&(!q||[r.num,r.lot,r.company,plainLocation(r),r.description,r.status].join(' ').toLowerCase().includes(q)));}
+function filtered(){const q=$('search')?.value?.toLowerCase().trim()||''; const st=$('fStatus')?.value||''; const lot=$('fLot')?.value||''; const loc=$('fLoc')?.value?.toLowerCase().trim()||''; return (state.reserves||[]).filter(r=>(!st||r.status===st)&&(!lot||r.lot===lot||lotLabel({lot:r.lot||'',company:r.company||''})===lot)&&(!loc||plainLocation(r).toLowerCase().includes(loc))&&(!q||[r.num,r.lot,r.company,plainLocation(r),r.description,r.status].join(' ').toLowerCase().includes(q)));}
 function renderSelects(){
   const opts=(state.lots||[]).map(l=>`<option>${esc(lotLabel(l))}</option>`).join('');
   $('vLot').innerHTML=opts||'<option value="">Créer les lots dans Projet</option>';
@@ -190,3 +190,4 @@ render();
 </script>
 </body>
 </html>
+<!-- test -->
