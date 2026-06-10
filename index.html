@@ -163,7 +163,37 @@ function editReserve(id){
   render();
 }
 function deleteReserve(id){if(!confirm('Supprimer cette réserve ?'))return; state.reserves=state.reserves.filter(r=>r.id!==id); persist(); render();}
-function filtered(){const q=$('search')?.value?.toLowerCase().trim()||''; const st=$('fStatus')?.value||''; const lot=$('fLot')?.value||''; const loc=$('fLoc')?.value?.toLowerCase().trim()||''; return (state.reserves||[]).filter(r=>(!st||r.status===st)&&(!lot||r.lot===lot||lotLabel({lot:r.lot||'',company:r.company||''})===lot)&&(!loc||plainLocation(r).toLowerCase().includes(loc))&&(!q||[r.num,r.lot,r.company,plainLocation(r),r.description,r.status].join(' ').toLowerCase().includes(q)));}
+function logementNumber(r){
+  const txt = plainLocation(r).toLowerCase();
+  const match = txt.match(/logement\s*0*(\d+)/i);
+  return match ? Number(match[1]) : 9999;
+}
+function filtered(){
+  const q=$('search')?.value?.toLowerCase().trim()||'';
+  const st=$('fStatus')?.value||'';
+  const lot=$('fLot')?.value||'';
+  const loc=$('fLoc')?.value?.toLowerCase().trim()||'';
+
+  return (state.reserves||[])
+    .filter(r=>
+      (!st||r.status===st) &&
+      (!lot||r.lot===lot||lotLabel({lot:r.lot||'',company:r.company||''})===lot) &&
+      (!loc||plainLocation(r).toLowerCase().includes(loc)) &&
+      (!q||[r.num,r.lot,r.company,plainLocation(r),r.description,r.status].join(' ').toLowerCase().includes(q))
+    )
+    .sort((a,b)=>{
+      const la = logementNumber(a);
+      const lb = logementNumber(b);
+
+      if(la !== lb) return la - lb;
+
+      return String(a.num||'').localeCompare(
+        String(b.num||''),
+        'fr',
+        {numeric:true}
+      );
+    });
+}
 function renderSelects(){
   const currentFilter = $('fLot')?.value || '';
 
