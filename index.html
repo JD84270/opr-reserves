@@ -501,7 +501,7 @@
               </div>
               <div class="full">
                 <label>Type de document</label
-                ><select id="pDocumentType">
+                ><select id="pDocumentType" onchange="saveProjectSilent()">
                   <option value="OPR">OPR</option>
                   <option value="Réserves">Réserves</option>
                 </select>
@@ -804,6 +804,21 @@
         render();
         alert("Projet sauvegardé.");
       }
+	  function saveProjectSilent() {
+	  state.project = {
+		name: $("pName").value,
+		address: $("pAddress").value,
+		client: $("pClient").value,
+		moe: $("pMoe").value,
+		opr: $("pOpr").value,
+		reception: $("pReception").value,
+		documentType: $("pDocumentType").value,
+	  };
+
+	  state.lots = parseLots($("lotsText").value);
+	  persist();
+	  render();
+	}
       function normalizeDocumentType(v) {
         return v === "Réserves" ||
           v === "Suivi des réserves" ||
