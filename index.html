@@ -652,27 +652,37 @@
               id="search"
               placeholder="Rechercher..."
               oninput="render()"
-            /><select id="fStatus" onchange="renderTable()">
+            />
+
+            <select id="fStatus" onchange="renderTable()">
               <option value="">Tous statuts</option>
               <option>À traiter</option>
               <option>En cours</option>
               <option>Levée</option>
-              <option>Refusée / non conforme</option></select
-            ><select id="fLot" onchange="renderTable()"></select
-            ><input
+              <option>Refusée / non conforme</option>
+            </select>
+
+            <select id="fLot" onchange="renderTable()"></select>
+
+            <input
               id="fLoc"
               placeholder="Localisation"
               oninput="render()"
-            /><button class="secondary" onclick="clearFilters()">
+            />
+
+            <button class="secondary" onclick="clearFilters()">
               Effacer
             </button>
           </div>
+
           <button onclick="showPanel('visitPanel')">+ Réserve</button>
         </div>
+
         <div class="printOnly">
           <h2 id="printListTitle">Liste des réserves</h2>
           <p id="printInfo" class="printMeta"></p>
         </div>
+
         <div class="tablewrap">
           <table>
             <thead>
@@ -687,10 +697,22 @@
                 <th class="noPrint">Actions</th>
               </tr>
             </thead>
+
             <tbody id="reservesBody"></tbody>
           </table>
         </div>
+
+        <div class="card noPrint" style="margin-top: 12px">
+          <h2>Impression</h2>
+          <p class="small">
+            Imprime la liste affichée avec les filtres actifs. L’édition est prévue en A4 paysage.
+          </p>
+          <button class="warn" onclick="window.print()">
+            Imprimer / PDF paysage
+          </button>
+        </div>
       </section>
+
       <section id="liftingPanel" class="panel">
         <div class="card">
           <div class="toolbar">
