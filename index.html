@@ -338,6 +338,22 @@
 	.followup-form input {
 	  flex: 1;
 	}
+	.followup-inline {
+	  display: flex;
+	  align-items: center;
+	  gap: 8px;
+	  margin-top: 8px;
+	  padding: 8px 10px;
+	  border-left: 3px solid var(--blue);
+	  border-radius: 10px;
+	  background: #f2f7ff;
+	  font-size: 13px;
+	}
+
+	.followup-form-inline {
+	  margin-left: 0;
+	  margin-top: 8px;
+	}
       .thumb {
         width: 76px;
         height: 58px;
@@ -1171,7 +1187,28 @@ function renderSelects() {
 			  <td>${esc(r.lot)}</td>
 			  <td>${esc(r.company)}</td>
 			  <td>${displayLocation(r)}</td>
-			  <td>${esc(r.description)}</td>
+			  <td>
+				  ${esc(r.description)}
+				  ${followups
+					.map(
+					  (f) => `<div class="followup-inline">
+						<span class="followup-arrow">↳</span>
+						<span class="followup-title">Suivi de réserve</span>
+						<span class="followup-date">${formatDateFR(f.date)}</span>
+						<span class="followup-text">${esc(f.text)}</span>
+					  </div>`,
+					)
+					.join("")}
+				  ${
+					activeFollowupReserveId === r.id
+					  ? `<div class="followup-form followup-form-inline noPrint">
+						  <input id="followupInput_${r.id}" placeholder="Ajouter un suivi de réserve..." />
+						  <button onclick="addFollowup('${r.id}')">Valider</button>
+						  <button class="ghost" onclick="cancelFollowup()">Annuler</button>
+						</div>`
+					  : ""
+				  }
+				</td>
 			  <td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
 			  <td>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}</td>
 			  <td class="noPrint">
@@ -1185,34 +1222,10 @@ function renderSelects() {
 			  </td>
 			</tr>`;
 
-			const followupRows = followups
-			  .map(
-				(f) => `<tr class="followup-row">
-				  <td colspan="8">
-					<div class="followup-box">
-					  <span class="followup-arrow">↳</span>
-					  <span class="followup-title">Suivi de réserve</span>
-					  <span class="followup-date">${formatDateFR(f.date)}</span>
-					  <span class="followup-text">${esc(f.text)}</span>
-					</div>
-				  </td>
-				</tr>`,
-			  )
-			  .join("");
+			const followupRows = "";
 
-			const followupForm =
-			  activeFollowupReserveId === r.id
-				? `<tr class="followup-row noPrint">
-					<td colspan="8">
-					  <div class="followup-form">
-						<input id="followupInput_${r.id}" placeholder="Ajouter un suivi de réserve..." />
-						<button onclick="addFollowup('${r.id}')">Valider</button>
-						<button class="ghost" onclick="cancelFollowup()">Annuler</button>
-					  </div>
-					</td>
-				  </tr>`
-				: "";
-
+			const followupForm = "";
+			
 			return mainRow + followupRows + followupForm;
 		  })
 		  .join("") || '<tr><td colspan="8">Aucune réserve.</td></tr>';
