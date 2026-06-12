@@ -284,6 +284,60 @@
         padding: 8px 10px;
         font-size: 13px;
       }
+	  .followup-row td {
+	  background: linear-gradient(90deg, #f8fbff, #ffffff);
+	  border-bottom: 1px solid #e5e7eb;
+	  padding-top: 8px;
+	  padding-bottom: 8px;
+	}
+
+	.followup-box {
+	  display: flex;
+	  align-items: center;
+	  gap: 10px;
+	  padding: 10px 12px;
+	  margin-left: 28px;
+	  border-left: 3px solid var(--blue);
+	  border-radius: 12px;
+	  background: #f2f7ff;
+	  color: #172033;
+	}
+
+	.followup-arrow {
+	  color: var(--blue);
+	  font-weight: 900;
+	  font-size: 18px;
+	}
+
+	.followup-title {
+	  font-weight: 800;
+	  color: var(--blue);
+	}
+
+	.followup-date {
+	  color: var(--muted);
+	  font-size: 13px;
+	  white-space: nowrap;
+	}
+
+	.followup-text {
+	  flex: 1;
+	}
+
+	.followup-form {
+	  display: flex;
+	  gap: 8px;
+	  align-items: center;
+	  margin-left: 28px;
+	  padding: 10px 12px;
+	  border-left: 3px solid var(--cyan);
+	  border-radius: 12px;
+	  background: #f0fdfa;
+	}
+
+	.followup-form input {
+	  flex: 1;
+	}
       .thumb {
         width: 76px;
         height: 58px;
@@ -759,6 +813,7 @@
         localStorage.getItem(KEY) || '{"project":{},"lots":[],"reserves":[]}',
       );
       let editingReserveId = null;
+	  let activeFollowupReserveId = null;
       const $ = (id) => document.getElementById(id);
       const esc = (s) =>
         String(s ?? "").replace(
@@ -1103,16 +1158,101 @@ function renderSelects() {
 
   $("fLot").value = currentFilter;
 }
-      function renderTable() {
-        const rows = filtered();
-        $("reservesBody").innerHTML =
-          rows
-            .map(
-              (r) =>
-                `<tr><td><b>${r.num}</b><br><span class="small">${new Date(r.created_at).toLocaleDateString("fr-FR")}</span></td><td>${esc(r.lot)}</td><td>${esc(r.company)}</td><td>${displayLocation(r)}</td><td>${esc(r.description)}</td><td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td><td>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}</td><td class="noPrint"><div class="actions"><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button><button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button></div></td></tr>`,
-            )
-            .join("") || '<tr><td colspan="8">Aucune réserve.</td></tr>';
-      }
+	function renderTable() {
+	  const rows = filtered();
+
+	  $("reservesBody").innerHTML =
+		rows
+		  .map((r) => {
+			const followups = r.followups || [];
+
+			const mainRow = `<tr>
+			  <td><b>${r.num}</b><br><span class="small">${new Date(r.created_at).toLocaleDateString("fr-FR")}</span></td>
+			  <td>${esc(r.lot)}</td>
+			  <td>${esc(r.company)}</td>
+			  <td>${displayLocation(r)}</td>
+			  <td>${esc(r.description)}</td>
+			  <td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
+			  <td>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}</td>
+			  <td class="noPrint">
+				<div class="actions">
+				  <button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
+				  <button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
+				  <button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
+				  <button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
+				  <button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
+				</div>
+			  </td>
+			</tr>`;
+
+			const followupRows = followups
+			  .map(
+				(f) => `<tr class="followup-row">
+				  <td colspan="8">
+					<div class="followup-box">
+					  <span class="followup-arrow">↳</span>
+					  <span class="followup-title">Suivi de réserve</span>
+					  <span class="followup-date">${formatDateFR(f.date)}</span>
+					  <span class="followup-text">${esc(f.text)}</span>
+					</div>
+				  </td>
+				</tr>`,
+			  )
+			  .join("");
+
+			const followupForm =
+			  activeFollowupReserveId === r.id
+				? `<tr class="followup-row noPrint">
+					<td colspan="8">
+					  <div class="followup-form">
+						<input id="followupInput_${r.id}" placeholder="Ajouter un suivi de réserve..." />
+						<button onclick="addFollowup('${r.id}')">Valider</button>
+						<button class="ghost" onclick="cancelFollowup()">Annuler</button>
+					  </div>
+					</td>
+				  </tr>`
+				: "";
+
+			return mainRow + followupRows + followupForm;
+		  })
+		  .join("") || '<tr><td colspan="8">Aucune réserve.</td></tr>';
+	}
+			function toggleFollowup(id) {
+		  activeFollowupReserveId = activeFollowupReserveId === id ? null : id;
+		  renderTable();
+
+		  setTimeout(() => {
+			const input = $("followupInput_" + id);
+			if (input) input.focus();
+		  }, 0);
+		}
+
+		function addFollowup(id) {
+		  const input = $("followupInput_" + id);
+		  const text = (input?.value || "").trim();
+
+		  if (!text) return alert("Renseigne le suivi de réserve.");
+
+		  const r = state.reserves.find((x) => x.id === id);
+		  if (!r) return;
+
+		  if (!Array.isArray(r.followups)) r.followups = [];
+
+		  r.followups.push({
+			id: crypto.randomUUID(),
+			date: new Date().toISOString(),
+			text,
+		  });
+
+		  activeFollowupReserveId = null;
+		  persist();
+		  render();
+		}
+
+		function cancelFollowup() {
+		  activeFollowupReserveId = null;
+		  renderTable();
+		}
       function renderCards() {
         const card = (r) =>
           `<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`;
