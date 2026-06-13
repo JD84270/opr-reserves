@@ -1427,19 +1427,20 @@ function renderSelects() {
 		  activeFollowupReserveId = null;
 		  renderTable();
 		}
-      function renderCards() {
-        const card = (r) =>
-          `<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${photoThumbHtml(r)}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`hydratePhotos();
-        $("lastCards").innerHTML =
-          [...(state.reserves || [])].slice(-6).reverse().map(card).join("") ||
-          '<p class="small">Aucune réserve pour le moment.</p>';
-        $("liftingList").innerHTML =
-          (state.reserves || [])
-            .filter((r) => r.status !== "Levée")
-            .map(card)
-            .join("") ||
-          '<p class="small">Toutes les réserves sont levées.</p>';
-      }
+		function renderCards() {
+		  const card = (r) =>
+			`<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${photoThumbHtml(r)}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`;
+
+		  $("lastCards").innerHTML =
+		  $("liftingList").innerHTML =
+			(state.reserves || [])
+			  .filter((r) => r.status !== "Levée")
+			  .map(card)
+			  .join("") ||
+			'<p class="small">Toutes les réserves sont levées.</p>';
+
+		  hydratePhotos();
+		}
       function formatDateFR(v) {
         return v ? new Date(v).toLocaleDateString("fr-FR") : "";
       }
