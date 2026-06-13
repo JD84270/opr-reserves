@@ -626,23 +626,26 @@
               Les données sont stockées localement sur cette tablette. Exporte
               régulièrement un fichier de sauvegarde.
             </p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap">
-              <button onclick="exportJSON()">Exporter chantier</button
-              ><input
-                id="importFile"
-                type="file"
-                accept="application/json"
-                class="hidden"
-                onchange="importJSON(event)"
-              /><button
-                class="ghost"
-                onclick="document.getElementById('importFile').click()"
-              >
-                Importer chantier</button
-              ><button class="danger" onclick="resetAll()">
-                Réinitialiser
-              </button>
-            </div>
+			<div style="display: flex; gap: 10px; flex-wrap: wrap">
+			  <button onclick="exportJSON()">Exporter chantier</button
+			  ><input
+				id="importFile"
+				type="file"
+				accept="application/json"
+				class="hidden"
+				onchange="importJSON(event)"
+			  /><button
+				class="ghost"
+				onclick="document.getElementById('importFile').click()"
+			  >
+				Importer chantier</button
+			  ><button class="secondary" onclick="migrateBase64PhotosToIndexedDB()">
+				Migrer photos
+			  </button
+			  ><button class="danger" onclick="resetAll()">
+				Réinitialiser
+			  </button>
+			</div>
           </div>
           <div class="card">
             <h2>Impression</h2>
