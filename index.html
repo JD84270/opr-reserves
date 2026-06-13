@@ -1370,7 +1370,7 @@ function renderSelects() {
 				  }
 				</td>
 			  <td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
-			  <td>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}</td>
+			  <td>${photoThumbHtml(r)}</td>
 			  <td class="noPrint">
 				<div class="actions">
 				  <button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
@@ -1389,6 +1389,7 @@ function renderSelects() {
 			return mainRow + followupRows + followupForm;
 		  })
 		  .join("") || '<tr><td colspan="8">Aucune réserve.</td></tr>';
+		  hydratePhotos();
 	}
 			function toggleFollowup(id) {
 		  activeFollowupReserveId = activeFollowupReserveId === id ? null : id;
