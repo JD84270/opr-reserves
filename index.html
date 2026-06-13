@@ -837,7 +837,8 @@
       <option>Balcon</option>
       <option>Garage</option>
     </datalist>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+	<script>
       const KEY = "opr_reserves_v1";
       let state = JSON.parse(
         localStorage.getItem(KEY) || '{"project":{},"lots":[],"reserves":[]}',
