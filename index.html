@@ -1102,15 +1102,21 @@ async function deletePhoto(photoId) {
         const location = buildLocation(housing, room);
         if (!lot.lot || !location || !desc)
           return alert("Lot, localisation et description sont obligatoires.");
-        let photo = "";
-        try {
-          photo = await fileToDataURL($("vPhoto").files[0]);
-        } catch (e) {
-          console.error(e);
-          return alert(
-            "La photo n’a pas pu être ajoutée. Essaie avec une autre photo ou sans photo.",
-          );
-        }
+		let photoId = "";
+
+		try {
+		  const photoDataUrl = await fileToDataURL($("vPhoto").files[0]);
+
+		  if (photoDataUrl) {
+			photoId = "photo_" + crypto.randomUUID();
+			await savePhoto(photoId, photoDataUrl);
+		  }
+		} catch (e) {
+		  console.error(e);
+		  return alert(
+			"La photo n’a pas pu être ajoutée. Essaie avec une autre photo ou sans photo.",
+		  );
+		}
 
         const editIndex = editingReserveId
           ? state.reserves.findIndex((x) => x.id === editingReserveId)
@@ -1118,21 +1124,22 @@ async function deletePhoto(photoId) {
 
         if (editIndex >= 0) {
           const existing = state.reserves[editIndex];
-          state.reserves[editIndex] = {
-            ...existing,
-            lot: lot.lot,
-            company: lot.company,
-            housing,
-            room,
-            location,
-            description: desc,
-            status: $("vStatus").value,
-            photo: photo || existing.photo || "",
-            lifted_at:
-              $("vStatus").value === "Levée"
-                ? existing.lifted_at || new Date().toISOString()
-                : null,
-          };
+			state.reserves[editIndex] = {
+			  ...existing,
+			  lot: lot.lot,
+			  company: lot.company,
+			  housing,
+			  room,
+			  location,
+			  description: desc,
+			  status: $("vStatus").value,
+			  photoId: photoId || existing.photoId || "",
+			  photo: existing.photo || "",
+			  lifted_at:
+				$("vStatus").value === "Levée"
+				  ? existing.lifted_at || new Date().toISOString()
+				  : null,
+			};
           try {
             persist();
           } catch (e) {
@@ -1142,21 +1149,22 @@ async function deletePhoto(photoId) {
           resetVisitForm();
         } else {
           state.reserves.push({
-            id: crypto.randomUUID(),
-            num: nextReserveNo(),
-            lot: lot.lot,
-            company: lot.company,
-            housing,
-            room,
-            location,
-            description: desc,
-            status: $("vStatus").value,
-            photo,
-            created_at: new Date().toISOString(),
-            lifted_at:
-              $("vStatus").value === "Levée" ? new Date().toISOString() : null,
-            lift_comment: "",
-          });
+			  id: crypto.randomUUID(),
+			  num: nextReserveNo(),
+			  lot: lot.lot,
+			  company: lot.company,
+			  housing,
+			  room,
+			  location,
+			  description: desc,
+			  status: $("vStatus").value,
+			  photoId,
+			  photo: "",
+			  created_at: new Date().toISOString(),
+			  lifted_at:
+				$("vStatus").value === "Levée" ? new Date().toISOString() : null,
+			  lift_comment: "",
+			});
           try {
             persist();
           } catch (e) {
