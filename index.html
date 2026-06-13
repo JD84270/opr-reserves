@@ -1642,6 +1642,93 @@ function renderSelects() {
 		  alert(`${photosAdded} photo(s) ajoutée(s) au ZIP complet.`);
 		}
 		
+		function blobToDataUrl(blob) {
+		  return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = () => reject(new Error("Lecture du fichier impossible."));
+
+			reader.readAsDataURL(blob);
+		  });
+		}
+
+		async function importFullZip(event) {
+		  const file = event.target.files[0];
+		  if (!file) return;
+
+		  if (typeof JSZip === "undefined") {
+			alert("JSZip n’est pas chargé. Vérifie ta connexion internet puis réessaie.");
+			event.target.value = "";
+			return;
+		  }
+
+		  const ok = confirm(
+			"Importer ce ZIP complet ?\n\n" +
+			  "Les données actuelles de ce navigateur seront remplacées par le chantier contenu dans le ZIP.",
+		  );
+
+		  if (!ok) {
+			event.target.value = "";
+			return;
+		  }
+
+		  try {
+			const zip = await JSZip.loadAsync(file);
+			const chantierFile = zip.file("chantier.json");
+
+			if (!chantierFile) {
+			  alert("ZIP invalide : fichier chantier.json introuvable.");
+			  event.target.value = "";
+			  return;
+			}
+
+			const jsonText = await chantierFile.async("string");
+			const importedState = JSON.parse(jsonText);
+
+			if (!importedState || !Array.isArray(importedState.reserves)) {
+			  alert("ZIP invalide : données chantier incorrectes.");
+			  event.target.value = "";
+			  return;
+			}
+
+			let photosImported = 0;
+
+			for (const r of importedState.reserves || []) {
+			  if (!r.photoId || !r.photoFile) continue;
+
+			  const photoFile = zip.file(r.photoFile);
+
+			  if (!photoFile) {
+				console.warn("Photo absente du ZIP :", r.photoFile);
+				continue;
+			  }
+
+			  const blob = await photoFile.async("blob");
+			  const dataUrl = await blobToDataUrl(blob);
+
+			  await savePhoto(r.photoId, dataUrl);
+
+			  r.photo = "";
+			  photosImported++;
+			}
+
+			state = importedState;
+			persist();
+			loadProject();
+			render();
+
+			alert(
+			  `Import ZIP terminé.\n\n${photosImported} photo(s) restaurée(s) dans IndexedDB.`,
+			);
+		  } catch (e) {
+			console.error(e);
+			alert("Import ZIP impossible. Vérifie que le fichier ZIP est correct.");
+		  } finally {
+			event.target.value = "";
+		  }
+		}
+		
       function projectLine() {
         const name = (state.project?.name || "").trim();
         const address = (state.project?.address || "").trim();
