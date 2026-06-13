@@ -1262,12 +1262,29 @@ async function deletePhoto(photoId) {
         showPanel("visitPanel");
         render();
       }
-      function deleteReserve(id) {
-        if (!confirm("Supprimer cette réserve ?")) return;
-        state.reserves = state.reserves.filter((r) => r.id !== id);
-        persist();
-        render();
-      }
+		async function deleteReserve(id) {
+		  if (!confirm("Supprimer cette réserve ?")) return;
+
+		  const reserve = state.reserves.find((r) => r.id === id);
+
+		  state.reserves = state.reserves.filter((r) => r.id !== id);
+
+		  try {
+			persist();
+		  } catch (e) {
+			return;
+		  }
+
+		  if (reserve?.photoId) {
+			try {
+			  await deletePhoto(reserve.photoId);
+			} catch (e) {
+			  console.error("Photo IndexedDB non supprimée :", reserve.photoId, e);
+			}
+		  }
+
+		  render();
+		}
       function logementNumber(r) {
   const txt = plainLocation(r).toLowerCase();
   const match = txt.match(/logement\s*0*(\d+)/i);
