@@ -1535,6 +1535,78 @@ function renderSelects() {
 
 		  alert(`${migrated} photo(s) migrée(s) vers IndexedDB.`);
 		}
+		
+		function dataUrlToBlob(dataUrl) {
+		  const parts = dataUrl.split(",");
+		  const mimeMatch = parts[0].match(/:(.*?);/);
+		  const mime = mimeMatch ? mimeMatch[1] : "image/jpeg";
+		  const binary = atob(parts[1]);
+		  const bytes = new Uint8Array(binary.length);
+
+		  for (let i = 0; i < binary.length; i++) {
+			bytes[i] = binary.charCodeAt(i);
+		  }
+
+		  return new Blob([bytes], { type: mime });
+		}
+
+		async function exportFullZip() {
+		  if (typeof JSZip === "undefined") {
+			alert("JSZip n’est pas chargé. Vérifie ta connexion internet puis réessaie.");
+			return;
+		  }
+
+		  const zip = new JSZip();
+		  const photosFolder = zip.folder("photos");
+
+		  const exportState = JSON.parse(JSON.stringify(state));
+		  const reserves = exportState.reserves || [];
+
+		  let photosAdded = 0;
+
+		  for (const r of reserves) {
+			try {
+			  let dataUrl = "";
+
+			  if (r.photoId) {
+				dataUrl = await getPhoto(r.photoId);
+			  } else if (r.photo) {
+				dataUrl = r.photo;
+			  }
+
+			  if (!dataUrl) continue;
+
+			  const photoId = r.photoId || "photo_" + crypto.randomUUID();
+			  const filename = `${photoId}.jpg`;
+
+			  photosFolder.file(filename, dataUrlToBlob(dataUrl));
+
+			  r.photoId = photoId;
+			  r.photo = "";
+			  r.photoFile = `photos/${filename}`;
+
+			  photosAdded++;
+			} catch (e) {
+			  console.error("Photo non exportée :", r.num, e);
+			}
+		  }
+
+		  zip.file("chantier.json", JSON.stringify(exportState, null, 2));
+
+		  const blob = await zip.generateAsync({ type: "blob" });
+
+		  const a = document.createElement("a");
+		  a.href = URL.createObjectURL(blob);
+		  a.download = safeFileName(
+			`${state.project?.name || "chantier"}_${currentDocumentTitle()}_complet.zip`,
+		  );
+		  a.click();
+
+		  URL.revokeObjectURL(a.href);
+
+		  alert(`${photosAdded} photo(s) ajoutée(s) au ZIP complet.`);
+		}
+		
       function projectLine() {
         const name = (state.project?.name || "").trim();
         const address = (state.project?.address || "").trim();
