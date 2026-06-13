@@ -1090,7 +1090,21 @@ async function deletePhoto(photoId) {
           reader.readAsDataURL(file);
         });
       }
+
+      function photoThumbHtml(r) {
+        if (r.photo) {
+          return `<img class="thumb" src="${r.photo}">`;
+        }
+
+        if (r.photoId) {
+          return `<img class="thumb" data-photo-id="${esc(r.photoId)}" alt="Photo réserve">`;
+        }
+
+        return "";
+      }
+
       async function addReserve(clear) {
+
         const selected = $("vLot").value;
         const lot = state.lots.find((l) => lotLabel(l) === selected) || {
           lot: selected,
