@@ -621,47 +621,58 @@
             </div>
           </div>
           <div class="card">
-            <h2>Sauvegarde</h2>
-            <p class="small">
-              Les données sont stockées localement sur cette tablette. Exporte
-              régulièrement un fichier de sauvegarde.
-            </p>
-			<div style="display: flex; gap: 10px; flex-wrap: wrap">
-			  <button onclick="exportJSON()">Exporter chantier</button
-				><button class="secondary" onclick="exportFullZip()">
+			  <h2>Sauvegarde</h2>
+			  <p class="small">
+				Les données sont stockées localement sur cette tablette. Exporte
+				régulièrement un fichier de sauvegarde.
+			  </p>
+
+			  <div style="display: flex; gap: 10px; flex-wrap: wrap">
+				<button onclick="exportJSON()">Exporter chantier</button>
+
+				<button class="secondary" onclick="exportFullZip()">
 				  Exporter ZIP complet
-				</button
-				><input
+				</button>
+
+				<input
 				  id="importFile"
 				  type="file"
 				  accept="application/json"
 				  class="hidden"
 				  onchange="importJSON(event)"
-				/><button
+				/>
+
+				<button
 				  class="ghost"
 				  onclick="document.getElementById('importFile').click()"
 				>
-				  Importer chantier</button
-				><input
+				  Importer chantier
+				</button>
+
+				<input
 				  id="importZipFile"
 				  type="file"
 				  accept=".zip,application/zip"
 				  class="hidden"
 				  onchange="importFullZip(event)"
-				/><button
+				/>
+
+				<button
 				  class="ghost"
 				  onclick="document.getElementById('importZipFile').click()"
 				>
-				  Importer ZIP complet</button
-				>
-			  ><button class="secondary" onclick="migrateBase64PhotosToIndexedDB()">
-				Migrer photos
-			  </button
-			  ><button class="danger" onclick="resetAll()">
-				Réinitialiser
-			  </button>
+				  Importer ZIP complet
+				</button>
+
+				<button class="secondary" onclick="migrateBase64PhotosToIndexedDB()">
+				  Migrer photos
+				</button>
+
+				<button class="danger" onclick="resetAll()">
+				  Réinitialiser
+				</button>
+			  </div>
 			</div>
-          </div>
           <div class="card">
             <h2>Impression</h2>
             <p class="small">
