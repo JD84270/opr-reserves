@@ -1486,6 +1486,51 @@ function renderSelects() {
 		  await hydratePhotos();
 		  window.print();
 		}
+		async function migrateBase64PhotosToIndexedDB() {
+		  const reserves = state.reserves || [];
+		  const toMigrate = reserves.filter((r) => r.photo && !r.photoId);
+
+		  if (!toMigrate.length) {
+			alert("Aucune ancienne photo à migrer.");
+			return;
+		  }
+
+		  const ok = confirm(
+			`Migrer ${toMigrate.length} ancienne(s) photo(s) vers IndexedDB ?\n\n` +
+			  "Le JSON sera ensuite beaucoup plus léger.",
+		  );
+
+		  if (!ok) return;
+
+		  let migrated = 0;
+
+		  for (const r of toMigrate) {
+			try {
+			  const photoId = "photo_" + crypto.randomUUID();
+			  await savePhoto(photoId, r.photo);
+
+			  r.photoId = photoId;
+			  r.photo = "";
+
+			  migrated++;
+			} catch (e) {
+			  console.error("Erreur migration photo :", r.num, e);
+			}
+		  }
+
+		  try {
+			persist();
+		  } catch (e) {
+			alert(
+			  "Migration partielle : les photos ont été copiées dans IndexedDB, mais la sauvegarde localStorage a échoué.",
+			);
+			return;
+		  }
+
+		  render();
+
+		  alert(`${migrated} photo(s) migrée(s) vers IndexedDB.`);
+		}
       function projectLine() {
         const name = (state.project?.name || "").trim();
         const address = (state.project?.address || "").trim();
