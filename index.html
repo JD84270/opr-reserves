@@ -1482,6 +1482,10 @@ function renderSelects() {
         const date = formatDateDots(currentDocumentDate());
         return `Liste des ${type}${date ? " du " + date : ""}`;
       }
+	  async function printDocument() {
+		  await hydratePhotos();
+		  window.print();
+		}
       function projectLine() {
         const name = (state.project?.name || "").trim();
         const address = (state.project?.address || "").trim();
