@@ -847,6 +847,112 @@
           /[&<>"]/g,
           (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[m],
         );
+		// ==========================
+		// INDEXEDDB PHOTOS STORAGE
+		// ==========================
+
+		const PHOTO_DB_NAME = "opr_reserves_photos_db";
+		const PHOTO_DB_VERSION = 1;
+		const PHOTO_STORE_NAME = "photos";
+
+		function openPhotoDB() {
+		  return new Promise((resolve, reject) => {
+			if (!("indexedDB" in window)) {
+			  reject(new Error("IndexedDB n'est pas disponible sur cet appareil."));
+			  return;
+			}
+
+			const request = indexedDB.open(PHOTO_DB_NAME, PHOTO_DB_VERSION);
+
+			request.onerror = () => {
+			  reject(new Error("Ouverture IndexedDB impossible."));
+			};
+
+			request.onupgradeneeded = (event) => {
+			  const db = event.target.result;
+
+			  if (!db.objectStoreNames.contains(PHOTO_STORE_NAME)) {
+				db.createObjectStore(PHOTO_STORE_NAME, { keyPath: "id" });
+			  }
+			};
+
+			request.onsuccess = () => {
+			  resolve(request.result);
+			};
+		  });
+		}
+
+		async function savePhoto(photoId, dataUrl) {
+		  if (!photoId || !dataUrl) return "";
+
+		  const db = await openPhotoDB();
+
+		  return new Promise((resolve, reject) => {
+			const tx = db.transaction(PHOTO_STORE_NAME, "readwrite");
+			const store = tx.objectStore(PHOTO_STORE_NAME);
+
+			store.put({
+			  id: photoId,
+			  dataUrl,
+			  created_at: new Date().toISOString(),
+			});
+
+			tx.oncomplete = () => {
+			  db.close();
+			  resolve(photoId);
+			};
+
+			tx.onerror = () => {
+			  db.close();
+			  reject(new Error("Enregistrement de la photo impossible."));
+			};
+		  });
+		}
+
+		async function getPhoto(photoId) {
+		  if (!photoId) return "";
+
+		  const db = await openPhotoDB();
+
+		  return new Promise((resolve, reject) => {
+			const tx = db.transaction(PHOTO_STORE_NAME, "readonly");
+			const store = tx.objectStore(PHOTO_STORE_NAME);
+			const request = store.get(photoId);
+
+			request.onsuccess = () => {
+			  db.close();
+			  resolve(request.result?.dataUrl || "");
+			};
+
+			request.onerror = () => {
+			  db.close();
+			  reject(new Error("Lecture de la photo impossible."));
+			};
+		  });
+		}
+
+async function deletePhoto(photoId) {
+  if (!photoId) return;
+
+  const db = await openPhotoDB();
+
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(PHOTO_STORE_NAME, "readwrite");
+    const store = tx.objectStore(PHOTO_STORE_NAME);
+
+    store.delete(photoId);
+
+    tx.oncomplete = () => {
+      db.close();
+      resolve();
+    };
+
+    tx.onerror = () => {
+      db.close();
+      reject(new Error("Suppression de la photo impossible."));
+    };
+  });
+}
       function persist() {
         try {
           localStorage.setItem(KEY, JSON.stringify(state));

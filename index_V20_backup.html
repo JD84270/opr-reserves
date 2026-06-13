@@ -847,6 +847,7 @@
           /[&<>"]/g,
           (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[m],
         );
+		
       function persist() {
         try {
           localStorage.setItem(KEY, JSON.stringify(state));
