@@ -1091,17 +1091,40 @@ async function deletePhoto(photoId) {
         });
       }
 
-      function photoThumbHtml(r) {
-        if (r.photo) {
-          return `<img class="thumb" src="${r.photo}">`;
-        }
+		function photoThumbHtml(r) {
+		  if (r.photo) {
+			return `<img class="thumb" src="${r.photo}">`;
+		  }
 
-        if (r.photoId) {
-          return `<img class="thumb" data-photo-id="${esc(r.photoId)}" alt="Photo réserve">`;
-        }
+		  if (r.photoId) {
+			return `<img class="thumb" data-photo-id="${esc(r.photoId)}" alt="Photo réserve">`;
+		  }
 
-        return "";
-      }
+		  return "";
+		}
+
+		async function hydratePhotos() {
+		  const imgs = document.querySelectorAll("img[data-photo-id]");
+
+		  for (const img of imgs) {
+			const photoId = img.dataset.photoId;
+
+			if (!photoId || img.dataset.loaded === "true") continue;
+
+			try {
+			  const dataUrl = await getPhoto(photoId);
+
+			  if (dataUrl) {
+				img.src = dataUrl;
+				img.dataset.loaded = "true";
+			  }
+			} catch (e) {
+			  console.error("Photo IndexedDB introuvable :", photoId, e);
+			}
+		  }
+		}
+
+async function addReserve(clear) {
 
       async function addReserve(clear) {
 
