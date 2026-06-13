@@ -1429,7 +1429,7 @@ function renderSelects() {
 		}
       function renderCards() {
         const card = (r) =>
-          `<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`;
+          `<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${photoThumbHtml(r)}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`hydratePhotos();
         $("lastCards").innerHTML =
           [...(state.reserves || [])].slice(-6).reverse().map(card).join("") ||
           '<p class="small">Aucune réserve pour le moment.</p>';
