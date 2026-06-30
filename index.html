@@ -499,9 +499,25 @@
           height: 48px;
         }
         .badge {
-          border: 1px solid #777;
-          background: white !important;
-          color: #111 !important;
+          border: 1px solid currentColor;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .b-open {
+          background: #fff7db !important;
+          color: #946200 !important;
+        }
+        .b-progress {
+          background: #e9f7ff !important;
+          color: #0565a8 !important;
+        }
+        .b-done {
+          background: #e7f8ef !important;
+          color: #087443 !important;
+        }
+        .b-refused {
+          background: #fff1f0 !important;
+          color: #b42318 !important;
         }
         td .small {
           font-size: 10.5px;
