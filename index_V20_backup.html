@@ -324,6 +324,47 @@
 	  flex: 1;
 	}
 
+	.followup-print-text {
+	  display: none;
+	}
+
+	.followup-edit {
+	  width: 26px;
+	  height: 26px;
+	  padding: 0;
+	  border-radius: 999px;
+	  background: #ffffff;
+	  color: var(--blue);
+	  border: 1px solid #c7d7fe;
+	  display: inline-flex;
+	  align-items: center;
+	  justify-content: center;
+	  font-size: 14px;
+	  line-height: 1;
+	}
+
+	.followup-edit-form {
+	  display: flex;
+	  flex: 1;
+	  gap: 6px;
+	  align-items: center;
+	}
+
+	.followup-edit-form textarea {
+	  flex: 1;
+	  min-height: 34px;
+	  max-height: 70px;
+	  resize: vertical;
+	  padding: 7px 9px;
+	  font-size: 13px;
+	}
+
+	.followup-edit-form button {
+	  padding: 7px 9px;
+	  font-size: 12px;
+	  border-radius: 8px;
+	}
+
 	.followup-form {
 	  display: flex;
 	  gap: 8px;
@@ -499,9 +540,25 @@
           height: 48px;
         }
         .badge {
-          border: 1px solid #777;
-          background: white !important;
-          color: #111 !important;
+          border: 1px solid currentColor;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .b-open {
+          background: #fff7db !important;
+          color: #946200 !important;
+        }
+        .b-progress {
+          background: #e9f7ff !important;
+          color: #0565a8 !important;
+        }
+        .b-done {
+          background: #e7f8ef !important;
+          color: #087443 !important;
+        }
+        .b-refused {
+          background: #fff1f0 !important;
+          color: #b42318 !important;
         }
         td .small {
           font-size: 10.5px;
@@ -522,6 +579,9 @@
 		.followup-inline .followup-text {
 		  font-size: 10.5px !important;
 		  line-height: 1.25 !important;
+		}
+		.followup-print-text {
+		  display: inline !important;
 		}
         th:nth-child(6),
         td:nth-child(6) {
@@ -621,38 +681,67 @@
             </div>
           </div>
           <div class="card">
-            <h2>Sauvegarde</h2>
-            <p class="small">
-              Les données sont stockées localement sur cette tablette. Exporte
-              régulièrement un fichier de sauvegarde.
-            </p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap">
-              <button onclick="exportJSON()">Exporter chantier</button
-              ><input
-                id="importFile"
-                type="file"
-                accept="application/json"
-                class="hidden"
-                onchange="importJSON(event)"
-              /><button
-                class="ghost"
-                onclick="document.getElementById('importFile').click()"
-              >
-                Importer chantier</button
-              ><button class="danger" onclick="resetAll()">
-                Réinitialiser
-              </button>
-            </div>
-          </div>
+			  <h2>Sauvegarde</h2>
+			  <p class="small">
+				Les données sont stockées localement sur cette tablette. Exporte
+				régulièrement un fichier de sauvegarde.
+			  </p>
+
+			  <div style="display: flex; gap: 10px; flex-wrap: wrap">
+				<button onclick="exportJSON()">Exporter chantier</button>
+
+				<button class="secondary" onclick="exportFullZip()">
+				  Exporter ZIP complet
+				</button>
+
+				<input
+				  id="importFile"
+				  type="file"
+				  accept="application/json"
+				  class="hidden"
+				  onchange="importJSON(event)"
+				/>
+
+				<button
+				  class="ghost"
+				  onclick="document.getElementById('importFile').click()"
+				>
+				  Importer chantier
+				</button>
+
+				<input
+				  id="importZipFile"
+				  type="file"
+				  accept=".zip,application/zip"
+				  class="hidden"
+				  onchange="importFullZip(event)"
+				/>
+
+				<button
+				  class="ghost"
+				  onclick="document.getElementById('importZipFile').click()"
+				>
+				  Importer ZIP complet
+				</button>
+
+				<button class="secondary" onclick="migrateBase64PhotosToIndexedDB()">
+				  Migrer photos
+				</button>
+
+				<button class="danger" onclick="resetAll()">
+				  Réinitialiser
+				</button>
+			  </div>
+			</div>
           <div class="card">
             <h2>Impression</h2>
             <p class="small">
               L’édition est prévue en A4 paysage. Utilise l’impression
               navigateur puis “Enregistrer en PDF”.
             </p>
-            <button class="warn" onclick="window.print()">
-              Imprimer / PDF paysage
-            </button>
+			<button class="warn" onclick="printDocument()">
+			  Imprimer / PDF
+			</button>
           </div>
         </div>
       </section>
@@ -757,7 +846,7 @@
 			  oninput="render()"
 			/>
 
-			<button class="warn" onclick="window.print()">
+			<button class="warn" onclick="printDocument()">
 			  Imprimer / PDF
 			</button>
 
@@ -834,20 +923,128 @@
       <option>Balcon</option>
       <option>Garage</option>
     </datalist>
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+	<script>
       const KEY = "opr_reserves_v1";
       let state = JSON.parse(
         localStorage.getItem(KEY) || '{"project":{},"lots":[],"reserves":[]}',
       );
       let editingReserveId = null;
 	  let activeFollowupReserveId = null;
+	  let editingFollowupReserveId = null;
+	  let editingFollowupId = null;
       const $ = (id) => document.getElementById(id);
       const esc = (s) =>
         String(s ?? "").replace(
           /[&<>"]/g,
           (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[m],
         );
-		
+		// ==========================
+		// INDEXEDDB PHOTOS STORAGE
+		// ==========================
+
+		const PHOTO_DB_NAME = "opr_reserves_photos_db";
+		const PHOTO_DB_VERSION = 1;
+		const PHOTO_STORE_NAME = "photos";
+
+		function openPhotoDB() {
+		  return new Promise((resolve, reject) => {
+			if (!("indexedDB" in window)) {
+			  reject(new Error("IndexedDB n'est pas disponible sur cet appareil."));
+			  return;
+			}
+
+			const request = indexedDB.open(PHOTO_DB_NAME, PHOTO_DB_VERSION);
+
+			request.onerror = () => {
+			  reject(new Error("Ouverture IndexedDB impossible."));
+			};
+
+			request.onupgradeneeded = (event) => {
+			  const db = event.target.result;
+
+			  if (!db.objectStoreNames.contains(PHOTO_STORE_NAME)) {
+				db.createObjectStore(PHOTO_STORE_NAME, { keyPath: "id" });
+			  }
+			};
+
+			request.onsuccess = () => {
+			  resolve(request.result);
+			};
+		  });
+		}
+
+		async function savePhoto(photoId, dataUrl) {
+		  if (!photoId || !dataUrl) return "";
+
+		  const db = await openPhotoDB();
+
+		  return new Promise((resolve, reject) => {
+			const tx = db.transaction(PHOTO_STORE_NAME, "readwrite");
+			const store = tx.objectStore(PHOTO_STORE_NAME);
+
+			store.put({
+			  id: photoId,
+			  dataUrl,
+			  created_at: new Date().toISOString(),
+			});
+
+			tx.oncomplete = () => {
+			  db.close();
+			  resolve(photoId);
+			};
+
+			tx.onerror = () => {
+			  db.close();
+			  reject(new Error("Enregistrement de la photo impossible."));
+			};
+		  });
+		}
+
+		async function getPhoto(photoId) {
+		  if (!photoId) return "";
+
+		  const db = await openPhotoDB();
+
+		  return new Promise((resolve, reject) => {
+			const tx = db.transaction(PHOTO_STORE_NAME, "readonly");
+			const store = tx.objectStore(PHOTO_STORE_NAME);
+			const request = store.get(photoId);
+
+			request.onsuccess = () => {
+			  db.close();
+			  resolve(request.result?.dataUrl || "");
+			};
+
+			request.onerror = () => {
+			  db.close();
+			  reject(new Error("Lecture de la photo impossible."));
+			};
+		  });
+		}
+
+async function deletePhoto(photoId) {
+  if (!photoId) return;
+
+  const db = await openPhotoDB();
+
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(PHOTO_STORE_NAME, "readwrite");
+    const store = tx.objectStore(PHOTO_STORE_NAME);
+
+    store.delete(photoId);
+
+    tx.oncomplete = () => {
+      db.close();
+      resolve();
+    };
+
+    tx.onerror = () => {
+      db.close();
+      reject(new Error("Suppression de la photo impossible."));
+    };
+  });
+}
       function persist() {
         try {
           localStorage.setItem(KEY, JSON.stringify(state));
@@ -985,7 +1182,42 @@
           reader.readAsDataURL(file);
         });
       }
+
+		function photoThumbHtml(r) {
+		  if (r.photo) {
+			return `<img class="thumb" src="${r.photo}">`;
+		  }
+
+		  if (r.photoId) {
+			return `<img class="thumb" data-photo-id="${esc(r.photoId)}" alt="Photo réserve">`;
+		  }
+
+		  return "";
+		}
+
+		async function hydratePhotos() {
+		  const imgs = document.querySelectorAll("img[data-photo-id]");
+
+		  for (const img of imgs) {
+			const photoId = img.dataset.photoId;
+
+			if (!photoId || img.dataset.loaded === "true") continue;
+
+			try {
+			  const dataUrl = await getPhoto(photoId);
+
+			  if (dataUrl) {
+				img.src = dataUrl;
+				img.dataset.loaded = "true";
+			  }
+			} catch (e) {
+			  console.error("Photo IndexedDB introuvable :", photoId, e);
+			}
+		  }
+		}
+
       async function addReserve(clear) {
+
         const selected = $("vLot").value;
         const lot = state.lots.find((l) => lotLabel(l) === selected) || {
           lot: selected,
@@ -997,15 +1229,21 @@
         const location = buildLocation(housing, room);
         if (!lot.lot || !location || !desc)
           return alert("Lot, localisation et description sont obligatoires.");
-        let photo = "";
-        try {
-          photo = await fileToDataURL($("vPhoto").files[0]);
-        } catch (e) {
-          console.error(e);
-          return alert(
-            "La photo n’a pas pu être ajoutée. Essaie avec une autre photo ou sans photo.",
-          );
-        }
+		let photoId = "";
+
+		try {
+		  const photoDataUrl = await fileToDataURL($("vPhoto").files[0]);
+
+		  if (photoDataUrl) {
+			photoId = "photo_" + crypto.randomUUID();
+			await savePhoto(photoId, photoDataUrl);
+		  }
+		} catch (e) {
+		  console.error(e);
+		  return alert(
+			"La photo n’a pas pu être ajoutée. Essaie avec une autre photo ou sans photo.",
+		  );
+		}
 
         const editIndex = editingReserveId
           ? state.reserves.findIndex((x) => x.id === editingReserveId)
@@ -1013,21 +1251,22 @@
 
         if (editIndex >= 0) {
           const existing = state.reserves[editIndex];
-          state.reserves[editIndex] = {
-            ...existing,
-            lot: lot.lot,
-            company: lot.company,
-            housing,
-            room,
-            location,
-            description: desc,
-            status: $("vStatus").value,
-            photo: photo || existing.photo || "",
-            lifted_at:
-              $("vStatus").value === "Levée"
-                ? existing.lifted_at || new Date().toISOString()
-                : null,
-          };
+			state.reserves[editIndex] = {
+			  ...existing,
+			  lot: lot.lot,
+			  company: lot.company,
+			  housing,
+			  room,
+			  location,
+			  description: desc,
+			  status: $("vStatus").value,
+			  photoId: photoId || existing.photoId || "",
+			  photo: existing.photo || "",
+			  lifted_at:
+				$("vStatus").value === "Levée"
+				  ? existing.lifted_at || new Date().toISOString()
+				  : null,
+			};
           try {
             persist();
           } catch (e) {
@@ -1037,21 +1276,22 @@
           resetVisitForm();
         } else {
           state.reserves.push({
-            id: crypto.randomUUID(),
-            num: nextReserveNo(),
-            lot: lot.lot,
-            company: lot.company,
-            housing,
-            room,
-            location,
-            description: desc,
-            status: $("vStatus").value,
-            photo,
-            created_at: new Date().toISOString(),
-            lifted_at:
-              $("vStatus").value === "Levée" ? new Date().toISOString() : null,
-            lift_comment: "",
-          });
+			  id: crypto.randomUUID(),
+			  num: nextReserveNo(),
+			  lot: lot.lot,
+			  company: lot.company,
+			  housing,
+			  room,
+			  location,
+			  description: desc,
+			  status: $("vStatus").value,
+			  photoId,
+			  photo: "",
+			  created_at: new Date().toISOString(),
+			  lifted_at:
+				$("vStatus").value === "Levée" ? new Date().toISOString() : null,
+			  lift_comment: "",
+			});
           try {
             persist();
           } catch (e) {
@@ -1114,12 +1354,29 @@
         showPanel("visitPanel");
         render();
       }
-      function deleteReserve(id) {
-        if (!confirm("Supprimer cette réserve ?")) return;
-        state.reserves = state.reserves.filter((r) => r.id !== id);
-        persist();
-        render();
-      }
+		async function deleteReserve(id) {
+		  if (!confirm("Supprimer cette réserve ?")) return;
+
+		  const reserve = state.reserves.find((r) => r.id === id);
+
+		  state.reserves = state.reserves.filter((r) => r.id !== id);
+
+		  try {
+			persist();
+		  } catch (e) {
+			return;
+		  }
+
+		  if (reserve?.photoId) {
+			try {
+			  await deletePhoto(reserve.photoId);
+			} catch (e) {
+			  console.error("Photo IndexedDB non supprimée :", reserve.photoId, e);
+			}
+		  }
+
+		  render();
+		}
       function logementNumber(r) {
   const txt = plainLocation(r).toLowerCase();
   const match = txt.match(/logement\s*0*(\d+)/i);
@@ -1202,14 +1459,26 @@ function renderSelects() {
 			  <td>
 				  ${esc(r.description)}
 				  ${followups
-					.map(
-					  (f) => `<div class="followup-inline">
+					.map((f) => {
+					  const isEditingFollowup =
+						editingFollowupReserveId === r.id && editingFollowupId === f.id;
+					  return `<div class="followup-inline">
 						<span class="followup-arrow">↳</span>
 						<span class="followup-title">Suivi de réserve</span>
 						<span class="followup-date">${formatDateFR(f.date)}</span>
-						<span class="followup-text">${esc(f.text)}</span>
-					  </div>`,
-					)
+						${
+						  isEditingFollowup
+							? `<span class="followup-text followup-print-text">${esc(f.text)}</span>
+							  <div class="followup-edit-form noPrint">
+								<textarea id="followupEditInput_${r.id}_${f.id}" class="noPrint">${esc(f.text)}</textarea>
+								<button class="noPrint" onclick="saveEditedFollowup('${r.id}','${f.id}')">Valider</button>
+								<button class="ghost noPrint" onclick="cancelEditFollowup()">Annuler</button>
+							  </div>`
+							: `<span class="followup-text">${esc(f.text)}</span>
+							  <button class="followup-edit noPrint" onclick="editFollowup('${r.id}','${f.id}')" title="Modifier le suivi" aria-label="Modifier le suivi">&#9998;</button>`
+						}
+					  </div>`;
+					})
 					.join("")}
 				  ${
 					activeFollowupReserveId === r.id
@@ -1222,7 +1491,7 @@ function renderSelects() {
 				  }
 				</td>
 			  <td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
-			  <td>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}</td>
+			  <td>${photoThumbHtml(r)}</td>
 			  <td class="noPrint">
 				<div class="actions">
 				  <button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
@@ -1241,6 +1510,7 @@ function renderSelects() {
 			return mainRow + followupRows + followupForm;
 		  })
 		  .join("") || '<tr><td colspan="8">Aucune réserve.</td></tr>';
+		  hydratePhotos();
 	}
 			function toggleFollowup(id) {
 		  activeFollowupReserveId = activeFollowupReserveId === id ? null : id;
@@ -1278,19 +1548,64 @@ function renderSelects() {
 		  activeFollowupReserveId = null;
 		  renderTable();
 		}
-      function renderCards() {
-        const card = (r) =>
-          `<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${r.photo ? `<img class="thumb" src="${r.photo}">` : ""}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`;
-        $("lastCards").innerHTML =
-          [...(state.reserves || [])].slice(-6).reverse().map(card).join("") ||
-          '<p class="small">Aucune réserve pour le moment.</p>';
-        $("liftingList").innerHTML =
-          (state.reserves || [])
-            .filter((r) => r.status !== "Levée")
-            .map(card)
-            .join("") ||
-          '<p class="small">Toutes les réserves sont levées.</p>';
-      }
+
+		function editFollowup(reserveId, followupId) {
+		  const reserve = state.reserves.find((x) => x.id === reserveId);
+		  if (!reserve || !Array.isArray(reserve.followups)) return;
+
+		  const followup = reserve.followups.find((x) => x.id === followupId);
+		  if (!followup) return;
+
+		  editingFollowupReserveId = reserveId;
+		  editingFollowupId = followupId;
+		  renderTable();
+
+		  setTimeout(() => {
+			const input = $("followupEditInput_" + reserveId + "_" + followupId);
+			if (input) input.focus();
+		  }, 0);
+		}
+
+		function saveEditedFollowup(reserveId, followupId) {
+		  const input = $("followupEditInput_" + reserveId + "_" + followupId);
+		  const trimmed = (input?.value || "").trim();
+		  if (!trimmed) return;
+
+		  const reserve = state.reserves.find((x) => x.id === reserveId);
+		  if (!reserve || !Array.isArray(reserve.followups)) return;
+
+		  const followup = reserve.followups.find((x) => x.id === followupId);
+		  if (!followup) return;
+
+		  followup.text = trimmed;
+		  editingFollowupReserveId = null;
+		  editingFollowupId = null;
+		  persist();
+		  render();
+		}
+
+		function cancelEditFollowup() {
+		  editingFollowupReserveId = null;
+		  editingFollowupId = null;
+		  renderTable();
+		}
+		function renderCards() {
+		  const card = (r) =>
+			`<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${photoThumbHtml(r)}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`;
+
+		  $("lastCards").innerHTML =
+			[...(state.reserves || [])].slice(-6).reverse().map(card).join("") ||
+			'<p class="small">Aucune réserve pour le moment.</p>';
+
+		  $("liftingList").innerHTML =
+			(state.reserves || [])
+			  .filter((r) => r.status !== "Levée")
+			  .map(card)
+			  .join("") ||
+			'<p class="small">Toutes les réserves sont levées.</p>';
+
+		  hydratePhotos();
+		}
       function formatDateFR(v) {
         return v ? new Date(v).toLocaleDateString("fr-FR") : "";
       }
@@ -1312,6 +1627,223 @@ function renderSelects() {
         const date = formatDateDots(currentDocumentDate());
         return `Liste des ${type}${date ? " du " + date : ""}`;
       }
+	  async function printDocument() {
+		  await hydratePhotos();
+		  window.print();
+		}
+		async function migrateBase64PhotosToIndexedDB() {
+		  const reserves = state.reserves || [];
+		  const toMigrate = reserves.filter((r) => r.photo && !r.photoId);
+
+		  if (!toMigrate.length) {
+			alert("Aucune ancienne photo à migrer.");
+			return;
+		  }
+
+		  const ok = confirm(
+			`Migrer ${toMigrate.length} ancienne(s) photo(s) vers IndexedDB ?\n\n` +
+			  "Le JSON sera ensuite beaucoup plus léger.",
+		  );
+
+		  if (!ok) return;
+
+		  let migrated = 0;
+
+		  for (const r of toMigrate) {
+			try {
+			  const photoId = "photo_" + crypto.randomUUID();
+			  await savePhoto(photoId, r.photo);
+
+			  r.photoId = photoId;
+			  r.photo = "";
+
+			  migrated++;
+			} catch (e) {
+			  console.error("Erreur migration photo :", r.num, e);
+			}
+		  }
+
+		  try {
+			persist();
+		  } catch (e) {
+			alert(
+			  "Migration partielle : les photos ont été copiées dans IndexedDB, mais la sauvegarde localStorage a échoué.",
+			);
+			return;
+		  }
+
+		  render();
+
+		  alert(`${migrated} photo(s) migrée(s) vers IndexedDB.`);
+		}
+		
+		function dataUrlToBlob(dataUrl) {
+		  const parts = dataUrl.split(",");
+		  const mimeMatch = parts[0].match(/:(.*?);/);
+		  const mime = mimeMatch ? mimeMatch[1] : "image/jpeg";
+		  const binary = atob(parts[1]);
+		  const bytes = new Uint8Array(binary.length);
+
+		  for (let i = 0; i < binary.length; i++) {
+			bytes[i] = binary.charCodeAt(i);
+		  }
+
+		  return new Blob([bytes], { type: mime });
+		}
+		
+		function safeFileName(name) {
+		  return String(name || "chantier")
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "")
+			.replace(/[^a-zA-Z0-9-_]+/g, "_")
+			.replace(/_+/g, "_")
+			.replace(/^_|_$/g, "");
+		}
+
+		async function exportFullZip() {
+		  if (typeof JSZip === "undefined") {
+			alert("JSZip n’est pas chargé. Vérifie ta connexion internet puis réessaie.");
+			return;
+		  }
+
+		  const zip = new JSZip();
+		  const photosFolder = zip.folder("photos");
+
+		  const exportState = JSON.parse(JSON.stringify(state));
+		  const reserves = exportState.reserves || [];
+
+		  let photosAdded = 0;
+
+		  for (const r of reserves) {
+			try {
+			  let dataUrl = "";
+
+			  if (r.photoId) {
+				dataUrl = await getPhoto(r.photoId);
+			  } else if (r.photo) {
+				dataUrl = r.photo;
+			  }
+
+			  if (!dataUrl) continue;
+
+			  const photoId = r.photoId || "photo_" + crypto.randomUUID();
+			  const filename = `${photoId}.jpg`;
+
+			  photosFolder.file(filename, dataUrlToBlob(dataUrl));
+
+			  r.photoId = photoId;
+			  r.photo = "";
+			  r.photoFile = `photos/${filename}`;
+
+			  photosAdded++;
+			} catch (e) {
+			  console.error("Photo non exportée :", r.num, e);
+			}
+		  }
+
+		  zip.file("chantier.json", JSON.stringify(exportState, null, 2));
+
+		  const blob = await zip.generateAsync({ type: "blob" });
+
+		  const a = document.createElement("a");
+		  a.href = URL.createObjectURL(blob);
+		  a.download = safeFileName(
+			`${state.project?.name || "chantier"}_${currentDocumentTitle()}_complet.zip`,
+		  );
+		  a.click();
+
+		  URL.revokeObjectURL(a.href);
+
+		  alert(`${photosAdded} photo(s) ajoutée(s) au ZIP complet.`);
+		}
+		
+		function blobToDataUrl(blob) {
+		  return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = () => reject(new Error("Lecture du fichier impossible."));
+
+			reader.readAsDataURL(blob);
+		  });
+		}
+
+		async function importFullZip(event) {
+		  const file = event.target.files[0];
+		  if (!file) return;
+
+		  if (typeof JSZip === "undefined") {
+			alert("JSZip n’est pas chargé. Vérifie ta connexion internet puis réessaie.");
+			event.target.value = "";
+			return;
+		  }
+
+		  const ok = confirm(
+			"Importer ce ZIP complet ?\n\n" +
+			  "Les données actuelles de ce navigateur seront remplacées par le chantier contenu dans le ZIP.",
+		  );
+
+		  if (!ok) {
+			event.target.value = "";
+			return;
+		  }
+
+		  try {
+			const zip = await JSZip.loadAsync(file);
+			const chantierFile = zip.file("chantier.json");
+
+			if (!chantierFile) {
+			  alert("ZIP invalide : fichier chantier.json introuvable.");
+			  event.target.value = "";
+			  return;
+			}
+
+			const jsonText = await chantierFile.async("string");
+			const importedState = JSON.parse(jsonText);
+
+			if (!importedState || !Array.isArray(importedState.reserves)) {
+			  alert("ZIP invalide : données chantier incorrectes.");
+			  event.target.value = "";
+			  return;
+			}
+
+			let photosImported = 0;
+
+			for (const r of importedState.reserves || []) {
+			  if (!r.photoId || !r.photoFile) continue;
+
+			  const photoFile = zip.file(r.photoFile);
+
+			  if (!photoFile) {
+				console.warn("Photo absente du ZIP :", r.photoFile);
+				continue;
+			  }
+
+			  const blob = await photoFile.async("blob");
+			  const dataUrl = await blobToDataUrl(blob);
+
+			  await savePhoto(r.photoId, dataUrl);
+
+			  r.photo = "";
+			  photosImported++;
+			}
+
+			state = importedState;
+			persist();
+			loadProject();
+			render();
+
+			alert(
+			  `Import ZIP terminé.\n\n${photosImported} photo(s) restaurée(s) dans IndexedDB.`,
+			);
+		  } catch (e) {
+			console.error(e);
+			alert("Import ZIP impossible. Vérifie que le fichier ZIP est correct.");
+		  } finally {
+			event.target.value = "";
+		  }
+		}
+		
       function projectLine() {
         const name = (state.project?.name || "").trim();
         const address = (state.project?.address || "").trim();
