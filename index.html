@@ -324,6 +324,21 @@
 	  flex: 1;
 	}
 
+	.followup-edit {
+	  width: 26px;
+	  height: 26px;
+	  padding: 0;
+	  border-radius: 999px;
+	  background: #ffffff;
+	  color: var(--blue);
+	  border: 1px solid #c7d7fe;
+	  display: inline-flex;
+	  align-items: center;
+	  justify-content: center;
+	  font-size: 14px;
+	  line-height: 1;
+	}
+
 	.followup-form {
 	  display: flex;
 	  gap: 8px;
@@ -1419,6 +1434,7 @@ function renderSelects() {
 						<span class="followup-title">Suivi de réserve</span>
 						<span class="followup-date">${formatDateFR(f.date)}</span>
 						<span class="followup-text">${esc(f.text)}</span>
+						<button class="followup-edit noPrint" onclick="editFollowup('${r.id}','${f.id}')" title="Modifier le suivi" aria-label="Modifier le suivi">&#9998;</button>
 					  </div>`,
 					)
 					.join("")}
@@ -1489,6 +1505,24 @@ function renderSelects() {
 		function cancelFollowup() {
 		  activeFollowupReserveId = null;
 		  renderTable();
+		}
+
+		function editFollowup(reserveId, followupId) {
+		  const reserve = state.reserves.find((x) => x.id === reserveId);
+		  if (!reserve || !Array.isArray(reserve.followups)) return;
+
+		  const followup = reserve.followups.find((x) => x.id === followupId);
+		  if (!followup) return;
+
+		  const text = prompt("Modifier le suivi de r\u00e9serve :", followup.text || "");
+		  if (text === null) return;
+
+		  const trimmed = text.trim();
+		  if (!trimmed) return;
+
+		  followup.text = trimmed;
+		  persist();
+		  render();
 		}
 		function renderCards() {
 		  const card = (r) =>
