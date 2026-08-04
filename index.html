@@ -1484,7 +1484,7 @@ function renderSelects() {
 					  return `<div class="followup-inline">
 						<div class="followup-main">
 						  <span class="followup-arrow">↳</span>
-						  <span class="followup-title">Suivi de réserve</span>
+						  <span class="followup-title">${currentDocumentTitle() === "OPR" ? "Suivi d'OPR" : "Suivi de réserve"}</span>
 						${
 						  isEditingFollowup
 							? `<span class="followup-text followup-print-text">${esc(f.text)}</span>
@@ -1510,23 +1510,29 @@ function renderSelects() {
 						</div>`
 					  : ""
 				  }
-				  <div class="actions description-actions noPrint">
-					<button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
-					<button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
-					<button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
-					<button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
-					<button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
-				  </div>
 				</td>
 			  <td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
 			  <td>${photoThumbHtml(r)}</td>
+			</tr>`;
+
+			const actionRow = `<tr class="noPrint">
+			  <td colspan="4">
+				<div class="actions description-actions">
+				  <button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
+				  <button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
+				  <button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
+				  <button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
+				  <button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
+				</div>
+			  </td>
+			  <td colspan="3"></td>
 			</tr>`;
 
 			const followupRows = "";
 
 			const followupForm = "";
 			
-			return mainRow + followupRows + followupForm;
+			return mainRow + actionRow + followupRows + followupForm;
 		  })
 		  .join("") || '<tr><td colspan="7">Aucune réserve.</td></tr>';
 		  hydratePhotos();
