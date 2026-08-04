@@ -285,8 +285,18 @@
         font-size: 13px;
       }
       .description-actions {
+        grid-column: 1 / -1;
         justify-content: flex-start;
         margin-top: 8px;
+      }
+      .reserve-identification {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr 1.2fr 1.4fr;
+        gap: 4px 12px;
+        align-items: start;
+      }
+      .reserve-identification > div {
+        min-width: 0;
       }
 	  .followup-row td {
 	  background: linear-gradient(90deg, #f8fbff, #ffffff);
@@ -1471,10 +1481,21 @@ function renderSelects() {
 			const followups = r.followups || [];
 
 			const mainRow = `<tr>
-			  <td><b>${r.num}</b><br><span class="small">${new Date(r.created_at).toLocaleDateString("fr-FR")}</span></td>
-			  <td>${esc(r.lot)}</td>
-			  <td>${esc(r.company)}</td>
-			  <td>${displayLocation(r)}</td>
+			  <td colspan="4">
+				<div class="reserve-identification">
+				  <div><b>${r.num}</b><br><span class="small">${new Date(r.created_at).toLocaleDateString("fr-FR")}</span></div>
+				  <div>${esc(r.lot)}</div>
+				  <div>${esc(r.company)}</div>
+				  <div>${displayLocation(r)}</div>
+				  <div class="actions description-actions noPrint">
+					<button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
+					<button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
+					<button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
+					<button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
+					<button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
+				  </div>
+				</div>
+			  </td>
 			  <td>
 				  ${esc(r.description)}
 				  ${followups
@@ -1515,24 +1536,11 @@ function renderSelects() {
 			  <td>${photoThumbHtml(r)}</td>
 			</tr>`;
 
-			const actionRow = `<tr class="noPrint">
-			  <td colspan="4">
-				<div class="actions description-actions">
-				  <button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
-				  <button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
-				  <button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
-				  <button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
-				  <button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
-				</div>
-			  </td>
-			  <td colspan="3"></td>
-			</tr>`;
-
 			const followupRows = "";
 
 			const followupForm = "";
 			
-			return mainRow + actionRow + followupRows + followupForm;
+			return mainRow + followupRows + followupForm;
 		  })
 		  .join("") || '<tr><td colspan="7">Aucune réserve.</td></tr>';
 		  hydratePhotos();
