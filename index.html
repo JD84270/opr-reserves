@@ -284,6 +284,10 @@
         padding: 8px 10px;
         font-size: 13px;
       }
+      .description-actions {
+        justify-content: flex-start;
+        margin-top: 8px;
+      }
 	  .followup-row td {
 	  background: linear-gradient(90deg, #f8fbff, #ffffff);
 	  border-bottom: 1px solid #e5e7eb;
@@ -316,7 +320,10 @@
 
 	.followup-date {
 	  color: var(--muted);
-	  font-size: 13px;
+	  font-size: 11px;
+	  line-height: 1.25;
+	  margin-top: 2px;
+	  margin-left: 26px;
 	  white-space: nowrap;
 	}
 
@@ -380,9 +387,7 @@
 	  flex: 1;
 	}
 	.followup-inline {
-	  display: flex;
-	  align-items: center;
-	  gap: 8px;
+	  display: block;
 	  margin-top: 8px;
 	  padding: 8px 10px;
 	  border-left: 3px solid var(--blue);
@@ -391,13 +396,19 @@
 	  font-size: 13px;
 	}
 
+	.followup-main {
+	  display: flex;
+	  align-items: center;
+	  gap: 8px;
+	}
+
 	.followup-form-inline {
 	  margin-left: 0;
 	  margin-top: 8px;
 	}
       .thumb {
-        width: 76px;
-        height: 58px;
+        width: 112px;
+        height: 84px;
         object-fit: cover;
         border-radius: 10px;
         border: 1px solid var(--line);
@@ -575,10 +586,15 @@
 
 		.followup-inline .followup-arrow,
 		.followup-inline .followup-title,
-		.followup-inline .followup-date,
 		.followup-inline .followup-text {
 		  font-size: 10.5px !important;
 		  line-height: 1.25 !important;
+		}
+		.followup-inline .followup-date {
+		  font-size: 9.5px !important;
+		  line-height: 1.25 !important;
+		  margin-top: 2px !important;
+		  margin-left: 22px !important;
 		}
 		.followup-print-text {
 		  display: inline !important;
@@ -832,6 +848,7 @@
 
             <select id="fStatus" onchange="renderTable()">
               <option value="">Tous statuts</option>
+              <option>À traiter + En cours</option>
               <option>À traiter</option>
               <option>En cours</option>
               <option>Levée</option>
@@ -874,7 +891,6 @@
                 <th>Description</th>
                 <th>Statut</th>
                 <th>Photo</th>
-                <th class="noPrint">Actions</th>
               </tr>
             </thead>
 
@@ -1392,7 +1408,10 @@ async function deletePhoto(photoId) {
 	  return (state.reserves || [])
 		.filter(
 		  (r) =>
-			(!st || r.status === st) &&
+			(!st ||
+			  r.status === st ||
+			  (st === "À traiter + En cours" &&
+				(r.status === "À traiter" || r.status === "En cours"))) &&
 			(!lot ||
 			  r.lot === lot ||
 			  lotLabel({ lot: r.lot || "", company: r.company || "" }) === lot) &&
@@ -1463,9 +1482,9 @@ function renderSelects() {
 					  const isEditingFollowup =
 						editingFollowupReserveId === r.id && editingFollowupId === f.id;
 					  return `<div class="followup-inline">
-						<span class="followup-arrow">↳</span>
-						<span class="followup-title">Suivi de réserve</span>
-						<span class="followup-date">${formatDateFR(f.date)}</span>
+						<div class="followup-main">
+						  <span class="followup-arrow">↳</span>
+						  <span class="followup-title">Suivi de réserve</span>
 						${
 						  isEditingFollowup
 							? `<span class="followup-text followup-print-text">${esc(f.text)}</span>
@@ -1476,7 +1495,9 @@ function renderSelects() {
 							  </div>`
 							: `<span class="followup-text">${esc(f.text)}</span>
 							  <button class="followup-edit noPrint" onclick="editFollowup('${r.id}','${f.id}')" title="Modifier le suivi" aria-label="Modifier le suivi">&#9998;</button>`
-						}
+						  }
+						</div>
+						<div class="followup-date">${formatDateFR(f.date)}</div>
 					  </div>`;
 					})
 					.join("")}
@@ -1489,18 +1510,16 @@ function renderSelects() {
 						</div>`
 					  : ""
 				  }
+				  <div class="actions description-actions noPrint">
+					<button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
+					<button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
+					<button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
+					<button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
+					<button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
+				  </div>
 				</td>
 			  <td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
 			  <td>${photoThumbHtml(r)}</td>
-			  <td class="noPrint">
-				<div class="actions">
-				  <button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
-				  <button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
-				  <button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
-				  <button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
-				  <button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
-				</div>
-			  </td>
 			</tr>`;
 
 			const followupRows = "";
@@ -1509,7 +1528,7 @@ function renderSelects() {
 			
 			return mainRow + followupRows + followupForm;
 		  })
-		  .join("") || '<tr><td colspan="8">Aucune réserve.</td></tr>';
+		  .join("") || '<tr><td colspan="7">Aucune réserve.</td></tr>';
 		  hydratePhotos();
 	}
 			function toggleFollowup(id) {
