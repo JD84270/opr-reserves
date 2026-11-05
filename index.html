@@ -200,6 +200,189 @@
         font-size: 18px;
         margin: 0 0 14px;
       }
+      .cr-card {
+        grid-column: 1 / -1;
+      }
+      .project-wide-card {
+        grid-column: 1 / -1;
+      }
+      .project-info-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      #projectPanel .lots-card.project-wide-card {
+        overflow: visible;
+      }
+      #projectPanel .lots-card.project-wide-card .lots-list {
+        flex: none;
+        height: auto;
+        max-height: 320px;
+      }
+      .cr-summary {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .cr-summary-item {
+        padding: 10px;
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      .cr-summary-item span {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .cr-summary-item strong {
+        overflow-wrap: anywhere;
+      }
+      .cr-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .cr-modal-card {
+        width: min(920px, 100%);
+      }
+      .cr-attendance-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .cr-attendance-category h3 {
+        margin: 0;
+        padding: 7px 0 5px;
+      }
+      .cr-attendance-row {
+        display: grid;
+        grid-template-columns: minmax(170px, 1.4fr) minmax(150px, 1fr) minmax(150px, 1fr) minmax(170px, 1fr);
+        align-items: center;
+        gap: 8px;
+        padding: 6px 0;
+        border-top: 1px solid var(--line);
+      }
+      .lots-list {
+        display: grid;
+        gap: 8px;
+        flex: 1 1 0;
+        min-height: 0;
+        height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        padding-right: 4px;
+      }
+      .lot-list-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        flex-wrap: wrap;
+        padding: 10px 12px;
+        text-align: left;
+        background: #f8fafc;
+        color: var(--ink);
+        border: 1px solid var(--line);
+        box-shadow: none;
+      }
+      .lot-list-item:hover {
+        background: #f2f7ff;
+        border-color: #c7d7fe;
+      }
+      .lot-list-separator {
+        color: var(--muted);
+      }
+      .intervenant-category-title {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .intervenant-list-item {
+        justify-content: space-between;
+      }
+      .intervenant-list-meta {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .lots-empty {
+        margin: 0;
+        padding: 10px 0;
+      }
+      .lots-add {
+        flex: 0 0 auto;
+        margin-top: 12px;
+      }
+      .lots-card {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+      }
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        background: rgba(23, 32, 51, 0.55);
+      }
+      .modal-card {
+        width: min(680px, 100%);
+        max-height: calc(100vh - 32px);
+        overflow-y: auto;
+        background: white;
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: 0 20px 60px rgba(16, 24, 40, 0.25);
+      }
+      .modal-card h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+      }
+      .modal-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .modal-actions .danger {
+        margin-right: auto;
+      }
+      .intervenant-lots-section {
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+      }
+      .intervenant-lots-section h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .intervenant-lots-list {
+        display: grid;
+        gap: 7px;
+        margin-bottom: 12px;
+      }
+      .intervenant-lots-list .lot-list-item {
+        padding: 8px 10px;
+      }
+      .lot-edit-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .lot-edit-actions .danger {
+        margin-right: auto;
+      }
       .formgrid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -223,6 +406,103 @@
         flex: 1;
         min-width: 760px;
       }
+      .attendance-panel {
+        margin: 0 0 12px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: 0 8px 22px rgba(16, 24, 40, 0.05);
+        overflow: hidden;
+      }
+      .attendance-panel summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+      }
+      .attendance-panel summary::-webkit-details-marker {
+        display: none;
+      }
+      .attendance-chevron {
+        color: var(--muted);
+        transition: transform 0.2s ease;
+      }
+      .attendance-panel[open] .attendance-chevron {
+        transform: rotate(180deg);
+      }
+      .attendance-content {
+        padding: 0 16px 14px;
+      }
+      .attendance-list {
+        display: grid;
+        gap: 0;
+      }
+      .attendance-category {
+        display: grid;
+      }
+      .attendance-category + .attendance-category {
+        margin-top: 10px;
+      }
+      .attendance-category .intervenant-category-title {
+        margin: 0;
+        padding: 8px 0 5px;
+      }
+      .attendance-row {
+        display: grid;
+        grid-template-columns: minmax(150px, 1fr) minmax(140px, 1fr) minmax(145px, auto) auto minmax(145px, auto);
+        align-items: center;
+        gap: 10px;
+        min-height: 42px;
+        padding: 6px 0;
+        border-top: 1px solid var(--line);
+      }
+      .attendance-edit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 6px;
+        width: fit-content;
+        max-width: 100%;
+        padding: 3px 2px;
+        color: var(--ink);
+        background: transparent;
+        border: 0;
+        border-radius: 4px;
+        box-shadow: none;
+        text-align: left;
+      }
+      .attendance-edit:hover {
+        color: var(--primary);
+        background: transparent;
+      }
+      .attendance-edit:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+      .attendance-edit-icon {
+        flex: 0 0 auto;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .attendance-lots {
+        color: var(--muted);
+      }
+      .attendance-field {
+        display: grid;
+        gap: 3px;
+      }
+      .attendance-field-label {
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .attendance-absence-input {
+        width: 72px;
+        max-width: 100%;
+      }
       .tablewrap {
         overflow: auto;
         background: white;
@@ -233,6 +513,16 @@
         width: 100%;
         border-collapse: collapse;
       }
+      #reservesPanel table {
+        table-layout: fixed;
+      }
+      #reservesPanel th:nth-child(1) { width: 7%; }
+      #reservesPanel th:nth-child(2) { width: 10%; }
+      #reservesPanel th:nth-child(3) { width: 14%; }
+      #reservesPanel th:nth-child(4) { width: 15%; }
+      #reservesPanel th:nth-child(5) { width: 32%; }
+      #reservesPanel th:nth-child(6) { width: 11%; }
+      #reservesPanel th:nth-child(7) { width: 11%; }
       th,
       td {
         padding: 12px;
@@ -247,6 +537,16 @@
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.04em;
+      }
+      #reservesPanel th:nth-child(6),
+      #reservesPanel th:nth-child(7),
+      #reservesBody > tr > td:nth-child(3),
+      #reservesBody > tr > td:nth-child(4) {
+        text-align: center;
+      }
+      #reservesBody > tr > td:nth-child(3),
+      #reservesBody > tr > td:nth-child(4) {
+        vertical-align: middle;
       }
       tr:last-child td {
         border-bottom: 0;
@@ -275,6 +575,14 @@
         background: #fff1f0;
         color: #b42318;
       }
+      .badge.b-pm {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: inherit;
+        font-weight: 400;
+      }
       .actions {
         display: flex;
         gap: 6px;
@@ -289,14 +597,85 @@
         justify-content: flex-start;
         margin-top: 8px;
       }
+      .task-meta-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 7px;
+      }
+      .task-meta-controls select,
+      .task-status-select {
+        min-height: 36px;
+        max-width: 100%;
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+      .task-meta-controls > select:first-child {
+        flex: 0 1 185px;
+        width: 185px;
+        min-width: 0;
+      }
+      .task-meta-controls > select:last-child {
+        flex: 0 1 145px;
+        width: 145px;
+        min-width: 0;
+      }
+      .task-status-select {
+        width: 100%;
+        border: 1px solid currentColor;
+        border-radius: 999px;
+        font-weight: 800;
+      }
+      .task-status-select.b-pm {
+        border-color: var(--line);
+        background: white;
+        color: var(--ink);
+        font-weight: 400;
+      }
+      .task-description-text {
+        white-space: pre-wrap;
+      }
+      .task-importance-important {
+        color: #b54708;
+      }
+      .task-importance-veryImportant {
+        padding: 6px 8px;
+        color: #b54708;
+        border: 1px solid #b54708;
+        border-radius: 6px;
+        font-size: 1.05em;
+        font-weight: 800;
+      }
+      .task-importance-urgent {
+        color: #b42318;
+        font-weight: 800;
+      }
+      .task-importance-veryUrgent {
+        padding: 6px 8px;
+        color: #b42318;
+        border: 1px solid #b42318;
+        border-radius: 6px;
+        font-size: 1.05em;
+        font-weight: 800;
+      }
+      .task-qualification-print {
+        margin-top: 5px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
       .reserve-identification {
         display: grid;
-        grid-template-columns: 0.7fr 1fr 1.2fr 1.4fr;
-        gap: 4px 12px;
+        grid-template-columns: 7fr 10fr 14fr 15fr;
+        gap: 0;
         align-items: start;
       }
       .reserve-identification > div {
         min-width: 0;
+        padding: 12px;
+        box-sizing: border-box;
+      }
+      #reservesBody > tr > td:first-child[colspan="4"] {
+        padding: 0;
       }
 	  .followup-row td {
 	  background: linear-gradient(90deg, #f8fbff, #ffffff);
@@ -339,6 +718,7 @@
 
 	.followup-text {
 	  flex: 1;
+	  white-space: pre-wrap;
 	}
 
 	.followup-print-text {
@@ -384,8 +764,9 @@
 
 	.followup-form {
 	  display: flex;
+	  flex-direction: column;
 	  gap: 8px;
-	  align-items: center;
+	  align-items: stretch;
 	  margin-left: 28px;
 	  padding: 10px 12px;
 	  border-left: 3px solid var(--cyan);
@@ -393,8 +774,21 @@
 	  background: #f0fdfa;
 	}
 
-	.followup-form input {
-	  flex: 1;
+	.followup-form textarea {
+	  box-sizing: border-box;
+	  width: 100%;
+	  min-width: 0;
+	  height: 40px;
+	  min-height: 40px;
+	  resize: vertical;
+	  white-space: pre-wrap;
+	  overflow-wrap: anywhere;
+	}
+	.followup-form-actions {
+	  display: flex;
+	  justify-content: flex-end;
+	  gap: 8px;
+	  flex-wrap: wrap;
 	}
 	.followup-inline {
 	  display: block;
@@ -416,6 +810,242 @@
 	  margin-left: 0;
 	  margin-top: 8px;
 	}
+      .task-main-with-followups > td {
+        border-bottom: 0;
+      }
+      .task-followups-row > td {
+        padding: 0 12px 10px;
+      }
+      .task-followup-form-row > td {
+        padding: 0 12px 10px;
+      }
+      .task-followup-form-area {
+        box-sizing: border-box;
+        width: 90%;
+      }
+      .task-followups-area {
+        width: min(70%, 820px);
+      }
+      .task-followups-area .followup-inline {
+        margin-top: 6px;
+      }
+      .task-followups-area .followup-text {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .task-followups-area .followup-form-inline {
+        width: 100%;
+      }
+      .task-followups-area .followup-form-inline textarea {
+        max-width: 100%;
+      }
+      .task-group-header > td {
+        padding: 8px 12px;
+        color: #173b66;
+        background: #eef5ff;
+        border-top: 1px solid #c7d7eb;
+        border-bottom: 1px solid #c7d7eb;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
+      }
+      .task-group-header.task-collapse-header > td,
+      .task-section-header.task-collapse-header > td {
+        padding: 0;
+      }
+      .task-collapse-toggle {
+        all: unset;
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 12px;
+        color: inherit;
+        font: inherit;
+        letter-spacing: inherit;
+        text-transform: inherit;
+        cursor: pointer;
+      }
+      .task-section-header .task-collapse-toggle {
+        padding: 12px 12px 8px;
+      }
+      .task-collapse-toggle:focus-visible {
+        outline: 2px solid var(--blue);
+        outline-offset: -2px;
+      }
+      .task-collapse-chevron {
+        flex: 0 0 1em;
+        font-size: 0.9em;
+        text-align: center;
+      }
+      .task-screen-collapsed {
+        display: none;
+      }
+      .task-section-header > td {
+        padding: 12px 12px 8px;
+        color: var(--ink);
+        background: white;
+        border-top: 2px solid var(--blue);
+        border-bottom: 0;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.045em;
+        text-transform: uppercase;
+      }
+      .task-group-columns > th {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+      @media screen {
+        #reservesPanel.task-list-table table {
+          min-width: 760px;
+        }
+        #reservesPanel.task-list-table col:nth-child(1) { width: 6%; }
+        #reservesPanel.task-list-table col:nth-child(2) { width: 8%; }
+        #reservesPanel.task-list-table col:nth-child(3) { width: 12%; }
+        #reservesPanel.task-list-table col:nth-child(4) { width: 13%; }
+        #reservesPanel.task-list-table col:nth-child(5) { width: 39%; }
+        #reservesPanel.task-list-table col:nth-child(6) { width: 11%; }
+        #reservesPanel.task-list-table col:nth-child(7) { width: 11%; }
+        #reservesPanel.task-list-table th {
+          width: auto;
+        }
+        #reservesPanel.task-list-table .reserve-identification {
+          grid-template-columns: 6fr 8fr 12fr 13fr;
+        }
+        #reservesPanel.task-list-table th:nth-child(-n + 5),
+        #reservesPanel.task-list-table .reserve-identification > div {
+          text-align: left;
+        }
+        #reservesPanel.task-list-table th:nth-child(6),
+        #reservesPanel.task-list-table th:nth-child(7) {
+          text-align: center;
+        }
+        #reservesPanel.task-list-table .reserve-identification > div {
+          overflow-wrap: break-word;
+        }
+        .task-followups-area {
+          width: fit-content;
+          max-width: 100%;
+        }
+        .task-timeline {
+          --task-timeline-line-color: #b8d7f5;
+          --task-timeline-label-color: #2563eb;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: fit-content;
+          max-width: 100%;
+        }
+        .task-timeline::before {
+          content: "";
+          position: absolute;
+          top: 16px;
+          bottom: 16px;
+          left: 8px;
+          width: 2px;
+          background: var(--task-timeline-line-color);
+        }
+        .task-timeline-item.followup-inline {
+          position: relative;
+          display: grid;
+          grid-template-columns: fit-content(190px) minmax(0, auto) 34px;
+          column-gap: 12px;
+          row-gap: 8px;
+          align-items: center;
+          width: fit-content;
+          max-width: 100%;
+          min-height: 36px;
+          margin: 0;
+          padding: 5px 0 5px 26px;
+          border-left: 0;
+          border-radius: 0;
+          background: transparent;
+        }
+        .task-timeline-item::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 4px;
+          z-index: 1;
+          width: 10px;
+          height: 10px;
+          border: 2px solid var(--blue);
+          border-radius: 50%;
+          background: white;
+          transform: translateY(-50%);
+        }
+        .task-timeline-item.is-last::after {
+          left: 3px;
+          width: 12px;
+          height: 12px;
+          background: var(--blue);
+        }
+        .task-timeline-item .followup-main {
+          display: contents;
+        }
+        .task-timeline-item .followup-arrow,
+        .task-timeline-item .followup-title {
+          display: none;
+        }
+        .task-timeline-item .followup-date {
+          grid-column: 1;
+          grid-row: 1;
+          align-self: center;
+          margin: 0;
+          color: var(--task-timeline-label-color);
+          font-size: 11px;
+          font-weight: 700;
+          white-space: normal;
+        }
+        .task-timeline-item .followup-date::before {
+          content: "Suivi de tâche du ";
+        }
+        .task-timeline-item .followup-text {
+          grid-column: 2;
+          grid-row: 1;
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
+        .task-timeline-item.is-last .followup-text {
+          font-weight: 600;
+        }
+        .task-timeline-item .followup-edit {
+          grid-column: 3;
+          grid-row: 1;
+          justify-self: end;
+          width: 32px;
+          height: 32px;
+        }
+        .task-timeline-item .followup-edit-form {
+          grid-column: 2 / 4;
+          grid-row: 1;
+          min-width: 0;
+        }
+        .task-timeline-item.is-editing {
+          width: 600px;
+          max-width: 100%;
+        }
+        .task-timeline-item.is-editing .followup-edit-form {
+          grid-column: 1 / 4;
+          grid-row: 2;
+          display: flex;
+          flex-wrap: wrap;
+          width: min(550px, 100%);
+          max-width: 100%;
+        }
+        .task-timeline-item.is-editing .followup-edit-form textarea {
+          flex: 1 1 100%;
+          width: 100%;
+          min-width: 0;
+          min-height: 80px;
+          max-height: none;
+          resize: vertical;
+        }
+      }
       .thumb {
         width: 112px;
         height: 84px;
@@ -423,10 +1053,144 @@
         border-radius: 10px;
         border: 1px solid var(--line);
       }
+      .photo-thumbs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
       .visit {
         display: grid;
         grid-template-columns: 420px 1fr;
         gap: 14px;
+      }
+      #visitPanel.task-list-visit .visit {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      #visitPanel.task-list-visit .visit-task-options {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      #visitPanel.task-list-visit .standard-visit-status,
+      #visitPanel.task-list-visit .standard-visit-photo {
+        display: none;
+      }
+      .task-visit-only {
+        display: none;
+      }
+      #visitPanel.task-list-visit .task-visit-only {
+        display: block;
+      }
+      #visitPanel.task-list-visit .reserveCards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .visit-photo-zone {
+        padding-top: 4px;
+      }
+      .visit-photo-title {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .visit-photo-previews {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .visit-photo-empty {
+        margin: 0 0 10px;
+      }
+      .visit-photo-preview {
+        position: relative;
+        width: 132px;
+        max-width: 100%;
+      }
+      .visit-photo-open {
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: none;
+      }
+      .visit-photo-open img {
+        display: block;
+        width: 100%;
+        height: 98px;
+        object-fit: cover;
+      }
+      .visit-photo-remove {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        color: white;
+        background: rgba(180, 35, 24, 0.92);
+        border: 0;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(16, 24, 40, 0.25);
+      }
+      .visit-photo-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .visit-photo-picker {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 9px 13px;
+        overflow: hidden;
+        color: white;
+        background: var(--blue);
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .visit-photo-picker.secondary {
+        color: var(--blue);
+        background: #eaf2ff;
+      }
+      .visit-photo-picker input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .photo-viewer {
+        position: fixed;
+        inset: 0;
+        z-index: 1200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(16, 24, 40, 0.88);
+      }
+      .photo-viewer img {
+        max-width: min(1100px, 100%);
+        max-height: calc(100vh - 40px);
+        object-fit: contain;
+      }
+      .photo-viewer-close {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border-radius: 50%;
       }
       .bigNum {
         font-size: 34px;
@@ -455,6 +1219,29 @@
       .rcard strong {
         font-size: 17px;
       }
+      #liftingPanel > .card {
+        padding: 12px;
+      }
+      #liftingPanel > .card > .toolbar {
+        margin-bottom: 8px;
+      }
+      #liftingList {
+        gap: 8px;
+      }
+      #liftingList .rcard {
+        padding: 9px 10px;
+      }
+      #liftingList .rcard .top {
+        gap: 8px;
+        margin-bottom: 5px;
+      }
+      #liftingList .rcard p {
+        margin: 6px 0;
+        line-height: 1.35;
+      }
+      #liftingList .rcard .actions {
+        margin-top: 6px !important;
+      }
       .small {
         font-size: 13px;
         color: var(--muted);
@@ -481,6 +1268,9 @@
         .visit {
           grid-template-columns: 1fr;
         }
+        .project-info-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
         .filters {
           grid-template-columns: 1fr 1fr;
           min-width: 0;
@@ -488,8 +1278,86 @@
         .reserveCards {
           grid-template-columns: 1fr;
         }
+        #visitPanel.task-list-visit .visit-task-options {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        #visitPanel.task-list-visit .reserveCards {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        #liftingPanel > .card {
+          padding: 10px;
+        }
+        #liftingPanel > .card > .toolbar {
+          margin-bottom: 6px;
+        }
+        #liftingList {
+          gap: 7px;
+        }
+        #liftingList .rcard {
+          padding: 8px 9px;
+        }
+        #liftingList .rcard .top {
+          margin-bottom: 4px;
+        }
+        #liftingList .rcard p {
+          margin: 5px 0;
+        }
         .brand {
           min-width: 0;
+        }
+        .modal-card .formgrid {
+          grid-template-columns: 1fr;
+        }
+        .lots-card {
+          overflow: visible;
+        }
+        .lots-list {
+          flex: none;
+          height: auto;
+          max-height: 320px;
+        }
+        .attendance-row {
+          grid-template-columns: 1fr;
+          gap: 6px;
+          padding: 9px 0;
+        }
+        .attendance-edit {
+          width: 100%;
+        }
+        .attendance-row select {
+          width: 100%;
+        }
+        .cr-summary {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .cr-attendance-row {
+          grid-template-columns: 1fr 1fr;
+        }
+        .task-followups-area {
+          width: 100%;
+        }
+        .task-followup-form-area {
+          width: 100%;
+        }
+        .task-followups-area .followup-form-inline textarea {
+          width: 100%;
+        }
+      }
+      @media (max-width: 640px) {
+        #visitPanel.task-list-visit .visit-task-options,
+        #visitPanel.task-list-visit .reserveCards {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .visit-photo-preview {
+          width: calc(50% - 5px);
+        }
+        .visit-photo-actions > * {
+          width: 100%;
+        }
+        .cr-summary,
+        .cr-attendance-row,
+        .project-info-grid {
+          grid-template-columns: minmax(0, 1fr);
         }
       }
       @media print {
@@ -538,6 +1406,88 @@
           margin: 0 0 6px;
           font-weight: 800;
         }
+        .print-attendance {
+          margin: 0 0 12px;
+          border: 1px solid #bbb;
+          border-radius: 6px;
+          overflow: hidden;
+          font-size: 9.5px;
+        }
+        .print-attendance-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          gap: 12px;
+          padding: 6px 8px;
+          background: #eee;
+          border-bottom: 1px solid #bbb;
+        }
+        .print-attendance-header h3 {
+          margin: 0;
+          font-size: 11px;
+        }
+        .print-attendance-next {
+          margin: 0;
+          white-space: nowrap;
+        }
+        .print-attendance-content {
+          padding: 2px 8px 5px;
+        }
+        .print-attendance-group-title {
+          margin: 5px 0 1px;
+          padding-bottom: 2px;
+          border-bottom: 1px solid #ddd;
+          font-size: 9.5px;
+          break-after: avoid;
+        }
+        .print-attendance-row {
+          display: grid;
+          grid-template-columns: minmax(105px, 1fr) minmax(125px, 1.2fr) minmax(115px, 1fr) minmax(70px, auto) minmax(52px, auto) minmax(88px, auto);
+          gap: 8px;
+          align-items: start;
+          padding: 3px 0;
+          border-bottom: 1px solid #eee;
+          break-inside: avoid;
+        }
+        .print-attendance-columns {
+          color: #667085;
+          font-size: 8px;
+          font-weight: 700;
+        }
+        .print-attendance-row:last-child {
+          border-bottom: 0;
+        }
+        .print-attendance-group .print-attendance-row {
+          border-bottom: 0;
+        }
+        .print-attendance-group .print-attendance-row > strong:first-child {
+          font-weight: 400;
+        }
+        .print-attendance-row > :nth-child(5) {
+          justify-self: stretch;
+          text-align: center;
+        }
+        .print-attendance-contact {
+          overflow-wrap: anywhere;
+        }
+        .print-attendance-status {
+          font-weight: 700;
+          white-space: nowrap;
+        }
+        .print-attendance-details {
+          display: grid;
+          grid-template-columns: max-content 1fr;
+          gap: 3px 8px;
+          padding: 6px 0 2px;
+        }
+        .print-attendance-details strong {
+          white-space: nowrap;
+        }
+        .print-attendance-presence-line {
+          display: flex;
+          justify-content: space-between;
+          gap: 18px;
+        }
         .printPanel {
           display: block !important;
         }
@@ -556,14 +1506,185 @@
           background: #eee !important;
           color: #111;
         }
+        #reservesPanel th:nth-child(1) { width: 6%; }
+        #reservesPanel th:nth-child(2) { width: 8%; }
+        #reservesPanel th:nth-child(3) { width: 13%; }
+        #reservesPanel th:nth-child(4) { width: 14%; }
+        #reservesPanel th:nth-child(5) { width: 37%; }
+        #reservesPanel th:nth-child(6) { width: 11%; }
+        #reservesPanel th:nth-child(7) { width: 11%; }
+        #reservesPanel.task-list-table col:nth-child(1) { width: 5%; }
+        #reservesPanel.task-list-table col:nth-child(2) { width: 7%; }
+        #reservesPanel.task-list-table col:nth-child(3) { width: 11%; }
+        #reservesPanel.task-list-table col:nth-child(4) { width: 12%; }
+        #reservesPanel.task-list-table col:nth-child(5) { width: 43%; }
+        #reservesPanel.task-list-table col:nth-child(6) { width: 11%; }
+        #reservesPanel.task-list-table col:nth-child(7) { width: 11%; }
+        #reservesPanel.task-list-table th {
+          width: auto;
+        }
+        .reserve-identification {
+          grid-template-columns: 6fr 8fr 13fr 14fr;
+        }
+        #reservesPanel.task-list-table .reserve-identification {
+          grid-template-columns: 5fr 7fr 11fr 12fr;
+        }
+        #reservesPanel.task-list-table th:nth-child(-n + 5),
+        #reservesPanel.task-list-table .reserve-identification > div {
+          text-align: left;
+        }
+        #reservesPanel.task-list-table th:nth-child(6),
+        #reservesPanel.task-list-table th:nth-child(7) {
+          text-align: center;
+        }
+        .reserve-identification > div {
+          padding: 6px;
+        }
         .thumb {
           width: 64px;
           height: 48px;
         }
         .badge {
+          width: auto;
+          min-width: 0;
+          padding: 3px 7px;
+          font-size: 10.5px;
+          line-height: 1.2;
           border: 1px solid currentColor;
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
+        }
+        .task-remark {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .task-status-print {
+          display: inline-flex !important;
+        }
+        .task-status-print.b-pm {
+          padding: 0;
+          border: 0;
+          border-radius: 0;
+          background: transparent !important;
+          color: #111 !important;
+          font-weight: 400;
+        }
+        .task-main-with-followups:not(.task-main-with-print-followups) > td {
+          border-bottom: 1px solid #ccc;
+        }
+        .task-followups-row > td {
+          padding: 0 6px 6px;
+          border-bottom: 1px solid #ccc;
+          break-inside: auto;
+          page-break-inside: auto;
+        }
+        .task-followups-area {
+          width: fit-content;
+          max-width: 100%;
+          margin-left: 0;
+          padding: 0;
+        }
+        .task-main-with-print-followups {
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+        .task-followups-row {
+          break-before: avoid;
+          page-break-before: avoid;
+        }
+        .task-group-header {
+          break-inside: avoid;
+          page-break-inside: avoid;
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+        .task-section-header {
+          break-inside: avoid;
+          page-break-inside: avoid;
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+        .task-group-columns {
+          break-inside: avoid;
+          page-break-inside: avoid;
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+        .task-screen-collapsed:not(.noPrint) {
+          display: table-row !important;
+        }
+        .task-screen-collapsed.noPrint {
+          display: none !important;
+        }
+        .task-collapse-chevron {
+          display: none !important;
+        }
+        .task-collapse-toggle {
+          padding: 0;
+          cursor: default;
+        }
+        .task-group-header.task-collapse-header > td {
+          padding: 6px 8px;
+          color: #111 !important;
+          background: #f2f2f2 !important;
+          border-top: 1px solid #777;
+          border-bottom: 1px solid #777;
+          font-size: 10.5px;
+          font-weight: 800;
+          letter-spacing: 0.02em;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .task-section-header.task-collapse-header > td {
+          padding: 6px 8px;
+          color: #111 !important;
+          background: white !important;
+          border-top: 2px solid #333;
+          border-bottom: 0;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 0.04em;
+        }
+        .task-group-columns > th {
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
+        #reservesPanel.task-list-table .task-section-header .task-collapse-count,
+        #reservesPanel.task-list-table .task-group-header .task-collapse-count {
+          font-weight: 400;
+        }
+        .task-print-spacer {
+          display: table-row !important;
+          break-inside: avoid;
+          page-break-inside: avoid;
+          break-after: avoid;
+          page-break-after: avoid;
+        }
+        .task-print-spacer > td {
+          height: var(--task-print-spacer-height);
+          padding: 0 !important;
+          border: 0 !important;
+          background: white !important;
+          font-size: 0;
+          line-height: 0;
+        }
+        .task-section-spacer {
+          --task-print-spacer-height: 16px;
+        }
+        .task-group-spacer {
+          --task-print-spacer-height: 10px;
+        }
+        .task-group-spacer-first {
+          --task-print-spacer-height: 4px;
+        }
+        #reservesPanel.task-list-table #reservesBody > tr:not(.task-section-header):not(.task-group-header):not(.task-group-columns):not(.task-followups-row):not(.task-followup-form-row) > td {
+          padding-top: 8px;
+          padding-bottom: 8px;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        #reservesPanel.task-list-table .task-description-text {
+          line-height: 1.4;
         }
         .b-open {
           background: #fff7db !important;
@@ -609,14 +1730,112 @@
 		.followup-print-text {
 		  display: inline !important;
 		}
-        th:nth-child(6),
-        td:nth-child(6) {
+        .task-timeline {
+          --task-timeline-line-color: #b8d7f5;
+          --task-timeline-label-color: #2563eb;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: fit-content;
+          max-width: 100%;
+          break-inside: auto;
+          page-break-inside: auto;
+        }
+        .task-timeline::before {
+          content: "";
+          position: absolute;
+          top: 13px;
+          bottom: 13px;
+          left: 6px;
+          width: 2px;
+          background: var(--task-timeline-line-color);
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .task-timeline-item.followup-inline {
+          position: relative;
+          display: grid;
+          grid-template-columns: fit-content(190px) minmax(0, auto);
+          column-gap: 10px;
+          align-items: center;
+          width: fit-content;
+          max-width: 100%;
+          min-height: 30px;
+          margin: 0 !important;
+          padding: 3px 0 3px 22px !important;
+          border-left: 0 !important;
+          border-radius: 0 !important;
+          background: transparent !important;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        .task-timeline-item::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 2px;
+          z-index: 1;
+          width: 9px;
+          height: 9px;
+          border: 2px solid var(--blue);
+          border-radius: 50%;
+          background: white;
+          transform: translateY(-50%);
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .task-timeline-item.is-last::after {
+          left: 1px;
+          width: 11px;
+          height: 11px;
+          background: var(--blue);
+        }
+        .task-timeline-item .followup-main {
+          display: contents;
+        }
+        .task-timeline-item .followup-arrow,
+        .task-timeline-item .followup-title {
+          display: none !important;
+        }
+        .task-timeline-item .followup-date {
+          grid-column: 1;
+          grid-row: 1;
+          margin: 0 !important;
+          color: var(--task-timeline-label-color);
+          font-size: 9.5px !important;
+          font-weight: 700;
+          line-height: 1.25 !important;
+          white-space: normal;
+        }
+        .task-timeline-item .followup-date::before {
+          content: "Suivi de tâche du ";
+        }
+        .task-timeline-item .followup-text {
+          grid-column: 2;
+          grid-row: 1;
+          min-width: 0;
+          color: #111;
+          font-size: 10.5px !important;
+          line-height: 1.25 !important;
+          overflow-wrap: anywhere;
+        }
+        .task-timeline-item.is-last .followup-text {
+          font-weight: 600;
+        }
+		#reservesPanel th:nth-child(6),
+		#reservesPanel th:nth-child(7),
+		#reservesBody > tr > td:nth-child(3),
+		#reservesBody > tr > td:nth-child(4) {
           text-align: center;
           vertical-align: middle;
         }
-        td:nth-child(6) .badge {
+        #reservesBody > tr > td:nth-child(3) .badge {
           font-size: 11px;
           justify-content: center;
+        }
+        #reservesPanel.task-list-table #reservesBody > tr > td:nth-child(4) .photo-thumbs {
+          justify-content: flex-end;
         }
       }
     </style>
@@ -637,13 +1856,13 @@
         <nav class="nav noPrint">
           <button data-panel="projectPanel" class="active">Projet</button
           ><button data-panel="visitPanel">Mode visite</button
-          ><button data-panel="reservesPanel">Réserves</button
-          ><button data-panel="liftingPanel">Levées</button>
+          ><button id="navReservesLabel" data-panel="reservesPanel">Réserves</button
+          ><button id="navLiftingLabel" data-panel="liftingPanel">Levées</button>
         </nav>
       </header>
       <section class="kpis noPrint">
         <div class="kpi total">
-          <span>Total réserves</span><strong id="kpiTotal">0</strong>
+          <span id="kpiTotalLabel">Total réserves</span><strong id="kpiTotal">0</strong>
         </div>
         <div class="kpi open">
           <span>Ouvertes</span><strong id="kpiOpen">0</strong>
@@ -657,26 +1876,39 @@
       </section>
       <section id="projectPanel" class="panel active">
         <div class="grid2">
-          <div class="card">
+          <div id="crCard" class="card cr-card hidden">
+            <h2>Compte rendu de chantier</h2>
+            <div class="cr-summary">
+              <div class="cr-summary-item"><span>CR actuel</span><strong id="crCurrentNumber">Non initialisé</strong></div>
+              <div class="cr-summary-item"><span>Date de réunion</span><strong id="crMeetingDate">—</strong></div>
+              <div class="cr-summary-item"><span>Prochaine réunion</span><strong id="crNextMeetingDate">—</strong></div>
+              <div class="cr-summary-item"><span>Heure</span><strong id="crNextMeetingTime">—</strong></div>
+              <div class="cr-summary-item"><span>Intervenants convoqués</span><strong id="crInvitedCount">0</strong></div>
+            </div>
+            <div class="cr-actions">
+              <button id="editCurrentCrBtn" class="secondary" onclick="openCurrentCrEditor()">Modifier le CR actuel</button>
+              <button onclick="openNextCrEditor()">Préparer un nouveau CR</button>
+            </div>
+          </div>
+          <div class="card project-wide-card">
             <h2>Informations chantier</h2>
-            <div class="formgrid">
+            <div class="formgrid project-info-grid">
               <div>
                 <label>Nom du chantier</label
                 ><input id="pName" placeholder="Résidence Les Oliviers" />
               </div>
               <div><label>Adresse</label><input id="pAddress" /></div>
-              <div><label>Maître d’ouvrage</label><input id="pClient" /></div>
-              <div><label>Maître d’œuvre</label><input id="pMoe" /></div>
-              <div><label>Date OPR</label><input id="pOpr" type="date" /></div>
-              <div>
-                <label>Date réception</label
+              <div id="pOprField"><label id="pOprLabel">Date OPR</label><input id="pOpr" type="date" /></div>
+              <div id="pReceptionField">
+                <label id="pReceptionLabel">Date réception</label
                 ><input id="pReception" type="date" />
               </div>
-              <div class="full">
+              <div>
                 <label>Type de document</label
                 ><select id="pDocumentType" onchange="saveProjectSilent()">
                   <option value="OPR">OPR</option>
                   <option value="Réserves">Réserves</option>
+                  <option value="Liste de tâches">Liste de tâches</option>
                 </select>
               </div>
               <div class="full">
@@ -684,27 +1916,12 @@
               </div>
             </div>
           </div>
-          <div class="card">
-            <h2>Lots / entreprises</h2>
-            <p class="small">
-              Une ligne par lot. Format conseillé :
-              <b>Peinture | ABC Peinture</b>
-            </p>
-            <textarea
-              id="lotsText"
-              placeholder="Peinture | ABC Peinture&#10;Menuiseries | Menuiserie Dupont&#10;Plomberie | Aqua Sud"
-            ></textarea>
-            <div
-              style="
-                margin-top: 12px;
-                display: flex;
-                gap: 10px;
-                flex-wrap: wrap;
-              "
-            >
-              <button onclick="saveProject()">Mettre à jour</button
-              ><button class="secondary" onclick="seedDemo()">Exemple</button>
-            </div>
+          <div class="card lots-card project-wide-card">
+            <h2>Intervenants du chantier</h2>
+            <div id="lotsList" class="lots-list"></div>
+            <button class="lots-add" onclick="openIntervenantEditor()">
+              + Ajouter un intervenant
+            </button>
           </div>
           <div class="card">
 			  <h2>Sauvegarde</h2>
@@ -774,12 +1991,21 @@
       <section id="visitPanel" class="panel">
         <div class="visit">
           <div class="card">
-            <h2>Mode visite chantier</h2>
+            <h2 id="visitTitle">Mode visite chantier</h2>
             <div class="bigNum" id="nextNumber">R-001</div>
             <p id="visitEditHint" class="small hidden">Modification en cours</p>
             <div class="formgrid">
-              <div>
-                <label>Lot / entreprise</label
+              <div class="task-visit-only">
+                <label>Catégorie d’attribution</label>
+                <select id="vAssignmentCategory" onchange="renderTaskAssignmentOptions('')">
+                  <option value="maitrise_ouvrage">Maîtrise d’ouvrage</option>
+                  <option value="maitrise_oeuvre">Maîtrise d’œuvre</option>
+                  <option value="autre">Autres</option>
+                  <option value="entreprise" selected>Entreprises</option>
+                </select>
+              </div>
+              <div id="visitAssignmentField">
+                <label id="visitAssignmentLabel">Lot / entreprise</label
                 ><select id="vLot"></select>
               </div>
               <div>
@@ -802,7 +2028,7 @@
                   placeholder="Décrire la réserve..."
                 ></textarea>
               </div>
-              <div>
+              <div class="standard-visit-status">
                 <label>Statut</label
                 ><select id="vStatus">
                   <option>À traiter</option>
@@ -811,7 +2037,7 @@
                   <option>Refusée / non conforme</option>
                 </select>
               </div>
-              <div>
+              <div class="standard-visit-photo">
                 <label>Photo</label
                 ><input
                   id="vPhoto"
@@ -819,6 +2045,43 @@
                   accept="image/*"
                   capture="environment"
                 />
+              </div>
+              <div class="full task-visit-only">
+                <div class="visit-task-options">
+                  <div>
+                    <label>Statut</label>
+                    <select id="vTaskStatus">
+                      <option>À traiter</option>
+                      <option>En cours</option>
+                      <option>Levée</option>
+                      <option>Refusée / non conforme</option>
+                      <option>PM</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>Qualification</label>
+                    <select id="vTaskQualification"></select>
+                  </div>
+                  <div>
+                    <label>Importance</label>
+                    <select id="vTaskImportance"></select>
+                  </div>
+                </div>
+              </div>
+              <div class="full task-visit-only visit-photo-zone">
+                <p class="visit-photo-title">Photos</p>
+                <div id="visitPhotoPreviews" class="visit-photo-previews"></div>
+                <p id="visitPhotoEmpty" class="small visit-photo-empty">Aucune photo sélectionnée.</p>
+                <div class="visit-photo-actions">
+                  <label class="visit-photo-picker">
+                    Prendre une photo
+                    <input id="vPhotoCamera" type="file" accept="image/*" capture="environment" onchange="selectVisitPhotos(this.files)" />
+                  </label>
+                  <label class="visit-photo-picker secondary">
+                    Ajouter depuis la bibliothèque
+                    <input id="vPhotoLibrary" type="file" accept="image/*" multiple onchange="selectVisitPhotos(this.files)" />
+                  </label>
+                </div>
               </div>
               <div
                 class="full"
@@ -838,7 +2101,7 @@
           </div>
           <div class="card">
             <div class="toolbar">
-              <h2>Dernières réserves</h2>
+              <h2 id="recentTitle">Dernières réserves</h2>
               <button class="secondary" onclick="showPanel('reservesPanel')">
                 Voir tout
               </button>
@@ -847,6 +2110,10 @@
           </div>
         </div>
       </section>
+      <div id="photoViewer" class="photo-viewer hidden noPrint" role="dialog" aria-modal="true" aria-label="Aperçu de la photo" onclick="closePhotoViewer(event)">
+        <button class="photo-viewer-close" type="button" onclick="closePhotoViewer()" aria-label="Fermer">×</button>
+        <img id="photoViewerImage" alt="Photo agrandie" />
+      </div>
       <section id="reservesPanel" class="panel printPanel">
         <div class="toolbar noPrint">
           <div class="filters">
@@ -863,9 +2130,10 @@
               <option>En cours</option>
               <option>Levée</option>
               <option>Refusée / non conforme</option>
+              <option id="fStatusPm" hidden>PM</option>
             </select>
 
-            <select id="fLot" onchange="renderTable()"></select>
+            <select id="fLot" onchange="renderTable(); renderAttendance()"></select>
 
 			<input
 			  id="fLoc"
@@ -882,21 +2150,47 @@
 			</button>
           </div>
 
-          <button onclick="showPanel('visitPanel')">+ Réserve</button>
+          <button id="addReserveLabel" onclick="showPanel('visitPanel')">+ Réserve</button>
         </div>
+
+        <details id="attendancePanel" class="attendance-panel noPrint hidden">
+          <summary>
+            <span id="attendanceTitle">Présences à la réunion (0 entreprise convoquée)</span>
+            <span class="attendance-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="attendance-content">
+            <div id="attendanceList" class="attendance-list"></div>
+          </div>
+        </details>
 
         <div class="printOnly">
           <h2 id="printListTitle">Liste des réserves</h2>
           <p id="printInfo" class="printMeta"></p>
+          <section id="printAttendance" class="print-attendance hidden">
+            <div class="print-attendance-header">
+              <h3 id="printAttendanceTitle">INTERVENANTS ET PRÉSENCES À LA RÉUNION</h3>
+              <p id="printNextMeeting" class="print-attendance-next"></p>
+            </div>
+            <div id="printAttendanceContent" class="print-attendance-content"></div>
+          </section>
         </div>
 
         <div class="tablewrap">
           <table>
-            <thead>
+            <colgroup id="reservesColumns" aria-hidden="true">
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+            </colgroup>
+            <thead id="reservesHead">
               <tr>
                 <th>N°</th>
-                <th>Lot</th>
-                <th>Entreprise</th>
+                <th id="reservesHeadAssignmentType">Lot</th>
+                <th id="reservesHeadAssignmentName">Entreprise</th>
                 <th>Localisation</th>
                 <th>Description</th>
                 <th>Statut</th>
@@ -912,7 +2206,7 @@
       <section id="liftingPanel" class="panel">
         <div class="card">
           <div class="toolbar">
-            <h2>Levée de réserves</h2>
+            <h2 id="liftingTitle">Levée de réserves</h2>
             <button class="secondary" onclick="showPanel('visitPanel')">
               + Ajouter
             </button>
@@ -920,6 +2214,122 @@
           <div id="liftingList" class="reserveCards"></div>
         </div>
       </section>
+    </div>
+    <div id="lotModal" class="modal-backdrop noPrint hidden" role="dialog" aria-modal="true" aria-labelledby="lotModalTitle">
+      <div class="modal-card">
+        <h2 id="lotModalTitle">Modifier un intervenant</h2>
+        <div class="formgrid">
+          <div>
+            <label for="intervenantCategory">Catégorie d'intervenant</label>
+            <select id="intervenantCategory" onchange="updateIntervenantFunctionOptions()"></select>
+          </div>
+          <div>
+            <label for="intervenantFunction">Fonction</label>
+            <select id="intervenantFunction" onchange="toggleCustomFunction()"></select>
+          </div>
+          <div id="customFunctionField" class="full hidden">
+            <label for="intervenantCustomFunction">Fonction personnalisée</label>
+            <input id="intervenantCustomFunction" />
+          </div>
+          <div class="full">
+            <label for="lotEditCompany">Nom / Raison sociale</label>
+            <input id="lotEditCompany" />
+          </div>
+          <div class="full">
+            <label for="lotEditAddress">Adresse</label>
+            <input id="lotEditAddress" />
+          </div>
+          <div>
+            <label for="lotEditPostalCode">Code postal</label>
+            <input id="lotEditPostalCode" inputmode="numeric" />
+          </div>
+          <div>
+            <label for="lotEditCity">Ville</label>
+            <input id="lotEditCity" />
+          </div>
+          <div>
+            <label for="intervenantContactFirstName">Prénom de l'interlocuteur</label>
+            <input id="intervenantContactFirstName" />
+          </div>
+          <div>
+            <label for="intervenantContactLastName">Nom de l'interlocuteur</label>
+            <input id="intervenantContactLastName" />
+          </div>
+          <div>
+            <label for="lotEditPhone">Téléphone</label>
+            <input id="lotEditPhone" type="tel" />
+          </div>
+          <div>
+            <label for="lotEditEmail">E-mail</label>
+            <input id="lotEditEmail" type="email" />
+          </div>
+        </div>
+        <div id="intervenantLotsSection" class="intervenant-lots-section hidden">
+          <div class="toolbar">
+            <h3>Lots associés</h3>
+            <button class="secondary" onclick="startNewIntervenantLot()">+ Ajouter un lot</button>
+          </div>
+          <div id="intervenantLotsList" class="intervenant-lots-list"></div>
+          <div id="intervenantLotForm" class="formgrid hidden">
+            <div>
+              <label for="lotEditNumber">Numéro du lot</label>
+              <input id="lotEditNumber" />
+            </div>
+            <div>
+              <label for="lotEditDesignation">Désignation du lot</label>
+              <input id="lotEditDesignation" />
+            </div>
+            <div class="full lot-edit-actions">
+              <button id="deleteLotBtn" class="danger hidden" onclick="deleteEditedLot()">Retirer ce lot</button>
+              <button class="ghost" onclick="cancelIntervenantLotEdit()">Annuler</button>
+              <button onclick="saveEditedLot()">Enregistrer le lot</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button id="deleteIntervenantBtn" class="danger hidden" onclick="deleteEditedIntervenant()">Supprimer</button>
+          <button class="ghost" onclick="closeLotEditor()">Annuler</button>
+          <button onclick="saveEditedIntervenant()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+    <div id="crModal" class="modal-backdrop noPrint hidden" role="dialog" aria-modal="true" aria-labelledby="crModalTitle">
+      <div class="modal-card cr-modal-card">
+        <h2 id="crModalTitle">Préparation du compte rendu</h2>
+        <div class="formgrid">
+          <div>
+            <label for="crNumberInput">Numéro de CR</label>
+            <input id="crNumberInput" type="number" min="1" step="1" inputmode="numeric" />
+          </div>
+          <div>
+            <label for="crMeetingDateInput">Date de réunion</label>
+            <input id="crMeetingDateInput" type="date" />
+          </div>
+          <div>
+            <label for="crNextMeetingDateInput">Date de prochaine réunion</label>
+            <input id="crNextMeetingDateInput" type="date" />
+          </div>
+          <div>
+            <label for="crNextMeetingTimeInput">Heure de prochaine réunion</label>
+            <input id="crNextMeetingTimeInput" type="time" />
+          </div>
+        </div>
+        <div id="crAttendanceList" class="cr-attendance-list"></div>
+        <div class="modal-actions">
+          <button class="ghost" onclick="closeCrEditor()">Annuler</button>
+          <button onclick="saveCrEditor()">Valider</button>
+        </div>
+      </div>
+    </div>
+    <div id="crStartupModal" class="modal-backdrop noPrint hidden" role="dialog" aria-modal="true" aria-labelledby="crStartupTitle">
+      <div class="modal-card">
+        <h2 id="crStartupTitle">Compte rendu actuel</h2>
+        <p id="crStartupText"></p>
+        <div class="modal-actions">
+          <button class="ghost" onclick="continueCurrentCr()">Continuer le CR actuel</button>
+          <button onclick="prepareNextCrFromStartup()">Préparer le CR suivant</button>
+        </div>
+      </div>
     </div>
     <datalist id="housingList">
       <option>Logement 1</option>
@@ -959,6 +2369,14 @@
 	  let activeFollowupReserveId = null;
 	  let editingFollowupReserveId = null;
 	  let editingFollowupId = null;
+	  let editingLotIndex = null;
+	  let editingIntervenantId = null;
+      let pendingVisitPhotos = [];
+      let visitPhotoLoadToken = 0;
+      let crDraft = null;
+      let crStartupPromptShown = false;
+      const expandedTaskSections = new Set();
+      const expandedTaskGroups = new Set();
       const $ = (id) => document.getElementById(id);
       const esc = (s) =>
         String(s ?? "").replace(
@@ -1071,6 +2489,39 @@ async function deletePhoto(photoId) {
     };
   });
 }
+		async function clearAllPhotos() {
+		  const db = await openPhotoDB();
+
+		  return new Promise((resolve, reject) => {
+			let settled = false;
+			const finish = (callback, value) => {
+			  if (settled) return;
+			  settled = true;
+			  db.close();
+			  callback(value);
+			};
+
+			if (!db.objectStoreNames.contains(PHOTO_STORE_NAME)) {
+			  finish(reject, new Error("Le stockage des photos est introuvable."));
+			  return;
+			}
+
+			let tx;
+			try {
+			  tx = db.transaction(PHOTO_STORE_NAME, "readwrite");
+			  tx.objectStore(PHOTO_STORE_NAME).clear();
+			} catch (error) {
+			  finish(reject, error);
+			  return;
+			}
+
+			tx.oncomplete = () => finish(resolve);
+			tx.onerror = () =>
+			  finish(reject, tx.error || new Error("Suppression des photos impossible."));
+			tx.onabort = () =>
+			  finish(reject, tx.error || new Error("Suppression des photos annulée."));
+		  });
+		}
       function persist() {
         try {
           localStorage.setItem(KEY, JSON.stringify(state));
@@ -1085,47 +2536,1085 @@ async function deletePhoto(photoId) {
       function lotLabel(l) {
         return l.lot + (l.company ? " | " + l.company : "");
       }
-      function parseLots(txt) {
-        return txt
-          .split("\n")
-          .map((x) => x.trim())
-          .filter(Boolean)
-          .map((x) => {
-            const p = x.split("|").map((v) => v.trim());
-            return { lot: p[0] || "", company: p[1] || "" };
+      function createStableId() {
+        if (typeof crypto !== "undefined" && crypto.randomUUID) {
+          return crypto.randomUUID();
+        }
+        return (
+          "lot_" +
+          Date.now().toString(36) +
+          "_" +
+          Math.random().toString(36).slice(2)
+        );
+      }
+      function createCompanyId() {
+        return "company_" + createStableId();
+      }
+      const INTERVENANT_CATEGORIES = {
+        maitrise_ouvrage: {
+          label: "Maître d'ouvrage",
+          functions: [
+            ["maitre_ouvrage", "Maître d'ouvrage"],
+            ["maitre_ouvrage_delegue", "Maître d'ouvrage délégué"],
+            ["amo", "Assistant à maîtrise d'ouvrage (AMO)"],
+          ],
+        },
+        maitrise_oeuvre: {
+          label: "Maîtrise d'œuvre",
+          functions: [
+            ["maitre_oeuvre", "Maître d'œuvre"],
+            ["architecte", "Architecte"],
+            ["opc", "OPC"],
+            ["bet_structure", "BET Structure"],
+            ["bet_fluides", "BET Fluides"],
+            ["economiste", "Économiste"],
+            ["autre", "Autre"],
+          ],
+        },
+        entreprise: {
+          label: "Entreprises de travaux",
+          functions: [["entreprise_travaux", "Entreprise de travaux"]],
+        },
+        bureau_controle: {
+          label: "Bureau de contrôle",
+          functions: [["bureau_controle", "Bureau de contrôle"]],
+        },
+        coordonnateur_sps: {
+          label: "Coordonnateur SPS",
+          functions: [["coordonnateur_sps", "Coordonnateur SPS"]],
+        },
+        autre: {
+          label: "Autres intervenants",
+          functions: [["autre", "Autre"]],
+        },
+      };
+      function normalizeCompanyName(value) {
+        return String(value || "")
+          .trim()
+          .replace(/\s+/g, " ")
+          .toLocaleLowerCase("fr-FR");
+      }
+      const ATTENDANCE_STATUSES = ["Présente", "Absente", "Excusée", "Non convoquée"];
+      function normalizedAttendanceRecord(value) {
+        if (typeof value === "string") {
+          return {
+            status: ATTENDANCE_STATUSES.includes(value) ? value : "Non convoquée",
+            nextMeetingInvited: false,
+            absenceCount: 0,
+            lastAbsenceCrNumber: null,
+          };
+        }
+        const record =
+          value && typeof value === "object" && !Array.isArray(value) ? value : {};
+        if (!ATTENDANCE_STATUSES.includes(record.status)) {
+          record.status = "Non convoquée";
+        }
+        if (typeof record.nextMeetingInvited !== "boolean") {
+          record.nextMeetingInvited = false;
+        }
+        const count = Number(record.absenceCount);
+        record.absenceCount = Number.isFinite(count) && count >= 0 ? Math.floor(count) : 0;
+        const absenceCrNumber = Number(record.lastAbsenceCrNumber);
+        record.lastAbsenceCrNumber =
+          Number.isSafeInteger(absenceCrNumber) && absenceCrNumber > 0
+            ? absenceCrNumber
+            : null;
+        return record;
+      }
+      function ensureCompanyIdentities() {
+        let changed = false;
+        if (!Array.isArray(state.lots)) {
+          state.lots = [];
+          changed = true;
+        }
+        if (!state.attendance || typeof state.attendance !== "object" || Array.isArray(state.attendance)) {
+          state.attendance = {};
+          changed = true;
+        }
+        if (
+          !state.attendance.companies ||
+          typeof state.attendance.companies !== "object" ||
+          Array.isArray(state.attendance.companies)
+        ) {
+          state.attendance.companies = {};
+          changed = true;
+        }
+        Object.entries(state.attendance.companies).forEach(([id, value]) => {
+          const previousStatus = value?.status;
+          const previousInvited = value?.nextMeetingInvited;
+          const previousAbsenceCount = value?.absenceCount;
+          const previousAbsenceCrNumber = value?.lastAbsenceCrNumber;
+          const normalized = normalizedAttendanceRecord(value);
+          if (
+            normalized !== value ||
+            previousStatus !== normalized.status ||
+            previousInvited !== normalized.nextMeetingInvited ||
+            previousAbsenceCount !== normalized.absenceCount ||
+            previousAbsenceCrNumber !== normalized.lastAbsenceCrNumber
+          ) {
+            state.attendance.companies[id] = normalized;
+            changed = true;
+          }
+        });
+
+        const companyIdsByName = new Map();
+        state.lots.forEach((lot) => {
+          const key = normalizeCompanyName(lot.company);
+          if (key && lot.companyId && !companyIdsByName.has(key)) {
+            companyIdsByName.set(key, lot.companyId);
+          }
+        });
+        state.lots.forEach((lot) => {
+          const key = normalizeCompanyName(lot.company);
+          if (!key || lot.companyId) return;
+          lot.companyId = companyIdsByName.get(key) || createCompanyId();
+          companyIdsByName.set(key, lot.companyId);
+          changed = true;
+        });
+        return changed;
+      }
+      function firstLotValue(lots, field) {
+        return String(lots.find((lot) => String(lot[field] || "").trim())?.[field] || "");
+      }
+      function ensureIntervenants() {
+        let changed = ensureCompanyIdentities();
+        if (!state.project || typeof state.project !== "object" || Array.isArray(state.project)) {
+          state.project = {};
+          changed = true;
+        }
+        if (!Array.isArray(state.intervenants)) {
+          state.intervenants = [];
+          changed = true;
+        }
+        state.intervenants.forEach((intervenant) => {
+          if (!intervenant || typeof intervenant !== "object") return;
+          ["contactFirstName", "contactLastName"].forEach((field) => {
+            if (typeof intervenant[field] !== "string") {
+              intervenant[field] = String(intervenant[field] || "");
+              changed = true;
+            }
           });
+        });
+
+        const intervenantsById = new Map(
+          state.intervenants
+            .filter((item) => item && item.id)
+            .map((item) => [item.id, item]),
+        );
+        groupedLotsByCompanyId().forEach((group) => {
+          if (intervenantsById.has(group.id)) return;
+          const intervenant = {
+            id: group.id,
+            category: "entreprise",
+            function: "entreprise_travaux",
+            customFunction: "",
+            name: group.company,
+            address: firstLotValue(group.sourceLots, "address"),
+            postalCode: firstLotValue(group.sourceLots, "postalCode"),
+            city: firstLotValue(group.sourceLots, "city"),
+            contactFirstName: "",
+            contactLastName: "",
+            phone: firstLotValue(group.sourceLots, "phone"),
+            email: firstLotValue(group.sourceLots, "email"),
+          };
+          state.intervenants.push(intervenant);
+          intervenantsById.set(intervenant.id, intervenant);
+          changed = true;
+        });
+
+        const projectIntervenants = [
+          {
+            field: "client",
+            idField: "clientIntervenantId",
+            category: "maitrise_ouvrage",
+            function: "maitre_ouvrage",
+          },
+          {
+            field: "moe",
+            idField: "moeIntervenantId",
+            category: "maitrise_oeuvre",
+            function: "maitre_oeuvre",
+          },
+        ];
+        projectIntervenants.forEach((definition) => {
+          const name = String(state.project?.[definition.field] || "").trim();
+          if (!name) return;
+          let id = state.project?.[definition.idField];
+          let intervenant = id ? intervenantsById.get(id) : null;
+          if (!intervenant) {
+            intervenant = state.intervenants.find(
+              (item) =>
+                item.category === definition.category &&
+                normalizeCompanyName(item.name) === normalizeCompanyName(name),
+            );
+          }
+          if (!intervenant) {
+            intervenant = {
+              id: createCompanyId(),
+              category: definition.category,
+              function: definition.function,
+              customFunction: "",
+              name,
+              address: "",
+              postalCode: "",
+              city: "",
+              contactFirstName: "",
+              contactLastName: "",
+              phone: "",
+              email: "",
+            };
+            state.intervenants.push(intervenant);
+            intervenantsById.set(intervenant.id, intervenant);
+            changed = true;
+          }
+          if (state.project[definition.idField] !== intervenant.id) {
+            state.project[definition.idField] = intervenant.id;
+            changed = true;
+          }
+        });
+        state.intervenants.forEach((intervenant) => {
+          if (!intervenant?.id) return;
+          if (!Object.prototype.hasOwnProperty.call(state.attendance.companies, intervenant.id)) {
+            state.attendance.companies[intervenant.id] = normalizedAttendanceRecord();
+            changed = true;
+          }
+        });
+        return changed;
+      }
+      function groupedLotsByCompanyId() {
+        const groups = new Map();
+        (state.lots || []).forEach((lot) => {
+          const company = String(lot.company || "").trim();
+          if (!company || !lot.companyId) return;
+          if (!groups.has(lot.companyId)) {
+            groups.set(lot.companyId, {
+              id: lot.companyId,
+              company,
+              lots: [],
+              sourceLots: [],
+            });
+          }
+          const group = groups.get(lot.companyId);
+          group.company = company;
+          group.sourceLots.push(lot);
+          const lotNumber = String(lot.lot || "").trim();
+          if (lotNumber && !group.lots.includes(lotNumber)) group.lots.push(lotNumber);
+        });
+        return [...groups.values()].map((group) => ({
+          ...group,
+          lots: group.lots.sort((a, b) =>
+            a.localeCompare(b, "fr", { numeric: true, sensitivity: "base" }),
+          ),
+        }));
+      }
+      function allIntervenants() {
+        ensureIntervenants();
+        const unique = new Map();
+        state.intervenants.forEach((item) => {
+          if (item?.id && !unique.has(item.id)) unique.set(item.id, item);
+        });
+        return [...unique.values()];
+      }
+      function groupedCompanies() {
+        const lotsByCompany = new Map(
+          groupedLotsByCompanyId().map((group) => [group.id, group]),
+        );
+        return allIntervenants()
+          .filter((item) => item.category === "entreprise")
+          .map((item) => ({
+            id: item.id,
+            company: item.name,
+            lots: lotsByCompany.get(item.id)?.lots || [],
+          }))
+          .sort((a, b) =>
+            a.company.localeCompare(b.company, "fr", { sensitivity: "base" }),
+          );
+      }
+      function categoryLabel(category) {
+        return INTERVENANT_CATEGORIES[category]?.label || "Autres intervenants";
+      }
+      function functionLabel(intervenant) {
+        if (intervenant.function === "autre" && intervenant.customFunction) {
+          return intervenant.customFunction;
+        }
+        const functions = INTERVENANT_CATEGORIES[intervenant.category]?.functions || [];
+        return functions.find(([value]) => value === intervenant.function)?.[1] || "Autre";
+      }
+      function intervenantContactName(intervenant) {
+        return [intervenant?.contactFirstName, intervenant?.contactLastName]
+          .map((value) => String(value || "").trim())
+          .filter(Boolean)
+          .join(" ");
+      }
+      function syncIntervenantToLots(intervenant) {
+        if (!intervenant || intervenant.category !== "entreprise") return;
+        state.lots.forEach((lot) => {
+          if (lot.companyId !== intervenant.id) return;
+          lot.company = intervenant.name;
+          lot.address = intervenant.address || "";
+          lot.postalCode = intervenant.postalCode || "";
+          lot.city = intervenant.city || "";
+          lot.phone = intervenant.phone || "";
+          lot.email = intervenant.email || "";
+        });
+      }
+      function attendanceStatus(companyId) {
+        return attendanceRecord(companyId).status;
+      }
+      function attendanceRecord(companyId) {
+        const value = state.attendance?.companies?.[companyId];
+        return normalizedAttendanceRecord(
+          value && typeof value === "object" && !Array.isArray(value)
+            ? { ...value }
+            : value,
+        );
+      }
+      function nextMeetingInvited(companyId) {
+        return attendanceRecord(companyId).nextMeetingInvited;
+      }
+      function absenceCount(companyId) {
+        return attendanceRecord(companyId).absenceCount;
+      }
+      function mutableAttendanceRecord(companyId) {
+        ensureCompanyIdentities();
+        const record = normalizedAttendanceRecord(
+          state.attendance.companies[companyId],
+        );
+        state.attendance.companies[companyId] = record;
+        return record;
+      }
+      function renderPrintAttendance() {
+        const panel = $("printAttendance");
+        const isTaskList = currentDocumentTitle() === "Liste de tâches";
+        panel.classList.toggle("hidden", !isTaskList);
+        if (!isTaskList) {
+          $("printAttendanceContent").innerHTML = "";
+          return;
+        }
+
+        const lotsByCompany = new Map(
+          groupedLotsByCompanyId().map((group) => [group.id, group]),
+        );
+        const selectedLotLabel = $("fLot")?.value || "";
+        const selectedLot = selectedLotLabel.startsWith("lot:")
+          ? taskLotFromFilter(selectedLotLabel)
+          : (state.lots || []).find((lot) => lotLabel(lot) === selectedLotLabel);
+
+        if (selectedLot?.companyId) {
+          const intervenant = (state.intervenants || []).find(
+            (item) => item?.id === selectedLot.companyId,
+          );
+          const companyGroup = lotsByCompany.get(selectedLot.companyId);
+          const companyName = intervenant?.name || companyGroup?.company || selectedLot.company || "";
+          const lots = companyGroup?.lots || [String(selectedLot.lot || "").trim()].filter(Boolean);
+          const contactName = intervenantContactName(intervenant);
+          const details = [
+            ["Entreprise :", companyName],
+            contactName ? ["Interlocuteur :", contactName] : null,
+            ["Lots concernés :", lots.join(", ")],
+            intervenant?.phone ? ["Téléphone :", intervenant.phone] : null,
+            intervenant?.email ? ["E-mail :", intervenant.email] : null,
+          ].filter(Boolean);
+          const invitation = nextMeetingInvited(selectedLot.companyId)
+            ? "Convoquée"
+            : "Non convoquée";
+          const nextMeeting = formatDateFR(state.project?.reception);
+          const nextMeetingTime = String(state.project?.nextMeetingTime || "").trim();
+          const nextMeetingLabel = [nextMeeting, nextMeetingTime ? `à ${nextMeetingTime}` : ""]
+            .filter(Boolean)
+            .join(" ");
+
+          $("printAttendanceTitle").textContent = "INTERVENANT ET PRÉSENCE À LA RÉUNION";
+          $("printNextMeeting").innerHTML = `<strong>Prochaine réunion :</strong> ${
+            nextMeetingLabel ? `${esc(nextMeetingLabel)} | ` : ""
+          }${esc(invitation)}`;
+          $("printNextMeeting").classList.remove("hidden");
+          $("printAttendanceContent").innerHTML = `<div class="print-attendance-details">
+            ${details
+              .map(
+                ([label, value]) =>
+                  `<strong>${esc(label)}</strong><span class="print-attendance-contact">${esc(value)}</span>`,
+              )
+              .join("")}
+            <strong>Présence :</strong><span class="print-attendance-presence-line"><span>${esc(attendanceStatus(selectedLot.companyId))}</span><span><strong>Absences aux réunions :</strong> ${absenceCount(selectedLot.companyId)}</span></span>
+          </div>`;
+          return;
+        }
+
+        $("printAttendanceTitle").textContent = "INTERVENANTS ET PRÉSENCES À LA RÉUNION";
+        const nextMeeting = formatDateFR(state.project?.reception);
+        const nextMeetingTime = String(state.project?.nextMeetingTime || "").trim();
+        const nextMeetingLabel = [nextMeeting, nextMeetingTime ? `à ${nextMeetingTime}` : ""]
+          .filter(Boolean)
+          .join(" ");
+        $("printNextMeeting").innerHTML = nextMeetingLabel
+          ? `<strong>Prochaine réunion :</strong> ${esc(nextMeetingLabel)}`
+          : "";
+        $("printNextMeeting").classList.toggle("hidden", !nextMeetingLabel);
+        const uniqueIntervenants = new Map();
+        (state.intervenants || []).forEach((intervenant) => {
+          if (intervenant?.id && !uniqueIntervenants.has(intervenant.id)) {
+            uniqueIntervenants.set(intervenant.id, intervenant);
+          }
+        });
+        const visibleIntervenants = [...uniqueIntervenants.values()].filter(
+          (intervenant) =>
+            attendanceStatus(intervenant.id) !== "Non convoquée" ||
+            nextMeetingInvited(intervenant.id),
+        );
+        const groups = Object.keys(INTERVENANT_CATEGORIES)
+          .map((category) => {
+            const rows = visibleIntervenants
+              .filter((intervenant) => intervenant.category === category)
+              .map((intervenant) => {
+                const companyLots = lotsByCompany.get(intervenant.id)?.lots || [];
+                const detail =
+                  category === "entreprise"
+                    ? `${companyLots.length === 1 ? "Lot" : "Lots"} ${companyLots.join(", ")}`.trim()
+                    : functionLabel(intervenant);
+                const contactName = intervenantContactName(intervenant);
+                const contactAndPhone = [contactName, intervenant.phone]
+                  .map((value) => String(value || "").trim())
+                  .filter(Boolean)
+                  .map((value) => esc(value))
+                  .join(" — ");
+                const contact = [
+                  contactAndPhone,
+                  intervenant.email ? esc(intervenant.email) : "",
+                ]
+                  .filter(Boolean)
+                  .join("<br>");
+                return `<div class="print-attendance-row">
+                  <strong>${esc(intervenant.name || "")}</strong>
+                  <span>${esc(detail)}</span>
+                  <span class="print-attendance-contact">${contact}</span>
+                  <span class="print-attendance-status">${esc(attendanceStatus(intervenant.id))}</span>
+                  <span>${absenceCount(intervenant.id)}</span>
+                  <span>${nextMeetingInvited(intervenant.id) ? "Convoqué" : "Non convoqué"}</span>
+                </div>`;
+              })
+              .join("");
+            return rows
+              ? `<section class="print-attendance-group">
+                  <h4 class="print-attendance-group-title">${esc(categoryLabel(category).toLocaleUpperCase("fr-FR"))}</h4>
+                  ${rows}
+                </section>`
+              : "";
+          })
+          .join("");
+        $("printAttendanceContent").innerHTML =
+          groups
+            ? `<div class="print-attendance-row print-attendance-columns"><span>Intervenant</span><span>Fonction / Lots</span><span>Coordonnées</span><span>Présence</span><span>Absences</span><span>Prochaine réunion</span></div>${groups}`
+            : '<p class="small">Aucun intervenant convoqué</p>';
+      }
+      function renderAttendance() {
+        const panel = $("attendancePanel");
+        const isTaskList = currentDocumentTitle() === "Liste de tâches";
+        panel.classList.toggle("hidden", !isTaskList);
+        if (!isTaskList) return;
+
+        const allCompanies = groupedCompanies();
+        const allPeople = allIntervenants();
+        const selectedLotLabel = $("fLot")?.value || "";
+        const selectedLot = selectedLotLabel.startsWith("lot:")
+          ? taskLotFromFilter(selectedLotLabel)
+          : (state.lots || []).find((lot) => lotLabel(lot) === selectedLotLabel);
+        const visibleIntervenants = selectedLot?.companyId
+          ? allCompanies
+              .filter((company) => company.id === selectedLot.companyId)
+              .map((company) => ({
+                ...company,
+                category: "entreprise",
+                detail: "",
+              }))
+          : allPeople.map((intervenant) => ({
+              id: intervenant.id,
+              company: intervenant.name,
+              category: intervenant.category,
+              lots:
+                intervenant.category === "entreprise"
+                  ? allCompanies.find((company) => company.id === intervenant.id)?.lots || []
+                  : [],
+              detail:
+                intervenant.category === "entreprise"
+                  ? ""
+                  : functionLabel(intervenant),
+            }));
+        const invitedCount = allPeople.filter(
+          (intervenant) => attendanceStatus(intervenant.id) !== "Non convoquée",
+        ).length;
+        $("attendanceTitle").textContent = `Présences à la réunion (${invitedCount} ${
+          invitedCount > 1 ? "intervenants convoqués" : "intervenant convoqué"
+        })`;
+
+        $("attendanceList").innerHTML =
+          Object.keys(INTERVENANT_CATEGORIES)
+            .map((category) => {
+              const categoryIntervenants = visibleIntervenants.filter(
+                (intervenant) => intervenant.category === category,
+              );
+              if (!categoryIntervenants.length) return "";
+              const rows = categoryIntervenants
+                .map((intervenant) => {
+                  const status = attendanceStatus(intervenant.id);
+                  const lotsLabel = intervenant.lots.length === 1 ? "Lot" : "Lots";
+                  const detail = intervenant.lots.length
+                    ? `${lotsLabel} ${intervenant.lots.join(", ")}`
+                    : intervenant.detail || "Entreprise sans lot";
+                  const options = ["Présente", "Absente", "Excusée", "Non convoquée"]
+                    .map(
+                      (value) =>
+                        `<option${value === status ? " selected" : ""}>${value}</option>`,
+                    )
+                    .join("");
+                  const invitationOptions = [
+                    ["true", "Convoqué"],
+                    ["false", "Non convoqué"],
+                  ]
+                    .map(
+                      ([value, label]) =>
+                        `<option value="${value}"${nextMeetingInvited(intervenant.id) === (value === "true") ? " selected" : ""}>${label}</option>`,
+                    )
+                    .join("");
+                  return `<div class="attendance-row">
+                    <button type="button" class="attendance-edit" onclick="openIntervenantEditor('${intervenant.id}')" title="Modifier ${esc(intervenant.company)}" aria-label="Modifier l'intervenant ${esc(intervenant.company)}"><span>${esc(intervenant.company)}</span><span class="attendance-edit-icon" aria-hidden="true">✎</span></button>
+                    <span class="attendance-lots">${esc(detail)}</span>
+                    <label class="attendance-field"><span class="attendance-field-label">Présence</span><select aria-label="Présence de ${esc(intervenant.company)}" onchange="updateAttendance('${esc(intervenant.id)}', this.value)">${options}</select></label>
+                    <label class="attendance-field"><span class="attendance-field-label">Absences</span><input class="attendance-absence-input" type="number" min="0" step="1" value="${absenceCount(intervenant.id)}" aria-label="Nombre d'absences de ${esc(intervenant.company)}" onchange="updateAbsenceCount('${esc(intervenant.id)}', this.value, this)"></label>
+                    <label class="attendance-field"><span class="attendance-field-label">Prochaine réunion</span><select aria-label="Convocation de ${esc(intervenant.company)} à la prochaine réunion" onchange="updateNextMeetingInvitation('${esc(intervenant.id)}', this.value === 'true')">${invitationOptions}</select></label>
+                  </div>`;
+                })
+                .join("");
+              return `<section class="attendance-category"><h3 class="intervenant-category-title">${esc(categoryLabel(category))}</h3>${rows}</section>`;
+            })
+            .join("") || '<p class="small">Aucun intervenant enregistré.</p>';
+      }
+      function updateAttendance(companyId, status) {
+        if (!ATTENDANCE_STATUSES.includes(status)) return;
+        const record = mutableAttendanceRecord(companyId);
+        const crNumber = validatedCrNumber(state.project?.crNumber);
+        if (crNumber) {
+          reconcileAbsenceForCr(record, status, crNumber);
+        } else if (record.status !== status && status === "Absente") {
+          record.absenceCount += 1;
+        }
+        record.status = status;
+        persist();
+        renderAttendance();
+      }
+      function updateNextMeetingInvitation(companyId, invited) {
+        mutableAttendanceRecord(companyId).nextMeetingInvited = invited === true;
+        persist();
+        renderAttendance();
+      }
+      function updateAbsenceCount(companyId, value, input) {
+        const record = mutableAttendanceRecord(companyId);
+        const rawValue = String(value ?? "").trim();
+        const parsedValue = Number(rawValue);
+        if (!/^\d+$/.test(rawValue) || !Number.isSafeInteger(parsedValue)) {
+          if (input) input.value = record.absenceCount;
+          return;
+        }
+        record.absenceCount = parsedValue;
+        persist();
+        renderAttendance();
+      }
+      function validatedCrNumber(value) {
+        const rawValue = String(value ?? "").trim();
+        const number = Number(rawValue);
+        return /^\d+$/.test(rawValue) && Number.isSafeInteger(number) && number > 0
+          ? number
+          : null;
+      }
+      function formattedCrNumber(value) {
+        const number = validatedCrNumber(value);
+        return number ? String(number).padStart(2, "0") : "";
+      }
+      function todayIsoDate() {
+        const now = new Date();
+        const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+        return localDate.toISOString().slice(0, 10);
+      }
+      function reconcileAbsenceForCr(record, status, crNumber) {
+        const countedForCurrentCr = record.lastAbsenceCrNumber === crNumber;
+        if (status === "Absente" && !countedForCurrentCr) {
+          record.absenceCount += 1;
+          record.lastAbsenceCrNumber = crNumber;
+        } else if (status !== "Absente" && countedForCurrentCr) {
+          record.absenceCount = Math.max(0, record.absenceCount - 1);
+          record.lastAbsenceCrNumber = null;
+        }
+      }
+      function crAttendanceDetail(intervenant, companiesById) {
+        if (intervenant.category === "entreprise") {
+          const lots = companiesById.get(intervenant.id)?.lots || [];
+          return lots.length
+            ? `${lots.length === 1 ? "Lot" : "Lots"} ${lots.join(", ")}`
+            : "Entreprise sans lot";
+        }
+        return functionLabel(intervenant);
+      }
+      function renderCrAttendanceDraft() {
+        if (!crDraft) return;
+        const companiesById = new Map(groupedCompanies().map((item) => [item.id, item]));
+        $("crAttendanceList").innerHTML = Object.keys(INTERVENANT_CATEGORIES)
+          .map((category) => {
+            const rows = allIntervenants()
+              .filter((intervenant) => intervenant.category === category)
+              .map((intervenant) => {
+                const draft = crDraft.attendance[intervenant.id];
+                const statusOptions = [
+                  draft.status === "" ? ["", "À renseigner"] : null,
+                  ...ATTENDANCE_STATUSES.map((status) => [status, status]),
+                ]
+                  .filter(Boolean)
+                  .map(
+                    ([value, label]) =>
+                      `<option value="${esc(value)}"${draft.status === value ? " selected" : ""}>${esc(label)}</option>`,
+                  )
+                  .join("");
+                return `<div class="cr-attendance-row">
+                  <strong>${esc(intervenant.name || "")}</strong>
+                  <span class="small">${esc(crAttendanceDetail(intervenant, companiesById))}</span>
+                  <label class="attendance-field"><span class="attendance-field-label">Présence</span><select onchange="updateCrAttendanceDraft('${esc(intervenant.id)}','status',this.value)">${statusOptions}</select></label>
+                  <label class="attendance-field"><span class="attendance-field-label">Prochaine réunion</span><select onchange="updateCrAttendanceDraft('${esc(intervenant.id)}','nextMeetingInvited',this.value === 'true')"><option value="true"${draft.nextMeetingInvited ? " selected" : ""}>Convoqué</option><option value="false"${draft.nextMeetingInvited ? "" : " selected"}>Non convoqué</option></select></label>
+                </div>`;
+              })
+              .join("");
+            return rows
+              ? `<section class="cr-attendance-category"><h3 class="intervenant-category-title">${esc(categoryLabel(category))}</h3>${rows}</section>`
+              : "";
+          })
+          .join("") || '<p class="small">Aucun intervenant enregistré.</p>';
+      }
+      function updateCrAttendanceDraft(intervenantId, field, value) {
+        if (!crDraft?.attendance?.[intervenantId]) return;
+        if (field === "status") {
+          if (value && !ATTENDANCE_STATUSES.includes(value)) return;
+          crDraft.attendance[intervenantId].status = value;
+        } else if (field === "nextMeetingInvited") {
+          crDraft.attendance[intervenantId].nextMeetingInvited = value === true;
+        }
+      }
+      function openCrEditor(mode) {
+        if (currentDocumentTitle() !== "Liste de tâches") return;
+        const currentCrNumber = validatedCrNumber(state.project?.crNumber);
+        const editCurrent = mode === "edit" && currentCrNumber;
+        const initializeFirst = !currentCrNumber;
+        const attendance = {};
+        allIntervenants().forEach((intervenant) => {
+          const record = attendanceRecord(intervenant.id);
+          attendance[intervenant.id] = {
+            status: editCurrent || initializeFirst
+              ? record.status
+              : record.nextMeetingInvited
+                ? ""
+                : "Non convoquée",
+            nextMeetingInvited: record.nextMeetingInvited,
+          };
+        });
+        crDraft = {
+          mode: editCurrent ? "edit" : initializeFirst ? "initial" : "next",
+          previousCrNumber: currentCrNumber,
+          attendance,
+        };
+        const proposedNumber = editCurrent ? currentCrNumber : (currentCrNumber || 0) + 1;
+        $("crNumberInput").value = proposedNumber;
+        $("crMeetingDateInput").value = editCurrent || initializeFirst
+          ? state.project?.opr || todayIsoDate()
+          : state.project?.reception || todayIsoDate();
+        $("crNextMeetingDateInput").value = editCurrent || initializeFirst
+          ? state.project?.reception || ""
+          : "";
+        $("crNextMeetingTimeInput").value = state.project?.nextMeetingTime || "";
+        $("crModalTitle").textContent = editCurrent
+          ? `Modification du compte rendu — CR N° ${formattedCrNumber(currentCrNumber)}`
+          : `Préparation du compte rendu — CR N° ${formattedCrNumber(proposedNumber)}`;
+        renderCrAttendanceDraft();
+        $("crModal").classList.remove("hidden");
+      }
+      function openCurrentCrEditor() {
+        openCrEditor(validatedCrNumber(state.project?.crNumber) ? "edit" : "next");
+      }
+      function openNextCrEditor() {
+        openCrEditor("next");
+      }
+      function closeCrEditor() {
+        crDraft = null;
+        $("crModal").classList.add("hidden");
+      }
+      function saveCrEditor() {
+        if (!crDraft) return;
+        const crNumber = validatedCrNumber($("crNumberInput").value);
+        const meetingDate = $("crMeetingDateInput").value;
+        const nextMeetingDate = $("crNextMeetingDateInput").value;
+        const nextMeetingTime = $("crNextMeetingTimeInput").value;
+        if (!crNumber) return alert("Le numéro de CR doit être un entier strictement positif.");
+        if (!meetingDate || !nextMeetingDate || !nextMeetingTime) {
+          return alert("Renseigne la date de réunion, la prochaine réunion et son heure.");
+        }
+        const unresolved = Object.values(crDraft.attendance).some(
+          (draft) => !ATTENDANCE_STATUSES.includes(draft.status),
+        );
+        if (unresolved) {
+          return alert("Renseigne la présence des intervenants convoqués à cette réunion.");
+        }
+        const previousProject = JSON.parse(JSON.stringify(state.project || {}));
+        const previousAttendance = JSON.parse(JSON.stringify(state.attendance || {}));
+        state.project = {
+          ...(state.project || {}),
+          crNumber,
+          opr: meetingDate,
+          reception: nextMeetingDate,
+          nextMeetingTime,
+        };
+        Object.entries(crDraft.attendance).forEach(([intervenantId, draft]) => {
+          const record = mutableAttendanceRecord(intervenantId);
+          if (
+            crDraft.mode === "initial" &&
+            draft.status === "Absente" &&
+            record.absenceCount > 0 &&
+            !record.lastAbsenceCrNumber
+          ) {
+            record.lastAbsenceCrNumber = crNumber;
+          }
+          if (
+            crDraft.mode === "edit" &&
+            crDraft.previousCrNumber !== crNumber &&
+            record.lastAbsenceCrNumber === crDraft.previousCrNumber
+          ) {
+            record.lastAbsenceCrNumber = crNumber;
+          }
+          reconcileAbsenceForCr(record, draft.status, crNumber);
+          record.status = draft.status;
+          record.nextMeetingInvited = draft.nextMeetingInvited;
+        });
+        try {
+          persist();
+        } catch (e) {
+          state.project = previousProject;
+          state.attendance = previousAttendance;
+          return;
+        }
+        closeCrEditor();
+        render();
+      }
+      function maybeShowCrStartupPrompt() {
+        if (crStartupPromptShown || currentDocumentTitle() !== "Liste de tâches") return;
+        crStartupPromptShown = true;
+        const crNumber = validatedCrNumber(state.project?.crNumber);
+        if (!crNumber) return;
+        $("crStartupText").textContent = `Compte rendu actuel : CR N° ${formattedCrNumber(crNumber)}`;
+        $("crStartupModal").classList.remove("hidden");
+      }
+      function continueCurrentCr() {
+        $("crStartupModal").classList.add("hidden");
+      }
+      function prepareNextCrFromStartup() {
+        continueCurrentCr();
+        openNextCrEditor();
+      }
+      function renderLotsList() {
+        const intervenants = allIntervenants();
+        const companies = new Map(groupedCompanies().map((item) => [item.id, item]));
+        $("lotsList").innerHTML =
+          Object.keys(INTERVENANT_CATEGORIES)
+            .map((category) => {
+              const items = intervenants.filter((item) => item.category === category);
+              if (!items.length) return "";
+              return `<h3 class="intervenant-category-title">${esc(categoryLabel(category))}</h3>${items
+                .map((item) => {
+                  const company = companies.get(item.id);
+                  const meta = company?.lots.length
+                    ? `${company.lots.length === 1 ? "Lot" : "Lots"} ${company.lots.join(", ")}`
+                    : functionLabel(item);
+                  return `<button class="lot-list-item intervenant-list-item" onclick="openIntervenantEditor('${item.id}')"><span>${esc(item.name)}</span><span class="intervenant-list-meta">${esc(meta)}</span></button>`;
+                })
+                .join("")}`;
+            })
+            .join("") || '<p class="small lots-empty">Aucun intervenant enregistré.</p>';
+      }
+      function updateIntervenantFunctionOptions(selectedValue = "") {
+        const category = $("intervenantCategory").value;
+        const functions = INTERVENANT_CATEGORIES[category]?.functions || [];
+        $("intervenantFunction").innerHTML = functions
+          .map(([value, label]) => `<option value="${value}">${esc(label)}</option>`)
+          .join("");
+        $("intervenantFunction").value = functions.some(([value]) => value === selectedValue)
+          ? selectedValue
+          : functions[0]?.[0] || "autre";
+        toggleCustomFunction();
+        $("intervenantLotsSection").classList.toggle(
+          "hidden",
+          category !== "entreprise" || !editingIntervenantId,
+        );
+      }
+      function toggleCustomFunction() {
+        $("customFunctionField").classList.toggle(
+          "hidden",
+          $("intervenantFunction").value !== "autre",
+        );
+      }
+      function openIntervenantEditor(id = null, lotIndex = null) {
+        ensureIntervenants();
+        const intervenant = id
+          ? state.intervenants.find((item) => item.id === id)
+          : null;
+        editingIntervenantId = intervenant?.id || null;
+        editingLotIndex = Number.isInteger(lotIndex) ? lotIndex : null;
+        $("lotModalTitle").textContent = intervenant
+          ? "Modifier un intervenant"
+          : "Ajouter un intervenant";
+        $("intervenantCategory").innerHTML = Object.entries(INTERVENANT_CATEGORIES)
+          .map(([value, definition]) => `<option value="${value}">${esc(definition.label)}</option>`)
+          .join("");
+        $("intervenantCategory").value = intervenant?.category || "entreprise";
+        updateIntervenantFunctionOptions(intervenant?.function || "");
+        $("intervenantCustomFunction").value = intervenant?.customFunction || "";
+        $("lotEditCompany").value = intervenant?.name || "";
+        $("lotEditAddress").value = intervenant?.address || "";
+        $("lotEditPostalCode").value = intervenant?.postalCode || "";
+        $("lotEditCity").value = intervenant?.city || "";
+        $("intervenantContactFirstName").value = intervenant?.contactFirstName || "";
+        $("intervenantContactLastName").value = intervenant?.contactLastName || "";
+        $("lotEditPhone").value = intervenant?.phone || "";
+        $("lotEditEmail").value = intervenant?.email || "";
+        $("deleteIntervenantBtn").classList.toggle("hidden", !intervenant);
+        $("intervenantLotForm").classList.add("hidden");
+        renderIntervenantLots();
+        if (Number.isInteger(lotIndex)) selectIntervenantLot(lotIndex);
+        $("lotModal").classList.remove("hidden");
+        setTimeout(() => $("lotEditCompany").focus(), 0);
+      }
+      function openLotEditor(index) {
+        const lot = state.lots?.[index];
+        if (!lot) return;
+        openIntervenantEditor(lot.companyId, index);
+      }
+      function closeLotEditor() {
+        editingIntervenantId = null;
+        editingLotIndex = null;
+        $("lotModal").classList.add("hidden");
+      }
+      function saveEditedIntervenant() {
+        const name = $("lotEditCompany").value.trim();
+        const emailInput = $("lotEditEmail");
+        if (!name) return alert("Le nom / la raison sociale est obligatoire.");
+        if (emailInput.value && !emailInput.checkValidity()) {
+          return alert("L’adresse e-mail n’est pas valide.");
+        }
+        const category = $("intervenantCategory").value;
+        const existing = editingIntervenantId
+          ? state.intervenants.find((item) => item.id === editingIntervenantId)
+          : null;
+        const associatedLots = existing
+          ? state.lots.filter((lot) => lot.companyId === existing.id)
+          : [];
+        if (associatedLots.length && category !== "entreprise") {
+          return alert("Retire ou réaffecte d’abord les lots avant de changer cette entreprise de catégorie.");
+        }
+        if (!existing && category === "entreprise") {
+          const duplicate = state.intervenants.find(
+            (item) =>
+              item.category === "entreprise" &&
+              normalizeCompanyName(item.name) === normalizeCompanyName(name),
+          );
+          if (duplicate) {
+            alert("Cette entreprise existe déjà. Sa fiche va être ouverte.");
+            return openIntervenantEditor(duplicate.id);
+          }
+        }
+        const updated = {
+          ...(existing || {}),
+          id: existing?.id || createCompanyId(),
+          category,
+          function: $("intervenantFunction").value,
+          customFunction: $("intervenantCustomFunction").value,
+          name,
+          address: $("lotEditAddress").value,
+          postalCode: $("lotEditPostalCode").value,
+          city: $("lotEditCity").value,
+          contactFirstName: $("intervenantContactFirstName").value.trim(),
+          contactLastName: $("intervenantContactLastName").value.trim(),
+          phone: $("lotEditPhone").value,
+          email: emailInput.value,
+        };
+        if (existing) Object.assign(existing, updated);
+        else state.intervenants.push(updated);
+        syncIntervenantToLots(updated);
+        if (state.project?.clientIntervenantId === updated.id) state.project.client = updated.name;
+        if (state.project?.moeIntervenantId === updated.id) state.project.moe = updated.name;
+        persist();
+        closeLotEditor();
+        render();
+      }
+      function renderIntervenantLots() {
+        const section = $("intervenantLotsSection");
+        const intervenant = state.intervenants?.find(
+          (item) => item.id === editingIntervenantId,
+        );
+        const visible = intervenant?.category === "entreprise";
+        section.classList.toggle("hidden", !visible);
+        if (!visible) return;
+        const lots = (state.lots || [])
+          .map((lot, index) => ({ lot, index }))
+          .filter(({ lot }) => lot.companyId === intervenant.id);
+        $("intervenantLotsList").innerHTML =
+          lots
+            .map(({ lot, index }) => `<button class="lot-list-item" onclick="selectIntervenantLot(${index})"><span>Lot ${esc(lot.lot || "sans numéro")}</span><span class="intervenant-list-meta">${esc(lot.designation || "")}</span></button>`)
+            .join("") || '<p class="small">Aucun lot associé.</p>';
+      }
+      function startNewIntervenantLot() {
+        editingLotIndex = null;
+        $("lotEditNumber").value = "";
+        $("lotEditDesignation").value = "";
+        $("deleteLotBtn").classList.add("hidden");
+        $("intervenantLotForm").classList.remove("hidden");
+        $("lotEditNumber").focus();
+      }
+      function selectIntervenantLot(index) {
+        const lot = state.lots?.[index];
+        if (!lot || lot.companyId !== editingIntervenantId) return;
+        editingLotIndex = index;
+        $("lotEditNumber").value = lot.lot || "";
+        $("lotEditDesignation").value = lot.designation || "";
+        $("deleteLotBtn").classList.remove("hidden");
+        $("intervenantLotForm").classList.remove("hidden");
+      }
+      function cancelIntervenantLotEdit() {
+        editingLotIndex = null;
+        $("intervenantLotForm").classList.add("hidden");
+      }
+      function saveEditedLot() {
+        const intervenant = state.intervenants?.find(
+          (item) => item.id === editingIntervenantId && item.category === "entreprise",
+        );
+        if (!intervenant) return alert("Enregistre d’abord l’entreprise.");
+        const lotNumber = $("lotEditNumber").value;
+        const designation = $("lotEditDesignation").value;
+        if (!lotNumber.trim() && !designation.trim()) {
+          return alert("Le numéro ou la désignation du lot est obligatoire.");
+        }
+        const existing = Number.isInteger(editingLotIndex)
+          ? state.lots[editingLotIndex] || {}
+          : {};
+        const updatedLot = {
+          ...existing,
+          id: existing.id || createStableId(),
+          companyId: intervenant.id,
+          lot: lotNumber,
+          designation,
+          company: intervenant.name,
+          address: intervenant.address || "",
+          postalCode: intervenant.postalCode || "",
+          city: intervenant.city || "",
+          phone: intervenant.phone || "",
+          email: intervenant.email || "",
+        };
+        if (Number.isInteger(editingLotIndex)) state.lots[editingLotIndex] = updatedLot;
+        else state.lots.push(updatedLot);
+        persist();
+        cancelIntervenantLotEdit();
+        renderIntervenantLots();
+        renderLotsList();
+        renderSelects();
+        renderTable();
+        renderAttendance();
+      }
+      function deleteEditedLot() {
+        if (editingLotIndex === null || !state.lots?.[editingLotIndex]) return;
+        if (!confirm("Retirer ce lot de l’entreprise ? Les observations historiques resteront inchangées.")) return;
+        state.lots.splice(editingLotIndex, 1);
+        persist();
+        cancelIntervenantLotEdit();
+        renderIntervenantLots();
+        renderLotsList();
+        renderSelects();
+        renderTable();
+        renderAttendance();
+      }
+      function deleteEditedIntervenant() {
+        const intervenant = state.intervenants?.find(
+          (item) => item.id === editingIntervenantId,
+        );
+        if (!intervenant) return;
+        const associatedLots = state.lots.filter(
+          (lot) => lot.companyId === intervenant.id,
+        );
+        if (associatedLots.length) {
+          return alert("Cet intervenant possède encore des lots. Retire ou réaffecte ces lots avant de supprimer sa fiche.");
+        }
+        const assignedTasks = (state.reserves || []).filter(
+          (reserve) => reserve.intervenantId === intervenant.id,
+        );
+        if (assignedTasks.length) {
+          return alert(
+            `Cet intervenant est encore responsable de ${assignedTasks.length} tâche(s). Réattribue-les avant de supprimer sa fiche.`,
+          );
+        }
+        if (
+          state.project?.clientIntervenantId === intervenant.id ||
+          state.project?.moeIntervenantId === intervenant.id
+        ) {
+          return alert("Cet intervenant est encore renseigné dans les informations du chantier. Modifie d’abord ce champ dans la carte projet.");
+        }
+        if (!confirm("Supprimer cet intervenant ? Les observations historiques resteront inchangées.")) return;
+        state.intervenants = state.intervenants.filter(
+          (item) => item.id !== intervenant.id,
+        );
+        persist();
+        closeLotEditor();
+        render();
+      }
+      function syncProjectIntervenantsFromFields() {
+        ensureIntervenants();
+        const links = [
+          ["clientIntervenantId", "client"],
+          ["moeIntervenantId", "moe"],
+        ];
+        links.forEach(([idField, nameField]) => {
+          if (!String(state.project?.[nameField] || "").trim()) {
+            delete state.project[idField];
+            return;
+          }
+          const intervenant = state.intervenants.find(
+            (item) => item.id === state.project?.[idField],
+          );
+          if (intervenant && state.project[nameField].trim()) {
+            intervenant.name = state.project[nameField].trim();
+          }
+        });
       }
       function saveProject() {
         state.project = {
+          ...(state.project || {}),
           name: $("pName").value,
           address: $("pAddress").value,
-          client: $("pClient").value,
-          moe: $("pMoe").value,
           opr: $("pOpr").value,
           reception: $("pReception").value,
           documentType: $("pDocumentType").value,
         };
-        state.lots = parseLots($("lotsText").value);
+        syncProjectIntervenantsFromFields();
         persist();
         render();
         alert("Projet sauvegardé.");
       }
 	  function saveProjectSilent() {
 	  state.project = {
+		...(state.project || {}),
 		name: $("pName").value,
 		address: $("pAddress").value,
-		client: $("pClient").value,
-		moe: $("pMoe").value,
 		opr: $("pOpr").value,
 		reception: $("pReception").value,
 		documentType: $("pDocumentType").value,
 	  };
 
-	  state.lots = parseLots($("lotsText").value);
+	  syncProjectIntervenantsFromFields();
 	  persist();
 	  render();
 	}
       function normalizeDocumentType(v) {
+        if (v === "Liste de tâches") return "Liste de tâches";
         return v === "Réserves" ||
           v === "Suivi des réserves" ||
           v === "Levée de réserves" ||
@@ -1137,24 +3626,346 @@ async function deletePhoto(photoId) {
         const p = state.project || {};
         $("pName").value = p.name || "";
         $("pAddress").value = p.address || "";
-        $("pClient").value = p.client || "";
-        $("pMoe").value = p.moe || "";
         $("pOpr").value = p.opr || "";
         $("pReception").value = p.reception || "";
         if ($("pDocumentType"))
           $("pDocumentType").value = normalizeDocumentType(p.documentType);
-        $("lotsText").value = (state.lots || []).map(lotLabel).join("\n");
+        renderLotsList();
       }
-      function nextReserveNo() {
-        return (
-          "R-" + String((state.reserves?.length || 0) + 1).padStart(3, "0")
+      function reserveSequence(value) {
+        const match = String(value || "").trim().match(/^R-(\d+)$/i);
+        if (!match) return null;
+        const sequence = Number(match[1]);
+        return Number.isSafeInteger(sequence) && sequence > 0 ? sequence : null;
+      }
+      function storedReserveSequence() {
+        const sequence = Number(state.project?.lastReserveSequence);
+        return Number.isSafeInteger(sequence) && sequence >= 0 ? sequence : 0;
+      }
+      function maximumReserveSequence() {
+        return (state.reserves || []).reduce(
+          (maximum, reserve) => Math.max(maximum, reserveSequence(reserve?.num) || 0),
+          0,
         );
       }
+      function formatReserveNumber(sequence) {
+        return "R-" + String(sequence).padStart(3, "0");
+      }
+      function reconcileReserveNumbering({ persistChanges = true, notify = true } = {}) {
+        if (!state.project || typeof state.project !== "object" || Array.isArray(state.project)) {
+          state.project = {};
+        }
+        if (!Array.isArray(state.reserves)) state.reserves = [];
+
+        const previousProject = JSON.parse(JSON.stringify(state.project));
+        const previousNumbers = state.reserves.map((reserve) => reserve?.num);
+        const groups = new Map();
+        const usedSequences = new Set();
+
+        state.reserves.forEach((reserve, index) => {
+          const sequence = reserveSequence(reserve?.num);
+          if (!sequence) return;
+          usedSequences.add(sequence);
+          if (!groups.has(sequence)) groups.set(sequence, []);
+          groups.get(sequence).push({ reserve, index });
+        });
+
+        let maximum = Math.max(storedReserveSequence(), maximumReserveSequence());
+        const history = Array.isArray(state.project.reserveNumberCorrections)
+          ? [...state.project.reserveNumberCorrections]
+          : [];
+        const historyKeys = new Set(
+          history.map((entry) => `${entry?.reserveId || ""}|${entry?.oldNumber || ""}|${entry?.newNumber || ""}`),
+        );
+        const corrections = [];
+
+        groups.forEach((entries) => {
+          if (entries.length < 2) return;
+          entries.sort((a, b) => {
+            const dateA = Date.parse(a.reserve?.created_at || "");
+            const dateB = Date.parse(b.reserve?.created_at || "");
+            const validA = Number.isFinite(dateA);
+            const validB = Number.isFinite(dateB);
+            if (validA && validB && dateA !== dateB) return dateA - dateB;
+            if (validA !== validB) return validA ? -1 : 1;
+            return a.index - b.index;
+          });
+
+          entries.slice(1).forEach(({ reserve }) => {
+            do maximum += 1;
+            while (usedSequences.has(maximum));
+            usedSequences.add(maximum);
+            const oldNumber = reserve.num;
+            const newNumber = formatReserveNumber(maximum);
+            reserve.num = newNumber;
+            const correction = {
+              reserveId: reserve.id,
+              oldNumber,
+              newNumber,
+              correctedAt: new Date().toISOString(),
+            };
+            const historyKey = `${correction.reserveId || ""}|${oldNumber || ""}|${newNumber}`;
+            if (!historyKeys.has(historyKey)) {
+              history.push(correction);
+              historyKeys.add(historyKey);
+            }
+            corrections.push(correction);
+          });
+        });
+
+        maximum = Math.max(maximum, maximumReserveSequence());
+        const hadCounter = Object.prototype.hasOwnProperty.call(previousProject, "lastReserveSequence");
+        const counterChanged = !hadCounter || previousProject.lastReserveSequence !== maximum;
+        const historyChanged = corrections.length > 0 ||
+          (!Array.isArray(previousProject.reserveNumberCorrections) && history.length > 0);
+        state.project.lastReserveSequence = maximum;
+        if (history.length) state.project.reserveNumberCorrections = history;
+        const changed = counterChanged || historyChanged;
+
+        if (persistChanges && changed) {
+          try {
+            persist();
+          } catch (error) {
+            state.project = previousProject;
+            state.reserves.forEach((reserve, index) => {
+              reserve.num = previousNumbers[index];
+            });
+            throw error;
+          }
+        }
+        if (notify && corrections.length) {
+          alert(`${corrections.length} doublon(s) de numérotation ont été corrigés.`);
+        }
+        return { changed, corrections };
+      }
+      function nextReserveNo() {
+        const usedSequences = new Set(
+          (state.reserves || [])
+            .map((reserve) => reserveSequence(reserve?.num))
+            .filter(Boolean),
+        );
+        let sequence = Math.max(storedReserveSequence(), maximumReserveSequence()) + 1;
+        while (usedSequences.has(sequence)) sequence += 1;
+        return formatReserveNumber(sequence);
+      }
       function statusClass(s) {
+        if (s === "PM") return "b-pm";
         if (s === "Levée") return "b-done";
         if (s === "En cours") return "b-progress";
         if (s?.startsWith("Refusée")) return "b-refused";
         return "b-open";
+      }
+      const TASK_QUALIFICATIONS = [
+        "Au plus tôt",
+        "Fait",
+        "Retard",
+        "Partiel à terminer",
+        "En cours",
+        "Remarque chantier",
+        "Observation administrative",
+        "Modification plans",
+        "PM",
+        "En attente",
+        "Dès que possible",
+        "À faire",
+        "Non réalisé",
+        "Priorité 1",
+        "Priorité 2",
+        "Priorité 3",
+      ];
+      const TASK_IMPORTANCES = [
+        ["normal", "Normal"],
+        ["important", "Important"],
+        ["veryImportant", "Très important"],
+        ["urgent", "Urgent"],
+        ["veryUrgent", "Très urgent"],
+      ];
+      const RESERVE_STATUSES = [
+        "À traiter",
+        "En cours",
+        "Levée",
+        "Refusée / non conforme",
+      ];
+      const TASK_STATUSES = [...RESERVE_STATUSES, "PM"];
+      const TASK_ASSIGNMENT_CATEGORIES = {
+        maitrise_ouvrage: ["maitrise_ouvrage"],
+        maitrise_oeuvre: ["maitrise_oeuvre", "bureau_controle", "coordonnateur_sps"],
+        autre: ["autre"],
+        entreprise: ["entreprise"],
+      };
+      const TASK_ASSIGNMENT_LABELS = {
+        maitrise_ouvrage: "Maîtrise d’ouvrage",
+        maitrise_oeuvre: "Maîtrise d’œuvre",
+        autre: "Autres",
+        entreprise: "Entreprises",
+      };
+      const TASK_CATEGORY_COLUMN_LABELS = {
+        maitrise_ouvrage: "Maîtrise d’ouvrage",
+        maitrise_oeuvre: "Maîtrise d’œuvre",
+        bureau_controle: "Bureau de contrôle",
+        coordonnateur_sps: "Coordonnateur SPS",
+        autre: "Autre",
+        entreprise: "Entreprise",
+      };
+      function taskAssignmentCategoryForIntervenant(intervenant) {
+        if (!intervenant) return "entreprise";
+        return Object.entries(TASK_ASSIGNMENT_CATEGORIES).find(([, categories]) =>
+          categories.includes(intervenant.category),
+        )?.[0] || "autre";
+      }
+      function taskAssignmentIntervenant(reserve) {
+        if (!reserve?.intervenantId) return null;
+        return (state.intervenants || []).find(
+          (intervenant) => intervenant.id === reserve.intervenantId,
+        ) || null;
+      }
+      function taskAssignmentDisplay(reserve) {
+        const intervenant = taskAssignmentIntervenant(reserve);
+        if (reserve?.intervenantId && !intervenant) {
+          return {
+            category: "autre",
+            lot: "Intervenant introuvable",
+            company: "Intervenant introuvable",
+            intervenant: null,
+            missingIntervenantId: reserve.intervenantId,
+          };
+        }
+        if (!intervenant || intervenant.category === "entreprise") {
+          return {
+            category: "entreprise",
+            lot: String(reserve?.lot || ""),
+            company: String(reserve?.company || intervenant?.name || ""),
+            intervenant,
+          };
+        }
+        const assignmentCategory = taskAssignmentCategoryForIntervenant(intervenant);
+        return {
+          category: assignmentCategory,
+          lot: TASK_CATEGORY_COLUMN_LABELS[intervenant.category] || categoryLabel(intervenant.category),
+          company: intervenant.name || "",
+          intervenant,
+        };
+      }
+      function renderTaskAssignmentOptions(selectedValue) {
+        const select = $("vLot");
+        const label = $("visitAssignmentLabel");
+        if (!select || !label) return;
+        const previousValue = selectedValue === undefined ? select.value : selectedValue;
+        if (currentDocumentTitle() !== "Liste de tâches") {
+          label.textContent = "Lot / entreprise";
+          select.innerHTML = (state.lots || [])
+            .map((lot) => `<option>${esc(lotLabel(lot))}</option>`)
+            .join("") || '<option value="">Créer les lots dans Projet</option>';
+        } else {
+          const category = TASK_ASSIGNMENT_CATEGORIES[$("vAssignmentCategory")?.value]
+            ? $("vAssignmentCategory").value
+            : "entreprise";
+          if (category === "entreprise") {
+            label.textContent = "Lot / entreprise";
+            select.innerHTML = (state.lots || [])
+              .map((lot) => `<option>${esc(lotLabel(lot))}</option>`)
+              .join("") || '<option value="">Aucun lot / entreprise enregistré</option>';
+          } else {
+            label.textContent = "Intervenant";
+            const allowedCategories = TASK_ASSIGNMENT_CATEGORIES[category];
+            const intervenants = allIntervenants().filter((intervenant) =>
+              allowedCategories.includes(intervenant.category),
+            );
+            select.innerHTML = intervenants.length
+              ? '<option value="">Sélectionner un intervenant</option>' +
+                intervenants
+                  .map(
+                    (intervenant) =>
+                      `<option value="${esc(intervenant.id)}">${esc(intervenant.name)} — ${esc(functionLabel(intervenant))}</option>`,
+                  )
+                  .join("")
+              : '<option value="">Aucun intervenant enregistré dans cette catégorie</option>';
+          }
+        }
+        if ([...select.options].some((option) => option.value === previousValue)) {
+          select.value = previousValue;
+        }
+      }
+      function currentTaskAssignment() {
+        const category = $("vAssignmentCategory")?.value || "entreprise";
+        if (category === "entreprise") {
+          const selected = $("vLot").value;
+          const lot = (state.lots || []).find((item) => lotLabel(item) === selected);
+          return {
+            valid: !!lot?.lot,
+            intervenantId: lot?.companyId || null,
+            lot: lot?.lot || selected,
+            company: lot?.company || "",
+          };
+        }
+        const allowedCategories = TASK_ASSIGNMENT_CATEGORIES[category] || [];
+        const intervenant = (state.intervenants || []).find(
+          (item) => item.id === $("vLot").value && allowedCategories.includes(item.category),
+        );
+        return {
+          valid: !!intervenant,
+          intervenantId: intervenant?.id || null,
+          lot: "",
+          company: "",
+        };
+      }
+      function ensureTaskMetadata() {
+        let changed = false;
+        if (!Array.isArray(state.reserves)) {
+          state.reserves = [];
+          return true;
+        }
+        state.reserves.forEach((reserve) => {
+          if (!reserve || typeof reserve !== "object") return;
+          if (typeof reserve.taskQualification !== "string") {
+            reserve.taskQualification = "";
+            changed = true;
+          }
+          if (!TASK_IMPORTANCES.some(([value]) => value === reserve.taskImportance)) {
+            reserve.taskImportance = "normal";
+            changed = true;
+          }
+        });
+        return changed;
+      }
+      function taskImportanceClass(value) {
+        return TASK_IMPORTANCES.some(([allowed]) => allowed === value)
+          ? `task-importance-${value}`
+          : "task-importance-normal";
+      }
+      function selectOptions(values, selectedValue) {
+        return values
+          .map(([value, label]) => `<option value="${esc(value)}"${value === selectedValue ? " selected" : ""}>${esc(label)}</option>`)
+          .join("");
+      }
+      function taskQualificationOptions(selectedValue) {
+        return selectOptions(
+          [["", "Qualification"], ...TASK_QUALIFICATIONS.map((value) => [value, value])],
+          selectedValue,
+        );
+      }
+      function taskImportanceOptions(selectedValue) {
+        return selectOptions(TASK_IMPORTANCES, selectedValue);
+      }
+      function reserveStatusOptions(selectedValue) {
+        return selectOptions(
+          TASK_STATUSES.map((value) => [value, value]),
+          selectedValue,
+        );
+      }
+      function updateTaskQualification(id, value) {
+        const reserve = state.reserves.find((item) => item.id === id);
+        if (!reserve || (value && !TASK_QUALIFICATIONS.includes(value))) return;
+        reserve.taskQualification = value;
+        persist();
+        renderTable();
+      }
+      function updateTaskImportance(id, value) {
+        const reserve = state.reserves.find((item) => item.id === id);
+        if (!reserve || !TASK_IMPORTANCES.some(([allowed]) => allowed === value)) return;
+        reserve.taskImportance = value;
+        persist();
+        renderTable();
       }
       function buildLocation(housing, room) {
         housing = (housing || "").trim();
@@ -1209,16 +4020,94 @@ async function deletePhoto(photoId) {
         });
       }
 
+      function reservePhotoIds(reserve) {
+        const ids = Array.isArray(reserve?.photoIds)
+          ? reserve.photoIds.filter(Boolean)
+          : [];
+        if (reserve?.photoId && !ids.includes(reserve.photoId)) ids.unshift(reserve.photoId);
+        return ids;
+      }
+
+      async function selectVisitPhotos(files) {
+        try {
+          for (const file of Array.from(files || [])) {
+            const dataUrl = await fileToDataURL(file);
+            if (dataUrl) pendingVisitPhotos.push({ source: "new", dataUrl });
+          }
+          renderVisitPhotoPreviews();
+        } catch (e) {
+          console.error(e);
+          alert("Une photo n’a pas pu être préparée. Essaie avec une autre image.");
+        } finally {
+          [$('vPhotoCamera'), $('vPhotoLibrary')].forEach((input) => {
+            if (input) input.value = "";
+          });
+        }
+      }
+
+      function renderVisitPhotoPreviews() {
+        const container = $("visitPhotoPreviews");
+        if (!container) return;
+        container.innerHTML = pendingVisitPhotos
+          .map((photo, index) => `<div class="visit-photo-preview">
+            <button class="visit-photo-open" type="button" onclick="openPhotoViewer(pendingVisitPhotos[${index}].dataUrl)" aria-label="Agrandir la photo ${index + 1}">
+              <img src="${photo.dataUrl}" alt="Photo ${index + 1}" />
+            </button>
+            <button class="visit-photo-remove" type="button" onclick="removeVisitPhoto(${index})" aria-label="Retirer la photo ${index + 1}">×</button>
+          </div>`)
+          .join("");
+        $("visitPhotoEmpty")?.classList.toggle("hidden", pendingVisitPhotos.length > 0);
+      }
+
+      function removeVisitPhoto(index) {
+        pendingVisitPhotos.splice(index, 1);
+        renderVisitPhotoPreviews();
+      }
+
+      function openPhotoViewer(dataUrl) {
+        if (!dataUrl) return;
+        $("photoViewerImage").src = dataUrl;
+        $("photoViewer").classList.remove("hidden");
+      }
+
+      function closePhotoViewer(event) {
+        if (event && event.target !== event.currentTarget) return;
+        $("photoViewer").classList.add("hidden");
+        $("photoViewerImage").removeAttribute("src");
+      }
+
+      async function loadVisitPhotos(reserve) {
+        const token = ++visitPhotoLoadToken;
+        const photos = [];
+        for (const photoId of reservePhotoIds(reserve)) {
+          try {
+            const dataUrl = await getPhoto(photoId);
+            if (dataUrl) photos.push({ source: "existing", photoId, dataUrl });
+          } catch (e) {
+            console.error("Photo IndexedDB introuvable :", photoId, e);
+          }
+        }
+        if (reserve?.photo && !photos.length) {
+          photos.push({ source: "legacy", dataUrl: reserve.photo });
+        }
+        if (token !== visitPhotoLoadToken || editingReserveId !== reserve?.id) return;
+        pendingVisitPhotos = photos;
+        renderVisitPhotoPreviews();
+      }
+
 		function photoThumbHtml(r) {
-		  if (r.photo) {
-			return `<img class="thumb" src="${r.photo}">`;
+		  if (currentDocumentTitle() !== "Liste de tâches") {
+			if (r.photo) return `<img class="thumb" src="${r.photo}">`;
+			if (r.photoId) return `<img class="thumb" data-photo-id="${esc(r.photoId)}" alt="Photo réserve">`;
+			return "";
 		  }
-
-		  if (r.photoId) {
-			return `<img class="thumb" data-photo-id="${esc(r.photoId)}" alt="Photo réserve">`;
+		  const images = reservePhotoIds(r).map(
+			(photoId, index) => `<img class="thumb" data-photo-id="${esc(photoId)}" alt="Photo ${index + 1}" onclick="openPhotoViewer(this.src)">`,
+		  );
+		  if (r.photo && !images.length) {
+			images.push(`<img class="thumb" src="${r.photo}" alt="Photo" onclick="openPhotoViewer(this.src)">`);
 		  }
-
-		  return "";
+		  return images.length ? `<div class="photo-thumbs">${images.join("")}</div>` : "";
 		}
 
 		async function hydratePhotos() {
@@ -1243,85 +4132,160 @@ async function deletePhoto(photoId) {
 		}
 
       async function addReserve(clear) {
-
+        const isTaskList = currentDocumentTitle() === "Liste de tâches";
         const selected = $("vLot").value;
-        const lot = state.lots.find((l) => lotLabel(l) === selected) || {
-          lot: selected,
-          company: "",
-        };
+        const assignment = isTaskList ? currentTaskAssignment() : null;
+        const lot = isTaskList
+          ? { lot: assignment.lot, company: assignment.company }
+          : state.lots.find((l) => lotLabel(l) === selected) || {
+              lot: selected,
+              company: "",
+            };
         const desc = $("vDesc").value.trim();
         const housing = $("vHousing").value.trim();
         const room = $("vLoc").value.trim();
         const location = buildLocation(housing, room);
-        if (!lot.lot || !location || !desc)
-          return alert("Lot, localisation et description sont obligatoires.");
-		let photoId = "";
-
-		try {
-		  const photoDataUrl = await fileToDataURL($("vPhoto").files[0]);
-
-		  if (photoDataUrl) {
-			photoId = "photo_" + crypto.randomUUID();
-			await savePhoto(photoId, photoDataUrl);
-		  }
-		} catch (e) {
-		  console.error(e);
-		  return alert(
-			"La photo n’a pas pu être ajoutée. Essaie avec une autre photo ou sans photo.",
-		  );
-		}
-
+        if (isTaskList && !assignment.valid) {
+          return alert("Sélectionne un intervenant ou un lot / une entreprise.");
+        }
+        if ((!isTaskList && !lot.lot) || !location || !desc) {
+          return alert(
+            isTaskList
+              ? "Attribution, localisation et description sont obligatoires."
+              : "Lot, localisation et description sont obligatoires.",
+          );
+        }
+        const status = isTaskList ? $("vTaskStatus").value : $("vStatus").value;
+        const taskQualification = isTaskList ? $("vTaskQualification").value : "";
+        const taskImportance = isTaskList ? $("vTaskImportance").value : "normal";
         const editIndex = editingReserveId
           ? state.reserves.findIndex((x) => x.id === editingReserveId)
           : -1;
+        const existing = editIndex >= 0 ? state.reserves[editIndex] : null;
+        const previousPhotoIds = reservePhotoIds(existing);
+        const savedNewPhotoIds = [];
+        let photoIds = [];
+        let legacyPhoto = existing?.photo || "";
+
+        try {
+          if (isTaskList) {
+            photoIds = pendingVisitPhotos
+              .filter((photo) => photo.source === "existing" && photo.photoId)
+              .map((photo) => photo.photoId);
+            legacyPhoto = "";
+            for (const photo of pendingVisitPhotos.filter(
+              (item) => item.source === "new" || item.source === "legacy",
+            )) {
+              const photoId = "photo_" + crypto.randomUUID();
+              await savePhoto(photoId, photo.dataUrl);
+              savedNewPhotoIds.push(photoId);
+              photoIds.push(photoId);
+            }
+          } else {
+            const photoDataUrl = await fileToDataURL($("vPhoto").files[0]);
+            if (photoDataUrl) {
+              const photoId = "photo_" + crypto.randomUUID();
+              await savePhoto(photoId, photoDataUrl);
+              savedNewPhotoIds.push(photoId);
+            }
+            photoIds = savedNewPhotoIds.length
+              ? savedNewPhotoIds
+              : previousPhotoIds;
+          }
+        } catch (e) {
+          console.error(e);
+          for (const photoId of savedNewPhotoIds) {
+            try { await deletePhoto(photoId); } catch (cleanupError) { console.error(cleanupError); }
+          }
+          return alert("La photo n’a pas pu être ajoutée. Essaie avec une autre photo ou sans photo.");
+        }
 
         if (editIndex >= 0) {
-          const existing = state.reserves[editIndex];
-			state.reserves[editIndex] = {
-			  ...existing,
-			  lot: lot.lot,
-			  company: lot.company,
-			  housing,
-			  room,
-			  location,
-			  description: desc,
-			  status: $("vStatus").value,
-			  photoId: photoId || existing.photoId || "",
-			  photo: existing.photo || "",
-			  lifted_at:
-				$("vStatus").value === "Levée"
-				  ? existing.lifted_at || new Date().toISOString()
-				  : null,
-			};
+          state.reserves[editIndex] = {
+            ...existing,
+            lot: lot.lot,
+            company: lot.company,
+            housing,
+            room,
+            location,
+            description: desc,
+            status,
+            ...(isTaskList ? { intervenantId: assignment.intervenantId } : {}),
+            taskQualification: isTaskList ? taskQualification : existing.taskQualification || "",
+            taskImportance: isTaskList ? taskImportance : existing.taskImportance || "normal",
+            ...(isTaskList
+              ? {
+                  photoIds,
+                  photoId: photoIds[0] || "",
+                  photo: legacyPhoto,
+                }
+              : {
+                  photoId: photoIds[0] || existing.photoId || "",
+                  photo: existing.photo || "",
+                }),
+            lifted_at:
+              status === "Levée"
+                ? existing.lifted_at || new Date().toISOString()
+                : null,
+          };
           try {
             persist();
           } catch (e) {
+            state.reserves[editIndex] = existing;
+            for (const photoId of savedNewPhotoIds) {
+              try { await deletePhoto(photoId); } catch (cleanupError) { console.error(cleanupError); }
+            }
             return;
+          }
+          if (isTaskList) {
+            for (const photoId of previousPhotoIds.filter((id) => !photoIds.includes(id))) {
+              try { await deletePhoto(photoId); } catch (e) { console.error("Photo non supprimée :", photoId, e); }
+            }
           }
           editingReserveId = null;
           resetVisitForm();
         } else {
+          try {
+            reconcileReserveNumbering();
+          } catch (error) {
+            console.error("Numérotation des observations impossible", error);
+            for (const photoId of savedNewPhotoIds) {
+              try { await deletePhoto(photoId); } catch (cleanupError) { console.error(cleanupError); }
+            }
+            return;
+          }
+          const previousSequence = storedReserveSequence();
+          const reserveNumber = nextReserveNo();
+          state.project.lastReserveSequence = reserveSequence(reserveNumber);
           state.reserves.push({
-			  id: crypto.randomUUID(),
-			  num: nextReserveNo(),
-			  lot: lot.lot,
-			  company: lot.company,
-			  housing,
-			  room,
-			  location,
-			  description: desc,
-			  status: $("vStatus").value,
-			  photoId,
-			  photo: "",
-			  created_at: new Date().toISOString(),
-			  lifted_at:
-				$("vStatus").value === "Levée" ? new Date().toISOString() : null,
-			  lift_comment: "",
-			});
+            id: crypto.randomUUID(),
+            num: reserveNumber,
+            lot: lot.lot,
+            company: lot.company,
+            housing,
+            room,
+            location,
+            description: desc,
+            status,
+            ...(isTaskList ? { intervenantId: assignment.intervenantId } : {}),
+            taskQualification,
+            taskImportance,
+            ...(isTaskList
+              ? { photoIds, photoId: photoIds[0] || "" }
+              : { photoId: photoIds[0] || "" }),
+            photo: legacyPhoto,
+            created_at: new Date().toISOString(),
+            lifted_at: status === "Levée" ? new Date().toISOString() : null,
+            lift_comment: "",
+          });
           try {
             persist();
           } catch (e) {
             state.reserves.pop();
+            state.project.lastReserveSequence = previousSequence;
+            for (const photoId of savedNewPhotoIds) {
+              try { await deletePhoto(photoId); } catch (cleanupError) { console.error(cleanupError); }
+            }
             return;
           }
           if (clear) {
@@ -1333,9 +4297,17 @@ async function deletePhoto(photoId) {
       function resetVisitForm() {
         $("vDesc").value = "";
         $("vPhoto").value = "";
+        if ($("vPhotoCamera")) $("vPhotoCamera").value = "";
+        if ($("vPhotoLibrary")) $("vPhotoLibrary").value = "";
         $("vHousing").value = "";
         $("vLoc").value = "";
         $("vStatus").value = "À traiter";
+        $("vTaskStatus").value = "À traiter";
+        $("vTaskQualification").value = "";
+        $("vTaskImportance").value = "normal";
+        visitPhotoLoadToken++;
+        pendingVisitPhotos = [];
+        renderVisitPhotoPreviews();
         toggleRoomInput();
         if ($("saveVisitBtn"))
           $("saveVisitBtn").textContent = "Sauver et suivante";
@@ -1349,7 +4321,10 @@ async function deletePhoto(photoId) {
       }
       function updateStatus(id, status) {
         const r = state.reserves.find((x) => x.id === id);
-        if (!r) return;
+        const allowedStatuses = currentDocumentTitle() === "Liste de tâches"
+          ? TASK_STATUSES
+          : RESERVE_STATUSES;
+        if (!r || !allowedStatuses.includes(status)) return;
         r.status = status;
         r.lifted_at = status === "Levée" ? new Date().toISOString() : null;
         persist();
@@ -1359,13 +4334,41 @@ async function deletePhoto(photoId) {
         const r = state.reserves.find((x) => x.id === id);
         if (!r) return;
         editingReserveId = id;
-        const label = lotLabel({ lot: r.lot || "", company: r.company || "" });
-        $("vLot").value = label;
+        const assignmentIntervenant = taskAssignmentIntervenant(r);
+        const linkedLot = assignmentIntervenant?.category === "entreprise"
+          ? (state.lots || []).find(
+              (lot) =>
+                lot.companyId === assignmentIntervenant.id &&
+                String(lot.lot || "") === String(r.lot || ""),
+            )
+          : null;
+        const label = lotLabel(
+          linkedLot || { lot: r.lot || "", company: r.company || "" },
+        );
+        if (currentDocumentTitle() === "Liste de tâches") {
+          const assignmentCategory = assignmentIntervenant
+            ? taskAssignmentCategoryForIntervenant(assignmentIntervenant)
+            : "entreprise";
+          $("vAssignmentCategory").value = assignmentCategory;
+          renderTaskAssignmentOptions(
+            assignmentCategory === "entreprise"
+              ? label
+              : assignmentIntervenant?.id || "",
+          );
+        } else {
+          $("vLot").value = label;
+        }
         $("vHousing").value = r.housing || "";
         $("vLoc").value = r.room || (r.housing ? "" : r.location || "");
         $("vDesc").value = r.description || "";
         $("vStatus").value = r.status || "À traiter";
+        $("vTaskStatus").value = r.status || "À traiter";
+        $("vTaskQualification").value = r.taskQualification || "";
+        $("vTaskImportance").value = r.taskImportance || "normal";
         $("vPhoto").value = "";
+        pendingVisitPhotos = [];
+        renderVisitPhotoPreviews();
+        loadVisitPhotos(r);
         toggleRoomInput();
         if ($("saveVisitBtn"))
           $("saveVisitBtn").textContent = "Enregistrer les modifications";
@@ -1374,7 +4377,7 @@ async function deletePhoto(photoId) {
           $("visitEditHint").textContent =
             "Modification de " +
             r.num +
-            " — laisse la photo vide pour conserver l’image existante.";
+            " — les photos existantes sont conservées tant qu’elles ne sont pas retirées.";
           $("visitEditHint").classList.remove("hidden");
         }
         showPanel("visitPanel");
@@ -1393,11 +4396,11 @@ async function deletePhoto(photoId) {
 			return;
 		  }
 
-		  if (reserve?.photoId) {
+		  for (const photoId of reservePhotoIds(reserve)) {
 			try {
-			  await deletePhoto(reserve.photoId);
+			  await deletePhoto(photoId);
 			} catch (e) {
-			  console.error("Photo IndexedDB non supprimée :", reserve.photoId, e);
+			  console.error("Photo IndexedDB non supprimée :", photoId, e);
 			}
 		  }
 
@@ -1408,6 +4411,57 @@ async function deletePhoto(photoId) {
   const match = txt.match(/logement\s*0*(\d+)/i);
   return match ? Number(match[1]) : 9999;
 }
+
+      function taskIntervenantFilterValue(intervenant) {
+        return `intervenant:${encodeURIComponent(intervenant.id)}`;
+      }
+      function taskLotFilterValue(lot, index) {
+        const stableKey = lot.id || [
+          lot.companyId || normalizeCompanyName(lot.company),
+          lot.lot || "",
+          index,
+        ].join("::");
+        return `lot:${encodeURIComponent(stableKey)}`;
+      }
+      function taskLotFromFilter(value) {
+        return (state.lots || []).find(
+          (lot, index) => taskLotFilterValue(lot, index) === value,
+        );
+      }
+      function taskLotGroupingKey(lot) {
+        const lotNumber = String(lot?.lot || "").trim();
+        const companyKey = lot?.companyId || normalizeCompanyName(lot?.company) || "sans-entreprise";
+        return lot?.id || `${lotNumber.toLocaleLowerCase("fr-FR")}::${companyKey}`;
+      }
+      function taskIntervenantIdFromFilter(value) {
+        return value.startsWith("intervenant:")
+          ? decodeURIComponent(value.slice("intervenant:".length))
+          : "";
+      }
+      function matchesTaskAssignmentFilter(reserve, value) {
+        if (!value) return true;
+        if (value.startsWith("intervenant:")) {
+          return reserve.intervenantId === taskIntervenantIdFromFilter(value);
+        }
+        if (value.startsWith("lot:")) {
+          const lot = taskLotFromFilter(value);
+          if (!lot) return false;
+          return taskGroupDescriptor(reserve).key === taskLotGroupingKey(lot);
+        }
+        return false;
+      }
+      function compareReserveNumbers(a, b) {
+        const sequenceA = reserveSequence(a?.num);
+        const sequenceB = reserveSequence(b?.num);
+        if (sequenceA !== null && sequenceB !== null && sequenceA !== sequenceB) {
+          return sequenceA - sequenceB;
+        }
+        if (sequenceA !== null && sequenceB === null) return -1;
+        if (sequenceA === null && sequenceB !== null) return 1;
+        return String(a?.num || "").localeCompare(String(b?.num || ""), "fr", {
+          numeric: true,
+        });
+      }
 
 	function filtered() {
 	  const q = $("search")?.value?.toLowerCase().trim() || "";
@@ -1422,15 +4476,19 @@ async function deletePhoto(photoId) {
 			  r.status === st ||
 			  (st === "À traiter + En cours" &&
 				(r.status === "À traiter" || r.status === "En cours"))) &&
-			(!lot ||
-			  r.lot === lot ||
-			  lotLabel({ lot: r.lot || "", company: r.company || "" }) === lot) &&
+			(currentDocumentTitle() === "Liste de tâches"
+			  ? matchesTaskAssignmentFilter(r, lot)
+			  : (!lot ||
+				r.lot === lot ||
+				lotLabel({ lot: r.lot || "", company: r.company || "" }) === lot)) &&
 			(!loc || plainLocation(r).toLowerCase().includes(loc)) &&
 			(!q ||
 			  [
 				r.num,
 				r.lot,
 				r.company,
+				taskAssignmentDisplay(r).lot,
+				taskAssignmentDisplay(r).company,
 				plainLocation(r),
 				r.description,
 				r.status,
@@ -1440,6 +4498,9 @@ async function deletePhoto(photoId) {
 				.includes(q)),
 		)
 		.sort((a, b) => {
+		  if (currentDocumentTitle() === "Liste de tâches") {
+			return compareReserveNumbers(a, b);
+		  }
 		  const la = logementNumber(a);
 		  const lb = logementNumber(b);
 
@@ -1451,98 +4512,422 @@ async function deletePhoto(photoId) {
 		});
 	}
 
+      function taskFilterIntervenantLabel(intervenant) {
+        return ["bureau_controle", "coordonnateur_sps"].includes(intervenant.category)
+          ? `${categoryLabel(intervenant.category)} — ${intervenant.name}`
+          : intervenant.name;
+      }
+      function taskFilterOptgroup(label, categories) {
+        const options = allIntervenants()
+          .filter((intervenant) => categories.includes(intervenant.category))
+          .sort((a, b) =>
+            String(a.name || "").localeCompare(String(b.name || ""), "fr", {
+              sensitivity: "base",
+            }),
+          )
+          .map(
+            (intervenant) =>
+              `<option value="${esc(taskIntervenantFilterValue(intervenant))}">${esc(taskFilterIntervenantLabel(intervenant))}</option>`,
+          )
+          .join("");
+        return options ? `<optgroup label="${esc(label)}">${options}</optgroup>` : "";
+      }
+
 function renderSelects() {
   const currentFilter = $("fLot")?.value || "";
+  const currentAssignment = $("vLot")?.value || "";
+  const isTaskList = currentDocumentTitle() === "Liste de tâches";
 
-  const opts = (state.lots || [])
-    .map((l) => `<option>${esc(lotLabel(l))}</option>`)
-    .join("");
+  $("fStatusPm").hidden = !isTaskList;
+  if (!isTaskList && $("fStatus").value === "PM") $("fStatus").value = "";
 
-  $("vLot").innerHTML =
-    opts || '<option value="">Créer les lots dans Projet</option>';
-
-  $("fLot").innerHTML =
-    '<option value="">Tous les lots / entreprises</option>' +
-    (state.lots || [])
+  if (isTaskList) {
+    const companyOptions = (state.lots || [])
       .map(
-        (l) =>
-          `<option value="${esc(lotLabel(l))}">${esc(lotLabel(l))}</option>`,
+        (lot, index) =>
+          `<option value="${esc(taskLotFilterValue(lot, index))}">${esc([`Lot ${lot.lot || "sans numéro"}`, lot.company].filter(Boolean).join(" — "))}</option>`,
       )
       .join("");
+    $("fLot").innerHTML =
+      '<option value="">Tous les intervenants / lots</option>' +
+      taskFilterOptgroup("Maîtrise d’ouvrage", ["maitrise_ouvrage"]) +
+      taskFilterOptgroup("Maîtrise d’œuvre", [
+        "maitrise_oeuvre",
+        "bureau_controle",
+        "coordonnateur_sps",
+      ]) +
+      taskFilterOptgroup("Autres", ["autre"]) +
+      (companyOptions ? `<optgroup label="Entreprises">${companyOptions}</optgroup>` : "");
+  } else {
+    $("fLot").innerHTML =
+      '<option value="">Tous les lots / entreprises</option>' +
+      (state.lots || [])
+        .map(
+          (lot) =>
+            `<option value="${esc(lotLabel(lot))}">${esc(lotLabel(lot))}</option>`,
+        )
+        .join("");
+  }
 
   $("fLot").value = currentFilter;
+  $("vTaskQualification").innerHTML = taskQualificationOptions(
+    $("vTaskQualification").value,
+  );
+  $("vTaskImportance").innerHTML = taskImportanceOptions(
+    $("vTaskImportance").value || "normal",
+  );
+  renderTaskAssignmentOptions(currentAssignment);
 }
+
+      function taskGroupDescriptor(reserve) {
+        const assignment = taskAssignmentDisplay(reserve);
+        if (assignment.intervenant && assignment.intervenant.category !== "entreprise") {
+          return {
+            key: `intervenant::${assignment.intervenant.id}`,
+            lot: "",
+            designation: "",
+            company: assignment.company,
+            assignmentLabel: assignment.lot,
+          };
+        }
+        const lotNumber = String(assignment.lot || "").trim();
+        const company = String(assignment.company || "").trim();
+        const sourceLot =
+          (assignment.intervenant?.category === "entreprise"
+            ? (state.lots || []).find(
+                (lot) =>
+                  lot.companyId === assignment.intervenant.id &&
+                  String(lot?.lot || "").trim() === lotNumber,
+              )
+            : null) ||
+          (state.lots || []).find(
+            (lot) =>
+              String(lot?.lot || "").trim() === lotNumber &&
+              normalizeCompanyName(lot?.company) === normalizeCompanyName(company),
+          );
+        const lotKey = taskLotGroupingKey(
+          sourceLot || { lot: lotNumber, company },
+        );
+        return {
+          key: lotKey,
+          lot: lotNumber,
+          designation: String(sourceLot?.designation || "").trim(),
+          company: String(sourceLot?.company || company).trim(),
+        };
+      }
+
+      function taskGroupNumber(value) {
+        const match = String(value || "").match(/\d+(?:[.,]\d+)?/);
+        return match ? Number(match[0].replace(",", ".")) : null;
+      }
+
+      function compareTaskGroups(a, b) {
+        const numberA = taskGroupNumber(a.lot);
+        const numberB = taskGroupNumber(b.lot);
+        if (numberA !== null && numberB !== null && numberA !== numberB) {
+          return numberA - numberB;
+        }
+        if (numberA !== null && numberB === null) return -1;
+        if (numberA === null && numberB !== null) return 1;
+        const lotOrder = a.lot.localeCompare(b.lot, "fr", {
+          numeric: true,
+          sensitivity: "base",
+        });
+        if (lotOrder) return lotOrder;
+        const companyOrder = a.company.localeCompare(b.company, "fr", {
+          sensitivity: "base",
+        });
+        return companyOrder || a.key.localeCompare(b.key, "fr");
+      }
+
+      function groupVisibleTasks(rows) {
+        const groups = new Map();
+        rows.forEach((reserve) => {
+          const descriptor = taskGroupDescriptor(reserve);
+          if (!groups.has(descriptor.key)) {
+            groups.set(descriptor.key, { ...descriptor, rows: [] });
+          }
+          groups.get(descriptor.key).rows.push(reserve);
+        });
+        return [...groups.values()].sort(compareTaskGroups);
+      }
+
+      function taskCollapseKey(value) {
+        return encodeURIComponent(value).replaceAll("'", "%27");
+      }
+      function taskCountLabel(count) {
+        return `${count} remarque${count > 1 ? "s" : ""}`;
+      }
+      function taskCollapseButton(label, count, expanded, onclick) {
+        const text = `${esc(label)} — <span class="task-collapse-count">${taskCountLabel(count)}</span>`;
+        return `<button type="button" class="task-collapse-toggle noPrint" onclick="${onclick}" aria-expanded="${expanded}"><span class="task-collapse-chevron" aria-hidden="true">${expanded ? "▼" : "▶"}</span><span>${text}</span></button><span class="printOnly">${text}</span>`;
+      }
+      function toggleTaskSection(sectionKey) {
+        sectionKey = decodeURIComponent(sectionKey);
+        if (expandedTaskSections.has(sectionKey)) expandedTaskSections.delete(sectionKey);
+        else expandedTaskSections.add(sectionKey);
+        renderTable();
+      }
+      function toggleTaskGroup(groupKey) {
+        groupKey = decodeURIComponent(groupKey);
+        if (expandedTaskGroups.has(groupKey)) expandedTaskGroups.delete(groupKey);
+        else expandedTaskGroups.add(groupKey);
+        renderTable();
+      }
+      function taskGroupHeaderHtml(group, stateKey, expanded, collapsed) {
+        if (group.assignmentLabel) {
+          const title = [group.assignmentLabel, group.company]
+            .filter(Boolean)
+            .join(" — ")
+            .toLocaleUpperCase("fr-FR");
+          return `<tr class="task-group-header task-collapse-header${collapsed ? " task-screen-collapsed" : ""}"><td colspan="7">${taskCollapseButton(title, group.rows.length, expanded, `toggleTaskGroup('${taskCollapseKey(stateKey)}')`)}</td></tr>`;
+        }
+        const lotTitle = /^lot\b/i.test(group.lot)
+          ? group.lot
+          : `LOT ${group.lot || "SANS NUMÉRO"}`;
+        const title = [
+          lotTitle,
+          group.designation,
+          group.company,
+        ]
+          .filter(Boolean)
+          .join(" — ")
+          .toLocaleUpperCase("fr-FR");
+        return `<tr class="task-group-header task-collapse-header${collapsed ? " task-screen-collapsed" : ""}"><td colspan="7">${taskCollapseButton(title, group.rows.length, expanded, `toggleTaskGroup('${taskCollapseKey(stateKey)}')`)}</td></tr>`;
+      }
+
+      function taskGroupColumnsHtml(isEnterprise = true, collapsed = false) {
+        return `<tr class="task-group-columns${collapsed ? " task-screen-collapsed" : ""}">
+          <th scope="col">N°</th>
+          <th scope="col">${isEnterprise ? "Lot" : "Catégorie"}</th>
+          <th scope="col">${isEnterprise ? "Entreprise" : "Intervenant"}</th>
+          <th scope="col">Localisation</th>
+          <th scope="col">Description</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Photo</th>
+        </tr>`;
+      }
+
+      const TASK_SECTION_DEFINITIONS = [
+        { key: "maitrise_ouvrage", label: "Maîtrise d’ouvrage" },
+        { key: "maitrise_oeuvre", label: "Maîtrise d’œuvre" },
+        { key: "autre", label: "Autres" },
+        { key: "entreprise", label: "Entreprises" },
+      ];
+      function taskSectionKey(reserve) {
+        const assignment = taskAssignmentDisplay(reserve);
+        if (assignment.missingIntervenantId) return "autre";
+        if (!assignment.intervenant || assignment.intervenant.category === "entreprise") {
+          return "entreprise";
+        }
+        return taskAssignmentCategoryForIntervenant(assignment.intervenant);
+      }
+      function groupTasksByIntervenant(rows) {
+        const groups = new Map();
+        rows.forEach((reserve) => {
+          const assignment = taskAssignmentDisplay(reserve);
+          const intervenant = assignment.intervenant;
+          const key = intervenant?.id || `missing::${assignment.missingIntervenantId || "unknown"}`;
+          if (!groups.has(key)) {
+            groups.set(key, {
+              key,
+              name: intervenant?.name || "Intervenant introuvable",
+              category: intervenant?.category || "autre",
+              missing: !intervenant,
+              rows: [],
+            });
+          }
+          groups.get(key).rows.push(reserve);
+        });
+        return [...groups.values()].sort((a, b) =>
+          a.name.localeCompare(b.name, "fr", { sensitivity: "base" }),
+        );
+      }
+      function taskSectionHeaderHtml(section, count, expanded) {
+        return `<tr class="task-section-header task-collapse-header"><td colspan="7">${taskCollapseButton(section.label.toLocaleUpperCase("fr-FR"), count, expanded, `toggleTaskSection('${taskCollapseKey(section.key)}')`)}</td></tr>`;
+      }
+      function taskIntervenantGroupHeaderHtml(group, stateKey, expanded, collapsed) {
+        const title = group.missing
+          ? "Intervenant introuvable"
+          : ["bureau_controle", "coordonnateur_sps"].includes(group.category)
+            ? `${categoryLabel(group.category)} — ${group.name}`
+            : group.name;
+        return `<tr class="task-group-header task-collapse-header${collapsed ? " task-screen-collapsed" : ""}"><td colspan="7">${taskCollapseButton(title.toLocaleUpperCase("fr-FR"), group.rows.length, expanded, `toggleTaskGroup('${taskCollapseKey(stateKey)}')`)}</td></tr>`;
+      }
+      function taskPrintSpacerHtml(className) {
+        return `<tr class="task-print-spacer ${className} printOnly"><td colspan="7"></td></tr>`;
+      }
+      function renderTaskSections(rows, renderReserveRows) {
+        let renderedSectionCount = 0;
+        return TASK_SECTION_DEFINITIONS.map((section) => {
+          const sectionRows = rows.filter(
+            (reserve) => taskSectionKey(reserve) === section.key,
+          );
+          if (!sectionRows.length) return "";
+          const sectionSpacer = renderedSectionCount > 0
+            ? taskPrintSpacerHtml("task-section-spacer")
+            : "";
+          renderedSectionCount += 1;
+          const groups = section.key === "entreprise"
+            ? groupVisibleTasks(sectionRows)
+            : groupTasksByIntervenant(sectionRows);
+          const sectionExpanded = expandedTaskSections.has(section.key);
+          const groupsHtml = groups
+            .map((group, groupIndex) => {
+              const groupStateKey = `${section.key}::${group.key}`;
+              const groupExpanded = expandedTaskGroups.has(groupStateKey);
+              const groupHeaderCollapsed = !sectionExpanded;
+              const groupContentCollapsed = !sectionExpanded || !groupExpanded;
+              const groupSpacer = section.key === "entreprise"
+                ? groupIndex > 0
+                  ? taskPrintSpacerHtml("task-group-spacer")
+                  : ""
+                : taskPrintSpacerHtml(
+                    groupIndex === 0 ? "task-group-spacer-first" : "task-group-spacer",
+                  );
+              return groupSpacer + (section.key === "entreprise"
+                ? taskGroupHeaderHtml(group, groupStateKey, groupExpanded, groupHeaderCollapsed) +
+                  taskGroupColumnsHtml(true, groupContentCollapsed)
+                : taskIntervenantGroupHeaderHtml(group, groupStateKey, groupExpanded, groupHeaderCollapsed) +
+                  taskGroupColumnsHtml(false, groupContentCollapsed)) +
+                group.rows.map((reserve) => renderReserveRows(reserve, groupContentCollapsed)).join("");
+            })
+            .join("");
+          return sectionSpacer +
+            taskSectionHeaderHtml(section, sectionRows.length, sectionExpanded) +
+            groupsHtml;
+        }).join("");
+      }
+
 	function renderTable() {
 	  const rows = filtered();
-
-	  $("reservesBody").innerHTML =
-		rows
-		  .map((r) => {
+	  const isTaskList = currentDocumentTitle() === "Liste de tâches";
+	  $("reservesPanel").classList.toggle("task-list-table", isTaskList);
+	  const renderReserveRows = (r, screenCollapsed = false) => {
 			const followups = r.followups || [];
+			const assignmentDisplay = taskAssignmentDisplay(r);
+			const taskActions = isTaskList
+			  ? `<button class="secondary" onclick="toggleFollowup('${r.id}')">+ Suivi</button>
+				 <button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
+				 <button class="danger" onclick="deleteReserve('${r.id}')">Supprimer</button>`
+			  : `<button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
+				 <button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
+				 <button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
+				 <button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
+				 <button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>`;
+			const description = isTaskList
+			  ? `<div class="task-remark ${taskImportanceClass(r.taskImportance)}">
+				   <div class="task-description-text">${esc(r.description)}</div>
+				   ${r.taskQualification ? `<div class="task-qualification-print printOnly">${esc(r.taskQualification.toLocaleUpperCase("fr-FR"))}</div>` : ""}
+				 </div>
+				 <div class="task-meta-controls noPrint">
+				   <select aria-label="Qualification de ${esc(r.num)}" onchange="updateTaskQualification('${r.id}', this.value)">${taskQualificationOptions(r.taskQualification)}</select>
+				   <select aria-label="Importance de ${esc(r.num)}" onchange="updateTaskImportance('${r.id}', this.value)">${taskImportanceOptions(r.taskImportance)}</select>
+				 </div>`
+			  : esc(r.description);
+			const status = isTaskList
+			  ? `<select class="task-status-select ${statusClass(r.status)} noPrint" aria-label="Statut de ${esc(r.num)}" onchange="updateStatus('${r.id}', this.value)">${reserveStatusOptions(r.status)}</select><span class="badge task-status-print ${statusClass(r.status)} printOnly">${esc(r.status)}</span>`
+			  : `<span class="badge ${statusClass(r.status)}">${esc(r.status)}</span>`;
+			const followupCards = followups
+			  .map((f, followupIndex) => {
+				const isEditingFollowup =
+				  editingFollowupReserveId === r.id && editingFollowupId === f.id;
+				const timelineClasses = isTaskList
+				  ? ` task-timeline-item${followupIndex === followups.length - 1 ? " is-last" : ""}${isEditingFollowup ? " is-editing" : ""}`
+				  : "";
+				return `<div class="followup-inline${timelineClasses}">
+				  <div class="followup-main">
+					<span class="followup-arrow">↳</span>
+					<span class="followup-title">${currentDocumentLabels().followup}</span>
+					${
+					  isEditingFollowup
+						? `<span class="followup-text followup-print-text">${esc(f.text)}</span>
+						  <div class="followup-edit-form noPrint">
+							<textarea id="followupEditInput_${r.id}_${f.id}" class="noPrint">${esc(f.text)}</textarea>
+							<button class="noPrint" onclick="saveEditedFollowup('${r.id}','${f.id}')">Valider</button>
+							<button class="ghost noPrint" onclick="cancelEditFollowup()">Annuler</button>
+						  </div>`
+						: `<span class="followup-text">${esc(f.text)}</span>
+						  <button class="followup-edit noPrint" onclick="editFollowup('${r.id}','${f.id}')" title="Modifier le suivi" aria-label="Modifier le suivi">&#9998;</button>`
+					}
+				  </div>
+				  <div class="followup-date">${formatDateFR(f.date)}</div>
+				</div>`;
+			  })
+			  .join("");
+			const followupForm =
+			  activeFollowupReserveId === r.id
+				? `<div class="followup-form followup-form-inline noPrint">
+					<textarea id="followupInput_${r.id}" placeholder="Ajouter un ${currentDocumentLabels().followup.toLocaleLowerCase("fr-FR")}..."></textarea>
+					<div class="followup-form-actions">
+					  <button onclick="addFollowup('${r.id}')">Valider</button>
+					  <button class="ghost" onclick="cancelFollowup()">Annuler</button>
+					</div>
+				  </div>`
+				: "";
+			const followupContent = followupCards + followupForm;
+			const collapsedRowClass = screenCollapsed ? " task-screen-collapsed" : "";
+			const taskFollowupRow =
+			  isTaskList && followupCards
+				? `<tr class="task-followups-row${collapsedRowClass}"><td colspan="7"><div class="task-followups-area"><div class="task-timeline">${followupCards}</div></div></td></tr>`
+				: "";
+			const followupFormRow = followupForm
+			  ? `<tr class="task-followup-form-row noPrint${collapsedRowClass}"><td colspan="7"><div class="task-followup-form-area">${followupForm}</div></td></tr>`
+			  : "";
+			const mainRowClassNames = [];
+			if (screenCollapsed) mainRowClassNames.push("task-screen-collapsed");
+			if (isTaskList && followupContent) {
+			  mainRowClassNames.push("task-main-with-followups");
+			  if (followups.length) mainRowClassNames.push("task-main-with-print-followups");
+			}
+			const mainRowClasses = mainRowClassNames.length
+			  ? ` class="${mainRowClassNames.join(" ")}"`
+			  : "";
 
-			const mainRow = `<tr>
+			const mainRow = `<tr${mainRowClasses}>
 			  <td colspan="4">
 				<div class="reserve-identification">
 				  <div><b>${r.num}</b><br><span class="small">${new Date(r.created_at).toLocaleDateString("fr-FR")}</span></div>
-				  <div>${esc(r.lot)}</div>
-				  <div>${esc(r.company)}</div>
+				  <div>${esc(isTaskList ? assignmentDisplay.lot : r.lot)}</div>
+				  <div>${esc(isTaskList ? assignmentDisplay.company : r.company)}</div>
 				  <div>${displayLocation(r)}</div>
 				  <div class="actions description-actions noPrint">
-					<button class="ghost" onclick="editReserve('${r.id}')">Modifier</button>
-					<button class="secondary" onclick="toggleFollowup('${r.id}')">Suivi</button>
-					<button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button>
-					<button class="warn" onclick="updateStatus('${r.id}','En cours')">En cours</button>
-					<button class="danger" onclick="deleteReserve('${r.id}')">Suppr.</button>
+					${taskActions}
 				  </div>
 				</div>
 			  </td>
 			  <td>
-				  ${esc(r.description)}
-				  ${followups
-					.map((f) => {
-					  const isEditingFollowup =
-						editingFollowupReserveId === r.id && editingFollowupId === f.id;
-					  return `<div class="followup-inline">
-						<div class="followup-main">
-						  <span class="followup-arrow">↳</span>
-						  <span class="followup-title">${currentDocumentTitle() === "OPR" ? "Suivi d'OPR" : "Suivi de réserve"}</span>
-						${
-						  isEditingFollowup
-							? `<span class="followup-text followup-print-text">${esc(f.text)}</span>
-							  <div class="followup-edit-form noPrint">
-								<textarea id="followupEditInput_${r.id}_${f.id}" class="noPrint">${esc(f.text)}</textarea>
-								<button class="noPrint" onclick="saveEditedFollowup('${r.id}','${f.id}')">Valider</button>
-								<button class="ghost noPrint" onclick="cancelEditFollowup()">Annuler</button>
-							  </div>`
-							: `<span class="followup-text">${esc(f.text)}</span>
-							  <button class="followup-edit noPrint" onclick="editFollowup('${r.id}','${f.id}')" title="Modifier le suivi" aria-label="Modifier le suivi">&#9998;</button>`
-						  }
-						</div>
-						<div class="followup-date">${formatDateFR(f.date)}</div>
-					  </div>`;
-					})
-					.join("")}
-				  ${
-					activeFollowupReserveId === r.id
-					  ? `<div class="followup-form followup-form-inline noPrint">
-						  <input id="followupInput_${r.id}" placeholder="Ajouter un suivi de réserve..." />
-						  <button onclick="addFollowup('${r.id}')">Valider</button>
-						  <button class="ghost" onclick="cancelFollowup()">Annuler</button>
-						</div>`
-					  : ""
-				  }
+				  ${description}
+				  ${isTaskList ? "" : followupCards}
 				</td>
-			  <td><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
+			  <td>${status}</td>
 			  <td>${photoThumbHtml(r)}</td>
 			</tr>`;
 
-			const followupRows = "";
-
-			const followupForm = "";
-			
-			return mainRow + followupRows + followupForm;
-		  })
-		  .join("") || '<tr><td colspan="7">Aucune réserve.</td></tr>';
+			return mainRow + taskFollowupRow + followupFormRow;
+		  };
+	  const assignmentFilter = $("fLot")?.value || "";
+	  const showTaskSections = isTaskList && !assignmentFilter;
+	  const filteredIntervenantId = isTaskList
+		? taskIntervenantIdFromFilter(assignmentFilter)
+		: "";
+	  const filteredIntervenant = (state.intervenants || []).find(
+		(intervenant) => intervenant.id === filteredIntervenantId,
+	  );
+	  const usesIntervenantColumns =
+		!!filteredIntervenant && filteredIntervenant.category !== "entreprise";
+	  $("reservesHead").classList.toggle("hidden", showTaskSections);
+	  $("reservesHeadAssignmentType").textContent = usesIntervenantColumns
+		? "Catégorie"
+		: "Lot";
+	  $("reservesHeadAssignmentName").textContent = usesIntervenantColumns
+		? "Intervenant"
+		: "Entreprise";
+	  const tableHtml = showTaskSections
+		? renderTaskSections(rows, renderReserveRows)
+		: rows.map((reserve) => renderReserveRows(reserve, false)).join("");
+	  $("reservesBody").innerHTML =
+		tableHtml || `<tr><td colspan="7">${currentDocumentLabels().emptyTable}</td></tr>`;
 		  hydratePhotos();
 	}
 			function toggleFollowup(id) {
@@ -1559,7 +4944,7 @@ function renderSelects() {
 		  const input = $("followupInput_" + id);
 		  const text = (input?.value || "").trim();
 
-		  if (!text) return alert("Renseigne le suivi de réserve.");
+		  if (!text) return alert(`Renseigne le ${currentDocumentLabels().followup.toLocaleLowerCase("fr-FR")}.`);
 
 		  const r = state.reserves.find((x) => x.id === id);
 		  if (!r) return;
@@ -1623,19 +5008,23 @@ function renderSelects() {
 		  renderTable();
 		}
 		function renderCards() {
-		  const card = (r) =>
-			`<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc(r.lot)} — ${esc(r.company)}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${photoThumbHtml(r)}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`;
+		  const card = (r) => {
+            const assignment = taskAssignmentDisplay(r);
+            const lot = currentDocumentTitle() === "Liste de tâches" ? assignment.lot : r.lot;
+            const company = currentDocumentTitle() === "Liste de tâches" ? assignment.company : r.company;
+            return `<div class="rcard"><div class="top"><strong>${r.num}</strong><span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div><div class="small">${esc([lot, company].filter(Boolean).join(" — "))}</div><p><b>${displayLocation(r)}</b><br>${esc(r.description)}</p>${photoThumbHtml(r)}<div class="actions" style="margin-top:10px"><button class="secondary" onclick="updateStatus('${r.id}','Levée')">Levée</button><button class="ghost" onclick="editReserve('${r.id}')">Modifier</button></div></div>`;
+          };
 
 		  $("lastCards").innerHTML =
 			[...(state.reserves || [])].slice(-6).reverse().map(card).join("") ||
-			'<p class="small">Aucune réserve pour le moment.</p>';
+			`<p class="small">${currentDocumentLabels().emptyRecent}</p>`;
 
 		  $("liftingList").innerHTML =
 			(state.reserves || [])
 			  .filter((r) => r.status !== "Levée")
 			  .map(card)
 			  .join("") ||
-			'<p class="small">Toutes les réserves sont levées.</p>';
+			`<p class="small">${currentDocumentLabels().emptyLifting}</p>`;
 
 		  hydratePhotos();
 		}
@@ -1650,38 +5039,108 @@ function renderSelects() {
       function currentDocumentTitle() {
         return normalizeDocumentType(state.project?.documentType);
       }
+      function currentDisplayDocumentTitle() {
+        if (currentDocumentTitle() !== "Liste de tâches") return currentDocumentTitle();
+        const crNumber = formattedCrNumber(state.project?.crNumber);
+        return crNumber ? `Liste des tâches — CR N° ${crNumber}` : "Liste des tâches";
+      }
+      function currentDocumentLabels() {
+        const isTaskList = currentDocumentTitle() === "Liste de tâches";
+        return isTaskList
+          ? {
+              followup: "Suivi de tâche",
+              oprDate: "Date du compte rendu",
+              receptionDate: "Date de la prochaine réunion",
+              navList: "Tâches",
+              navLifting: "À traiter",
+              total: "Total tâches",
+              visit: "Ajouter une tâche",
+              descriptionPlaceholder: "Décrire la tâche...",
+              recent: "Dernières tâches",
+              add: "+ Tâche",
+              lifting: "Tâches à traiter",
+              emptyTable: "Aucune tâche.",
+              emptyRecent: "Aucune tâche pour le moment.",
+              emptyLifting: "Toutes les tâches sont levées.",
+            }
+          : {
+              followup:
+                currentDocumentTitle() === "OPR"
+                  ? "Suivi d'OPR"
+                  : "Suivi de réserve",
+              oprDate: "Date OPR",
+              receptionDate: "Date réception",
+              navList: "Réserves",
+              navLifting: "Levées",
+              total: "Total réserves",
+              visit: "Mode visite chantier",
+              descriptionPlaceholder: "Décrire la réserve...",
+              recent: "Dernières réserves",
+              add: "+ Réserve",
+              lifting: "Levée de réserves",
+              emptyTable: "Aucune réserve.",
+              emptyRecent: "Aucune réserve pour le moment.",
+              emptyLifting: "Toutes les réserves sont levées.",
+            };
+      }
       function currentDocumentDate() {
-        return currentDocumentTitle() === "OPR"
+        return currentDocumentTitle() === "OPR" ||
+          currentDocumentTitle() === "Liste de tâches"
           ? state.project?.opr
           : state.project?.reception || state.project?.opr;
       }
       function currentListTitle() {
         const type = currentDocumentTitle();
         const date = formatDateDots(currentDocumentDate());
+        if (type === "Liste de tâches") {
+          const crNumber = formattedCrNumber(state.project?.crNumber);
+          return crNumber
+            ? `Liste des tâches — CR N° ${crNumber}`
+            : `Liste des tâches${date ? " du " + date : ""}`;
+        }
         return `Liste des ${type}${date ? " du " + date : ""}`;
       }
 	  async function printDocument() {
 		  await hydratePhotos();
+		  renderPrintAttendance();
 
 		  const previousTitle = document.title;
-		  const type = currentDocumentTitle().toLocaleUpperCase("fr-FR");
-		  const date = formatDateDots(new Date());
+		  const isTaskList = currentDocumentTitle() === "Liste de tâches";
+		  const type = isTaskList
+			? "LISTE DE TACHES"
+			: currentDocumentTitle().toLocaleUpperCase("fr-FR");
+		  const date = isTaskList
+			? formatDateDots(state.project?.opr) || formatDateDots(new Date())
+			: formatDateDots(new Date());
 		  const selectedLot = $("fLot")?.value?.trim() || "";
 		  let lotTitle = "TOUS LOTS";
 
 		  if (selectedLot) {
-			const separatorIndex = selectedLot.indexOf(" | ");
-			const lot =
-			  separatorIndex === -1
+			if (isTaskList && selectedLot.startsWith("lot:")) {
+			  const selectedTaskLot = taskLotFromFilter(selectedLot);
+			  lotTitle = [
+				"LOT",
+				selectedTaskLot?.lot,
+				String(selectedTaskLot?.company || "").toLocaleUpperCase("fr-FR"),
+			  ].filter(Boolean).join(" ");
+			} else if (isTaskList && selectedLot.startsWith("intervenant:")) {
+			  const intervenantId = taskIntervenantIdFromFilter(selectedLot);
+			  const intervenant = (state.intervenants || []).find(
+				(item) => item.id === intervenantId,
+			  );
+			  lotTitle = String(intervenant?.name || "INTERVENANT").toLocaleUpperCase("fr-FR");
+			} else {
+			  const separatorIndex = selectedLot.indexOf(" | ");
+			  const lot = separatorIndex === -1
 				? selectedLot
 				: selectedLot.slice(0, separatorIndex).trim();
-			const company =
-			  separatorIndex === -1
+			  const company = separatorIndex === -1
 				? ""
 				: selectedLot.slice(separatorIndex + 3).trim();
-			lotTitle = ["LOT", lot, company.toLocaleUpperCase("fr-FR")]
-			  .filter(Boolean)
-			  .join(" ");
+			  lotTitle = ["LOT", lot, company.toLocaleUpperCase("fr-FR")]
+				.filter(Boolean)
+				.join(" ");
+			}
 		  }
 
 		  const restoreTitle = () => {
@@ -1783,26 +5242,32 @@ function renderSelects() {
 
 		  for (const r of reserves) {
 			try {
-			  let dataUrl = "";
-
-			  if (r.photoId) {
-				dataUrl = await getPhoto(r.photoId);
-			  } else if (r.photo) {
-				dataUrl = r.photo;
-			  }
-
-			  if (!dataUrl) continue;
-
-			  const photoId = r.photoId || "photo_" + crypto.randomUUID();
-			  const filename = `${photoId}.jpg`;
-
-			  photosFolder.file(filename, dataUrlToBlob(dataUrl));
-
-			  r.photoId = photoId;
-			  r.photo = "";
-			  r.photoFile = `photos/${filename}`;
-
-			  photosAdded++;
+              const sourceIds = reservePhotoIds(r);
+              const exportedIds = [];
+              const photoFiles = [];
+              for (const photoId of sourceIds) {
+                const dataUrl = await getPhoto(photoId);
+                if (!dataUrl) continue;
+                const filename = `${photoId}.jpg`;
+                photosFolder.file(filename, dataUrlToBlob(dataUrl));
+                exportedIds.push(photoId);
+                photoFiles.push(`photos/${filename}`);
+                photosAdded++;
+              }
+              if (!exportedIds.length && r.photo) {
+                const photoId = "photo_" + crypto.randomUUID();
+                const filename = `${photoId}.jpg`;
+                photosFolder.file(filename, dataUrlToBlob(r.photo));
+                exportedIds.push(photoId);
+                photoFiles.push(`photos/${filename}`);
+                photosAdded++;
+              }
+              if (!exportedIds.length) continue;
+              r.photoIds = exportedIds;
+              r.photoId = exportedIds[0];
+              r.photo = "";
+              r.photoFiles = photoFiles;
+              r.photoFile = photoFiles[0];
 			} catch (e) {
 			  console.error("Photo non exportée :", r.num, e);
 			}
@@ -1855,6 +5320,7 @@ function renderSelects() {
 			return;
 		  }
 
+		  const previousState = state;
 		  try {
 			const zip = await JSZip.loadAsync(file);
 			const chantierFile = zip.file("chantier.json");
@@ -1877,33 +5343,41 @@ function renderSelects() {
 			let photosImported = 0;
 
 			for (const r of importedState.reserves || []) {
-			  if (!r.photoId || !r.photoFile) continue;
-
-			  const photoFile = zip.file(r.photoFile);
-
-			  if (!photoFile) {
-				console.warn("Photo absente du ZIP :", r.photoFile);
-				continue;
-			  }
-
-			  const blob = await photoFile.async("blob");
-			  const dataUrl = await blobToDataUrl(blob);
-
-			  await savePhoto(r.photoId, dataUrl);
-
-			  r.photo = "";
-			  photosImported++;
+              const ids = reservePhotoIds(r);
+              const files = Array.isArray(r.photoFiles) && r.photoFiles.length
+                ? r.photoFiles
+                : r.photoFile
+                  ? [r.photoFile]
+                  : [];
+              for (let index = 0; index < Math.min(ids.length, files.length); index++) {
+                const photoFile = zip.file(files[index]);
+                if (!photoFile) {
+                  console.warn("Photo absente du ZIP :", files[index]);
+                  continue;
+                }
+                const blob = await photoFile.async("blob");
+                const dataUrl = await blobToDataUrl(blob);
+                await savePhoto(ids[index], dataUrl);
+                photosImported++;
+              }
+              r.photoIds = ids;
+              r.photoId = ids[0] || "";
+              r.photo = "";
 			}
 
 			state = importedState;
-			persist();
+			const numbering = reconcileReserveNumbering({ notify: false });
 			loadProject();
 			render();
 
 			alert(
-			  `Import ZIP terminé.\n\n${photosImported} photo(s) restaurée(s) dans IndexedDB.`,
+			  `Import ZIP terminé.\n\n${photosImported} photo(s) restaurée(s) dans IndexedDB.` +
+				(numbering.corrections.length
+				  ? `\n${numbering.corrections.length} doublon(s) de numérotation corrigé(s).`
+				  : ""),
 			);
 		  } catch (e) {
+			state = previousState;
 			console.error(e);
 			alert("Import ZIP impossible. Vérifie que le fichier ZIP est correct.");
 		  } finally {
@@ -1919,14 +5393,17 @@ function renderSelects() {
       }
       function renderKpis() {
         const all = state.reserves || [];
-        $("kpiTotal").textContent = all.length;
-        $("kpiOpen").textContent = all.filter(
+        const labels = currentDocumentLabels();
+        const isTaskList = currentDocumentTitle() === "Liste de tâches";
+        const kpiItems = isTaskList ? all.filter((r) => r.status !== "PM") : all;
+        $("kpiTotal").textContent = kpiItems.length;
+        $("kpiOpen").textContent = kpiItems.filter(
           (r) => r.status === "À traiter" || r.status === "En cours",
         ).length;
-        $("kpiDone").textContent = all.filter(
+        $("kpiDone").textContent = kpiItems.filter(
           (r) => r.status === "Levée",
         ).length;
-        $("kpiRefused").textContent = all.filter((r) =>
+        $("kpiRefused").textContent = kpiItems.filter((r) =>
           r.status?.startsWith("Refusée"),
         ).length;
         $("nextNumber").textContent = editingReserveId
@@ -1934,19 +5411,57 @@ function renderSelects() {
               ?.num || nextReserveNo()
           : nextReserveNo();
         if ($("documentTitle"))
-          $("documentTitle").textContent = currentDocumentTitle();
+          $("documentTitle").textContent = currentDisplayDocumentTitle();
+        $("visitPanel").classList.toggle(
+          "task-list-visit",
+          currentDocumentTitle() === "Liste de tâches",
+        );
+        $("crCard").classList.toggle("hidden", !isTaskList);
+        $("pOprField").classList.toggle("hidden", isTaskList);
+        $("pReceptionField").classList.toggle("hidden", isTaskList);
+        if (isTaskList) {
+          const crNumber = formattedCrNumber(state.project?.crNumber);
+          $("crCurrentNumber").textContent = crNumber ? `N° ${crNumber}` : "Non initialisé";
+          $("crMeetingDate").textContent = formatDateFR(state.project?.opr) || "—";
+          $("crNextMeetingDate").textContent = formatDateFR(state.project?.reception) || "—";
+          $("crNextMeetingTime").textContent = state.project?.nextMeetingTime || "—";
+          $("crInvitedCount").textContent = (state.intervenants || []).filter(
+            (intervenant) => attendanceStatus(intervenant.id) !== "Non convoquée",
+          ).length;
+          $("editCurrentCrBtn").textContent = crNumber
+            ? "Modifier le CR actuel"
+            : "Initialiser le premier CR";
+        }
+        $("pOprLabel").textContent = labels.oprDate;
+        $("pReceptionLabel").textContent = labels.receptionDate;
+        $("navReservesLabel").textContent = labels.navList;
+        $("navLiftingLabel").textContent = labels.navLifting;
+        $("kpiTotalLabel").textContent = labels.total;
+        $("visitTitle").textContent = labels.visit;
+        $("vDesc").placeholder = labels.descriptionPlaceholder;
+        $("recentTitle").textContent = labels.recent;
+        $("addReserveLabel").textContent = labels.add;
+        $("liftingTitle").textContent = labels.lifting;
         $("projectSubtitle").textContent = projectLine();
         if ($("printListTitle"))
           $("printListTitle").textContent = currentListTitle();
+        const printProjectInfo =
+          `<strong>Chantier :</strong> ${esc(state.project?.name || "")} &nbsp; | &nbsp; <strong>Adresse :</strong> ${esc(state.project?.address || "")} &nbsp; | &nbsp; <strong>${esc(labels.oprDate)} :</strong> ${esc(formatDateFR(state.project?.opr))}`;
         $("printInfo").innerHTML =
-          `<strong>Chantier :</strong> ${esc(state.project?.name || "")} &nbsp; | &nbsp; <strong>Adresse :</strong> ${esc(state.project?.address || "")} &nbsp; | &nbsp; <strong>OPR :</strong> ${esc(formatDateFR(state.project?.opr))} &nbsp; | &nbsp; <strong>Réception :</strong> ${esc(formatDateFR(state.project?.reception))}`;
+          currentDocumentTitle() === "Liste de tâches"
+            ? printProjectInfo
+            : `${printProjectInfo} &nbsp; | &nbsp; <strong>${esc(labels.receptionDate)} :</strong> ${esc(formatDateFR(state.project?.reception))}`;
       }
       function render() {
+        const intervenantsChanged = ensureIntervenants();
+        const taskMetadataChanged = ensureTaskMetadata();
+        if (intervenantsChanged || taskMetadataChanged) persist();
         loadProject();
         renderSelects();
         renderTable();
         renderCards();
         renderKpis();
+        renderAttendance();
         toggleRoomInput();
       }
       function showPanel(id) {
@@ -1986,33 +5501,125 @@ function renderSelects() {
         if (!f) return;
         const r = new FileReader();
         r.onload = () => {
+          const previousState = state;
           try {
             state = JSON.parse(r.result);
-            persist();
+            const numbering = reconcileReserveNumbering({ notify: false });
             render();
-            alert("Import terminé.");
+            alert(
+              "Import terminé." +
+                (numbering.corrections.length
+                  ? `\n${numbering.corrections.length} doublon(s) de numérotation corrigé(s).`
+                  : ""),
+            );
           } catch (err) {
+            state = previousState;
             alert("Fichier invalide.");
           }
         };
         r.readAsText(f);
       }
-      function resetAll() {
-        if (confirm("Tout effacer sur cette tablette ?")) {
-          state = { project: {}, lots: [], reserves: [] };
-          persist();
-          render();
+      async function resetAll() {
+        const confirmed = confirm(
+          "Réinitialiser complètement ce chantier ?\n\n" +
+            "Toutes les informations du chantier, les intervenants, les lots, les observations, les tâches, les comptes rendus et les photographies stockées localement seront définitivement supprimés.\n\n" +
+            "Les sauvegardes JSON et ZIP déjà téléchargées ne seront pas affectées.\n\n" +
+            "Cette opération est irréversible.",
+        );
+        if (!confirmed) return;
+
+        try {
+          await clearAllPhotos();
+        } catch (error) {
+          console.error("Réinitialisation : nettoyage IndexedDB impossible", error);
+          alert(
+            "La réinitialisation a été interrompue : les photographies locales n'ont pas pu être supprimées.\n\n" +
+              "Les données du chantier ont été conservées. Tu peux réessayer.",
+          );
+          return;
         }
+
+        const previousState = state;
+        state = {
+          project: {},
+          lots: [],
+          intervenants: [],
+          reserves: [],
+          attendance: { companies: {} },
+        };
+
+        try {
+          persist();
+        } catch (error) {
+          state = previousState;
+          console.error("Réinitialisation : persistance du nouvel état impossible", error);
+          alert(
+            "Les photographies ont été supprimées, mais le nouvel état vide n'a pas pu être enregistré.\n\n" +
+              "Les données métier restent affichées. Exporte-les avant de réessayer.",
+          );
+          return;
+        }
+
+        editingReserveId = null;
+        activeFollowupReserveId = null;
+        editingFollowupReserveId = null;
+        editingFollowupId = null;
+        editingLotIndex = null;
+        editingIntervenantId = null;
+        pendingVisitPhotos = [];
+        visitPhotoLoadToken++;
+        crDraft = null;
+        crStartupPromptShown = false;
+
+        $("search").value = "";
+        $("fStatus").value = "";
+        $("fLot").value = "";
+        $("fLoc").value = "";
+        if ($("vAssignmentCategory")) $("vAssignmentCategory").value = "entreprise";
+        resetVisitForm();
+
+        document.querySelectorAll(".modal-backdrop").forEach((modal) => {
+          modal.classList.add("hidden");
+          modal.querySelectorAll("input, textarea").forEach((field) => {
+            field.value = "";
+          });
+          modal.querySelectorAll("select").forEach((field) => {
+            field.selectedIndex = 0;
+          });
+        });
+
+        render();
+        showPanel("projectPanel");
+        alert("Le chantier a été complètement réinitialisé.");
       }
       function seedDemo() {
         $("pName").value = "Résidence Les Oliviers";
-        $("pClient").value = "SCI Exemple";
-        $("pMoe").value = "MOE Consult";
-        $("lotsText").value =
-          "Peinture | ABC Peinture\nMenuiseries | Menuiserie Dupont\nPlomberie | Aqua Sud\nÉlectricité | Elec Provence";
+        state.lots = [
+          { id: createStableId(), lot: "Peinture", company: "ABC Peinture" },
+          {
+            id: createStableId(),
+            lot: "Menuiseries",
+            company: "Menuiserie Dupont",
+          },
+          { id: createStableId(), lot: "Plomberie", company: "Aqua Sud" },
+          {
+            id: createStableId(),
+            lot: "Électricité",
+            company: "Elec Provence",
+          },
+        ];
         saveProject();
       }
+      try {
+        reconcileReserveNumbering();
+      } catch (error) {
+        console.error("Initialisation de la numérotation impossible", error);
+        alert(
+          "La numérotation des observations n'a pas pu être sécurisée. Les données existantes ont été conservées.",
+        );
+      }
       render();
+      setTimeout(maybeShowCrStartupPrompt, 0);
     </script>
   </body>
 </html>
